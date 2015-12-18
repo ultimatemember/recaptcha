@@ -38,11 +38,19 @@
 		$client_captcha_response = $_POST['g-recaptcha-response'];
 		$user_ip = $_SERVER['REMOTE_ADDR'];
 		
-		$verify = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip");
-		$result = json_decode( $verify['body'] );
-		
-		if ( !$result->success ) {
+		$response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip");
+		if( is_array($response) ) {
+			
+			$result = json_decode( $response['body'] );
+			
+			if ( ! $result->success ) {
+				$ultimatemember->form->add_error('recaptcha', __('Please confirm you are not a robot','um-recaptcha') );
+			}
+			
+		} else {
+			
 			$ultimatemember->form->add_error('recaptcha', __('Please confirm you are not a robot','um-recaptcha') );
+		
 		}
 	
 	}
