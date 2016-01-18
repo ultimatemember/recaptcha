@@ -47,7 +47,7 @@
 	function um_recaptcha_validate( $args ){
 		global $um_recaptcha, $ultimatemember;
 
-		if ( isset($args['mode']) && !in_array( $args['mode'], array('login','register') ) ) return;
+		if ( isset($args['mode']) && !in_array( $args['mode'], array('login','register') ) && ! isset( $args['_social_login_form'] ) ) return;
 
 		if ( !$um_recaptcha->captcha_allowed( $args ) ) return;
 
