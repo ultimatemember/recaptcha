@@ -10,7 +10,7 @@
 		if ( !$um_recaptcha->captcha_allowed( $args ) ) return;
 
 		$your_sitekey = um_get_option('g_recaptcha_sitekey');
-		$id = 'gcaptch' . rand(0, 100) . microtime();
+		$id = 'gcaptch' . rand(0, 100) . time();
 
 		?>
 
