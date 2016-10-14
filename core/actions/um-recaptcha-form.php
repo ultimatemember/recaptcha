@@ -15,21 +15,12 @@
 		?>
 
 		<div id="<?php echo $id; ?>" class="g-recaptcha"></div>
-		<script>
-		var renderCaptcha = function() {
-			grecaptcha.render('<?php echo $id; ?>', {
-    			sitekey: '<?php echo $your_sitekey; ?>'
-    		});
-		}
-		if(typeof grecaptcha === "undefined") {
-			jQuery(window).load(function() {
+		<script type="text/javascript">
+			jQuery(document).ready(function(){
 				grecaptcha.render('<?php echo $id; ?>', {
 	    			sitekey: '<?php echo $your_sitekey; ?>'
 	    		});
 			});
-		} else {
-			renderCaptcha();
-		}
 		</script>
 
 		<?php

@@ -36,7 +36,7 @@ class UM_reCAPTCHA_API {
 	***/
 	function add_notice( $msg ) {
 		
-		if ( !is_admin() ) return;
+		if ( !is_admin() || ( defined('DOING_AJAX') && DOING_AJAX ) ) return;
 		
 		echo '<div class="error"><p>' . $msg . '</p></div>';
 		
