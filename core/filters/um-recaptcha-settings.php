@@ -113,6 +113,45 @@
 										'vi'     => 'Vietnamese',
 										'zu'     => 'Zulu'
 					)
+				),
+
+				array(
+					'id'       		=> 'g_recaptcha_theme',
+	                'type'     		=> 'select',
+					'select2'		=> array( 'allowClear' => 0, 'minimumResultsForSearch' => 0 ),
+	                'title'   		=> __( 'Theme','ultimatemember' ),
+					'default' 		=> 'light',
+					'desc' 	   		=> __('Select a color theme of the widget.','ultimatemember'),
+					'options' 		=> array(
+										'dark'     => 'Dark',
+										'light'			 => 'Light'
+					)
+				),
+
+				array(
+					'id'       		=> 'g_recaptcha_type',
+	                'type'     		=> 'select',
+					'select2'		=> array( 'allowClear' => 0, 'minimumResultsForSearch' => 0 ),
+	                'title'   		=> __( 'Type','ultimatemember' ),
+					'default' 		=> 'image',
+					'desc' 	   		=> __('The type of CAPTCHA to serve.','ultimatemember'),
+					'options' 		=> array(
+										'audio'    		 => 'Audio',
+										'image'			 => 'Image'
+					)
+				),
+
+				array(
+					'id'       		=> 'g_recaptcha_size',
+	                'type'     		=> 'select',
+					'select2'		=> array( 'allowClear' => 0, 'minimumResultsForSearch' => 0 ),
+	                'title'   		=> __( 'Size','ultimatemember' ),
+					'default' 		=> 'normal',
+					'desc' 	   		=> __('The type of CAPTCHA to serve.','ultimatemember'),
+					'options' 		=> array(
+										'compact'     		 => 'Compact',
+										'normal'			 => 'Normal'
+					)
 				)
 
 			)

@@ -10,19 +10,22 @@
 		if ( !$um_recaptcha->captcha_allowed( $args ) ) return;
 
 		$your_sitekey = um_get_option('g_recaptcha_sitekey');
-		$id = 'gcaptch' . rand(0, 100) . time();
+		
+		$options = array(
+			'data-type' => um_get_option('g_recaptcha_type'),
+			'data-size' => um_get_option('g_recaptcha_size'),
+			'data-theme' => um_get_option('g_recaptcha_theme'),
+		);
 
+		$attrs = '';
+		foreach( $options as $att => $value ){
+			if( $value ){
+				$attrs .= " {$att}=\"{$value}\" "; 
+			}
+		}
 		?>
-
-		<div id="<?php echo $id; ?>" class="g-recaptcha"></div>
-		<script type="text/javascript">
-			jQuery(document).ready(function(){
-				grecaptcha.render('<?php echo $id; ?>', {
-	    			sitekey: '<?php echo $your_sitekey; ?>'
-	    		});
-			});
-		</script>
-
+		<div class="g-recaptcha" <?php echo $attrs; ?> data-sitekey="<?php echo $your_sitekey;?>"></div>
+		
 		<?php
 
 		if ($ultimatemember->form->has_error('recaptcha')) {
