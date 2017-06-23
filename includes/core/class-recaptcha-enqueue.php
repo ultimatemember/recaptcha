@@ -1,6 +1,8 @@
 <?php
+namespace um_ext\um_recaptcha\core;
 
-class UM_reCAPTCHA_Enqueue {
+
+class reCAPTCHA_Enqueue {
 
 	function __construct() {
 

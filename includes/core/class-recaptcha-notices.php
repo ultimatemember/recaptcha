@@ -1,6 +1,8 @@
 <?php
+namespace um_ext\um_recaptcha\core;
 
-class UM_reCAPTCHA_Notices {
+
+class reCAPTCHA_Notices {
 
 	function __construct() {
 
