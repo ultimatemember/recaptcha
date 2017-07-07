@@ -35,6 +35,19 @@
 				),
 
 				array(
+					'id'       		=> 'g_recaptcha_type',
+	                'type'     		=> 'select',
+					'select2'		=> array( 'allowClear' => 0, 'minimumResultsForSearch' => 0 ),
+	                'title'   		=> __( 'Type','ultimatemember' ),
+					'default' 		=> 'image',
+					'desc' 	   		=> __('The type of reCAPTCHA to serve.','ultimatemember'),
+					'options' 		=> array(
+										'audio'    		 => 'Audio',
+										'image'			 => 'Image',
+					)
+				),
+
+				array(
 					'id'       		=> 'g_recaptcha_language_code',
 	                'type'     		=> 'select',
 					'select2'		=> array( 'allowClear' => 0, 'minimumResultsForSearch' => 0 ),
@@ -128,18 +141,7 @@
 					)
 				),
 
-				array(
-					'id'       		=> 'g_recaptcha_type',
-	                'type'     		=> 'select',
-					'select2'		=> array( 'allowClear' => 0, 'minimumResultsForSearch' => 0 ),
-	                'title'   		=> __( 'Type','ultimatemember' ),
-					'default' 		=> 'image',
-					'desc' 	   		=> __('The type of CAPTCHA to serve.','ultimatemember'),
-					'options' 		=> array(
-										'audio'    		 => 'Audio',
-										'image'			 => 'Image'
-					)
-				),
+
 
 				array(
 					'id'       		=> 'g_recaptcha_size',
@@ -147,10 +149,12 @@
 					'select2'		=> array( 'allowClear' => 0, 'minimumResultsForSearch' => 0 ),
 	                'title'   		=> __( 'Size','ultimatemember' ),
 					'default' 		=> 'normal',
-					'desc' 	   		=> __('The type of CAPTCHA to serve.','ultimatemember'),
+					'desc' 	   		=> __('The type of reCAPTCHA to serve.','ultimatemember'),
 					'options' 		=> array(
-										'compact'     		 => 'Compact',
-										'normal'			 => 'Normal'
+										'compact'     		=> 'Compact',
+										'normal'			=> 'Normal',
+										'invisible'		 	=> 'Invisible'
+					
 					)
 				)
 
