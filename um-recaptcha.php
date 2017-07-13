@@ -34,7 +34,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
         if ( ! defined( 'um_path' ) || ! file_exists( um_path  . 'includes/class-dependencies.php' ) ) {
             //UM is not installed
             function um_recaptcha_dependencies() {
-                echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-bbpress' ), um_bbpress_extension ) . '</p></div>';
+                echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-recaptcha' ), um_recaptcha_extension ) . '</p></div>';
             }
 
             add_action( 'admin_notices', 'um_recaptcha_dependencies' );
@@ -50,7 +50,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
             if ( ! $is_um_active ) {
                 //UM is not active
                 function um_recaptcha_dependencies() {
-                    echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-bbpress' ), um_bbpress_extension ) . '</p></div>';
+                    echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-recaptcha' ), um_recaptcha_extension ) . '</p></div>';
                 }
 
                 add_action( 'admin_notices', 'um_recaptcha_dependencies' );
@@ -58,7 +58,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
             } elseif ( ! UM()->dependencies()->ultimatemember_version_check( um_recaptcha_requires ) ) {
                 //UM old version is active
                 function um_recaptcha_dependencies() {
-                    echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires a <a href="https://wordpress.org/plugins/ultimate-member">newer version</a> of Ultimate Member to work properly.', 'um-bbpress' ), um_bbpress_extension ) . '</p></div>';
+                    echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires a <a href="https://wordpress.org/plugins/ultimate-member">newer version</a> of Ultimate Member to work properly.', 'um-recaptcha' ), um_recaptcha_extension ) . '</p></div>';
                 }
 
                 add_action( 'admin_notices', 'um_recaptcha_dependencies' );
