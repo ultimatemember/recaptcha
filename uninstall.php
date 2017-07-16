@@ -21,10 +21,10 @@ $options = get_option( 'um_options' );
 $options = empty( $options ) ? array() : $options;
 
 if ( ! empty( $options['uninstall_on_delete'] ) ) {
-    if ( ! class_exists( 'UM_Recaptcha_Setup' ) )
-        require_once um_recaptcha_path . 'includes/core/um-recaptcha-setup.php';
+    if ( ! class_exists( 'um_ext\um_recaptcha\core\Recaptcha_Setup' ) )
+        require_once um_recaptcha_path . 'includes/core/class-recaptcha-setup.php';
 
-    $recaptcha_setup = new UM_Recaptcha_Setup();
+    $recaptcha_setup = new um_ext\um_recaptcha\core\Recaptcha_Setup();
 
     //remove settings
     foreach ( $recaptcha_setup->settings_defaults as $k => $v ) {

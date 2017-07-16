@@ -22,7 +22,26 @@ class UM_reCAPTCHA_API {
             $this->notices();
 
 		add_action( 'init', array( &$this, 'init' ), 1 );
-	}
+
+        add_filter( 'um_settings_default_values', array( &$this, 'default_settings' ), 10, 1 );
+    }
+
+
+    function default_settings( $defaults ) {
+        $defaults = array_merge( $defaults, $this->setup()->settings_defaults );
+        return $defaults;
+    }
+
+
+    /**
+     * @return um_ext\um_recaptcha\core\Recaptcha_Setup()
+     */
+    function setup() {
+        if ( empty( UM()->classes['um_recaptcha_setup'] ) ) {
+            UM()->classes['um_recaptcha_setup'] = new um_ext\um_recaptcha\core\Recaptcha_Setup();
+        }
+        return UM()->classes['um_recaptcha_setup'];
+    }
 
 
     function get_this() {

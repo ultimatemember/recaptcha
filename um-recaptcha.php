@@ -88,9 +88,9 @@ function um_recaptcha_activation_hook() {
 
 
     //run setup
-    if ( ! class_exists( 'UM_Recaptcha_Setup' ) )
-        require_once um_recaptcha_path . 'includes/core/um-recaptcha-setup.php';
+    if ( ! class_exists( 'um_ext\um_recaptcha\core\Recaptcha_Setup' ) )
+        require_once um_recaptcha_path . 'includes/core/class-recaptcha-setup.php';
 
-    $recaptcha_setup = new UM_Recaptcha_Setup();
+    $recaptcha_setup = new um_ext\um_recaptcha\core\Recaptcha_Setup();
     $recaptcha_setup->run_setup();
 }

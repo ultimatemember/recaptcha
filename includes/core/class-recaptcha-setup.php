@@ -1,6 +1,7 @@
 <?php
+namespace um_ext\um_recaptcha\core;
 
-class UM_Recaptcha_Setup {
+class Recaptcha_Setup {
     var $settings_defaults;
 
     function __construct() {
