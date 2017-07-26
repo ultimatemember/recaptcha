@@ -36,7 +36,18 @@ function um_recaptcha_settings( $settings ) {
                 'label'   		=> __( 'Secret Key','um-recaptcha' ),
                 'description' 	   		=> __('Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>','um-recaptcha'),
             ),
-
+            array(
+                'id'       		=> 'g_recaptcha_type',
+                'type'     		=> 'select',
+                'label'   		=> __( 'Type','um-recaptcha' ),
+                'value' 		=> UM()->um_get_option( 'g_recaptcha_type' ),
+                'default' 		=> UM()->um_get_default( 'g_recaptcha_type' ),
+                'description' 	   		=> __('The type of reCAPTCHA to serve.','um-recaptcha'),
+                'options' 		=> array(
+                    'audio'    		 => 'Audio',
+                    'image'			 => 'Image'
+                )
+            ),
             array(
                 'id'       		=> 'g_recaptcha_language_code',
                 'type'     		=> 'select',
@@ -130,27 +141,16 @@ function um_recaptcha_settings( $settings ) {
                 )
             ),
             array(
-                'id'       		=> 'g_recaptcha_type',
-                'type'     		=> 'select',
-                'label'   		=> __( 'Type','um-recaptcha' ),
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_type' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_type' ),
-                'description' 	   		=> __('The type of CAPTCHA to serve.','um-recaptcha'),
-                'options' 		=> array(
-                    'audio'    		 => 'Audio',
-                    'image'			 => 'Image'
-                )
-            ),
-            array(
                 'id'       		=> 'g_recaptcha_size',
                 'type'     		=> 'select',
                 'label'   		=> __( 'Size','um-recaptcha' ),
                 'value' 		=> UM()->um_get_option( 'g_recaptcha_size' ),
                 'default' 		=> UM()->um_get_default( 'g_recaptcha_size' ),
-                'description' 	   		=> __('The type of CAPTCHA to serve.','um-recaptcha'),
+                'description' 	   		=> __('The type of reCAPTCHA to serve.','um-recaptcha'),
                 'options' 		=> array(
                     'compact'     		 => 'Compact',
-                    'normal'			 => 'Normal'
+                    'normal'			 => 'Normal',
+                    'invisible'		 	=> 'Invisible'
                 )
             )
         )
