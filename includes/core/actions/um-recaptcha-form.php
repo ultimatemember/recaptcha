@@ -5,10 +5,10 @@
 	 ***/
 	add_action( 'um_after_register_fields', 'um_recaptcha_add_captcha', 500 );
 	add_action( 'um_after_login_fields', 'um_recaptcha_add_captcha', 500 );
-	add_action( 'wp_footer', 'um_recaptcha_google_onload' );
-	function um_recaptcha_add_captcha( $args )
-	{
-		if (!UM()->reCAPTCHA_API()->captcha_allowed( $args )) return;
+	function um_recaptcha_add_captcha( $args ) {
+
+		if ( ! UM()->reCAPTCHA_API()->captcha_allowed( $args ) )
+			return;
 
 		$your_sitekey = um_get_option( 'g_recaptcha_sitekey' );
 
@@ -109,10 +109,14 @@
 
 	}
 
-	function um_recaptcha_google_onload()
-	{
-		if ('invisible' != um_get_option( 'g_recaptcha_size' )) {
-			?>
+
+	add_action( 'wp_footer', 'um_recaptcha_google_onload' );
+	function um_recaptcha_google_onload() {
+
+		if ( ! um_is_core_page( 'login' ) && ! um_is_core_page( 'register' ) )
+			return;
+
+		if ( 'invisible' != um_get_option( 'g_recaptcha_size' ) ) { ?>
             <script>
                 var onloadCallback = function () {
                     jQuery('.g-recaptcha').each(function (i) {
@@ -124,6 +128,5 @@
                     });
                 }
             </script>
-			<?php
-		}
+		<?php }
 	}
