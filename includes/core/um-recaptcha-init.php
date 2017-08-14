@@ -21,7 +21,7 @@ class UM_reCAPTCHA_API {
         if ( UM()->is_request( 'admin' ) )
             $this->notices();
 
-		add_action( 'init', array( &$this, 'init' ), 1 );
+		add_action( 'plugins_loaded', array( &$this, 'init' ), 0 );
 
         add_filter( 'um_settings_default_values', array( &$this, 'default_settings' ), 10, 1 );
     }
