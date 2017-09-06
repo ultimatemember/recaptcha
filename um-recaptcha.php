@@ -3,7 +3,7 @@
 Plugin Name: Ultimate Member - Google reCAPTCHA
 Plugin URI: http://ultimatemember.com/
 Description: Protect your website from spam and integrate Google reCAPTCHA into your Ultimate Member forms
-Version: 1.0.4
+Version: 2.0-beta1
 Author: Ultimate Member
 Author URI: http://ultimatemember.com/
 */
@@ -18,9 +18,7 @@ define( 'um_recaptcha_plugin', plugin_basename( __FILE__ ) );
 define( 'um_recaptcha_extension', $plugin_data['Name'] );
 define( 'um_recaptcha_version', $plugin_data['Version'] );
 
-define( 'um_recaptcha_requires', '1.3.35' );
-
-$GLOBALS['um_recaptcha_dependencies'] = false;
+define( 'um_recaptcha_requires', '2.0-beta1' );
 
 function um_recaptcha_plugins_loaded() {
     load_plugin_textdomain( 'um-recaptcha', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -55,20 +53,15 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 
                 add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
-            } elseif ( ! UM()->dependencies()->ultimatemember_version_check( um_recaptcha_requires ) ) {
+            } elseif ( true !== UM()->dependencies()->compare_versions( um_recaptcha_requires, um_recaptcha_version, 'recaptcha', um_recaptcha_extension ) ) {
                 //UM old version is active
                 function um_recaptcha_dependencies() {
-                    echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires a <a href="https://wordpress.org/plugins/ultimate-member">newer version</a> of Ultimate Member to work properly.', 'um-recaptcha' ), um_recaptcha_extension ) . '</p></div>';
+                    echo '<div class="error"><p>' . UM()->dependencies()->compare_versions( um_recaptcha_requires, um_recaptcha_version, 'recaptcha', um_recaptcha_extension ) . '</p></div>';
                 }
 
                 add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
             } else {
-                global $um_recaptcha_dependencies;
-                $um_recaptcha_dependencies = true;
-                /***
-                 ***	@Init
-                 ***/
                 require_once um_recaptcha_path . 'includes/core/um-recaptcha-init.php';
             }
         }
