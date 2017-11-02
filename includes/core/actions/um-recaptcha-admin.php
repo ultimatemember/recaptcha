@@ -2,7 +2,7 @@
 
 	add_action( 'um_admin_custom_register_metaboxes', 'um_recaptcha_add_metabox_register' );
 	function um_recaptcha_add_metabox_register( $action ) {
-		UM()->metabox()->is_loaded = true;
+		//UM()->metabox()->is_loaded = true;
 		
 		if ( !is_admin() || !current_user_can('manage_options') ) die();
 
@@ -19,7 +19,7 @@
 	
 	add_action('um_admin_custom_login_metaboxes', 'um_recaptcha_add_metabox_login');
 	function um_recaptcha_add_metabox_login( $action ) {
-        UM()->metabox()->is_loaded = true;
+        //UM()->metabox()->is_loaded = true;
 		
 		if ( !is_admin() || !current_user_can('manage_options') ) die();
 
