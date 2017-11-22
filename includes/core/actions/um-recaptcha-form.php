@@ -16,37 +16,45 @@
 			'data-type'  => um_get_option( 'g_recaptcha_type' ),
 			'data-size'  => um_get_option( 'g_recaptcha_size' ),
 			'data-theme' => um_get_option( 'g_recaptcha_theme' ),
-
 		);
-
-
 		?>
 
 		<?php if ('invisible' == $options['data-size']): ?>
-        <script>
+            <script>
 
-            var onSubmit = function (token) {
-                var me = jQuery('.um-<?php _e( $args['form_id'] );?> form');
-                me.attr('disabled', 'disabled');
-                me.submit();
-            };
+                var onSubmit = function (token) {
+                    var me = jQuery('.um-<?php _e( $args['form_id'] );?> form');
+                    me.attr('disabled', 'disabled');
+                    me.submit();
+                };
 
-            var onloadCallback = function () {
-                grecaptcha.render('um-submit-btn', {
-                    'sitekey': '<?php _e( $your_sitekey );?>',
-                    'callback': onSubmit
+                var onloadCallback = function () {
+                    grecaptcha.render('um-submit-btn', {
+                        'sitekey': '<?php _e( $your_sitekey );?>',
+                        'callback': onSubmit
+                    });
+                };
+
+                jQuery(document).ready(function () {
+                    jQuery('.um-<?php _e( $args['form_id'] );?> #um-submit-btn').addClass('um-has-recaptcha');
                 });
-            };
 
-            jQuery(document).ready(function () {
-                jQuery('.um-<?php _e( $args['form_id'] );?> #um-submit-btn').addClass('um-has-recaptcha');
-            });
+            </script>
 
-        </script>
+		<?php else: ?>
+			<?php $options['data-sitekey'] = $your_sitekey; ?>
+            <script>
+                var onloadCallback = function () {
+                    jQuery('.g-recaptcha').each(function (i) {
+                        grecaptcha.render(jQuery(this).attr('id'), {
+                            'sitekey': jQuery(this).attr('data-sitekey'),
+                            'theme': jQuery(this).attr('data-theme')
+                        });
 
-	<?php else: ?>
-		<?php $options['data-sitekey'] = $your_sitekey; ?>
-	<?php endif; ?>
+                    });
+                }
+            </script>
+		<?php endif; ?>
 
 		<?php
 		$attrs = '';
@@ -57,7 +65,7 @@
 		}
 		?>
 
-        <div class="g-recaptcha"  id="um-<?php _e( $args['form_id'] ); ?>" <?php echo $attrs; ?> ></div>
+        <div class="g-recaptcha" id="um-<?php _e( $args['form_id'] ); ?>" <?php echo $attrs; ?> ></div>
 		<?php
 
 		if (UM()->form()->has_error( 'recaptcha' )) {
@@ -70,8 +78,7 @@
 	 ***    @form error handling
 	 ***/
 	add_action( 'um_submit_form_errors_hook', 'um_recaptcha_validate', 20 );
-	function um_recaptcha_validate( $args )
-	{
+	function um_recaptcha_validate( $args ) {
 		if (isset( $args['mode'] ) && !in_array( $args['mode'], array( 'login', 'register' ) ) && !isset( $args['_social_login_form'] )) return;
 
 		if (!UM()->reCAPTCHA_API()->captcha_allowed( $args )) return;
@@ -109,24 +116,19 @@
 
 	}
 
-
-	add_action( 'wp_footer', 'um_recaptcha_google_onload' );
-	function um_recaptcha_google_onload() {
-
-		if ( ! um_is_core_page( 'login' ) && ! um_is_core_page( 'register' ) )
+	/**
+     * reCAPTCHA scripts/styles enqueue
+	 *
+	 * @uses   hook actions: um_pre_register_shortcode
+     *                       um_pre_login_shortcode
+	 */
+	function um_recaptcha_enqueue_scripts( $args ){
+		if (!UM()->reCAPTCHA_API()->captcha_allowed( $args ))
 			return;
 
-		if ( 'invisible' != um_get_option( 'g_recaptcha_size' ) ) { ?>
-            <script>
-                var onloadCallback = function () {
-                    jQuery('.g-recaptcha').each(function (i) {
-                        grecaptcha.render(jQuery(this).attr('id'), {
-                            'sitekey': jQuery(this).attr('data-sitekey'),
-                            'theme': jQuery(this).attr('data-theme')
-                        });
+	    UM()->reCAPTCHA_API()->enqueue()->wp_enqueue_scripts();
 
-                    });
-                }
-            </script>
-		<?php }
-	}
+    }
+	add_action( 'um_pre_register_shortcode', 'um_recaptcha_enqueue_scripts' );
+	add_action( 'um_pre_login_shortcode', 'um_recaptcha_enqueue_scripts' );
+

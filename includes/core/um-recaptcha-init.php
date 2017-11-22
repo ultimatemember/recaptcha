@@ -15,8 +15,8 @@ class UM_reCAPTCHA_API {
         $GLOBALS['um_recaptcha'] = $this;
         add_filter( 'um_call_object_reCAPTCHA_API', array( &$this, 'get_this' ) );
 
-        if ( UM()->is_request( 'frontend' ) )
-            $this->enqueue();
+        //if ( UM()->is_request( 'frontend' ) )
+        //    $this->enqueue();
 
         if ( UM()->is_request( 'admin' ) )
             $this->notices();

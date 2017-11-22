@@ -15,8 +15,8 @@ class reCAPTCHA_Enqueue {
      */
     function wp_enqueue_scripts() {
 
-        if ( ! um_is_core_page('login') && ! um_is_core_page('register') )
-            return;
+        //if ( ! um_is_core_page('login') && ! um_is_core_page('register') )
+        //    return;
 
         wp_register_style( 'um_recaptcha', um_recaptcha_url . 'assets/css/um-recaptcha.css' );
         wp_enqueue_style( 'um_recaptcha' );
