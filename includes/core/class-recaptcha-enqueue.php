@@ -21,7 +21,7 @@ class reCAPTCHA_Enqueue {
         wp_register_style( 'um_recaptcha', um_recaptcha_url . 'assets/css/um-recaptcha.css' );
         wp_enqueue_style( 'um_recaptcha' );
 
-        $language_code = um_get_option( 'g_recaptcha_language_code' );
+        $language_code = UM()->options()->get( 'g_recaptcha_language_code' );
         wp_enqueue_script(
             'google-recapthca-api',
             "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code"

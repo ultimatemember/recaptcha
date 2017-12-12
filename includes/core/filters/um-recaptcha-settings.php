@@ -14,8 +14,6 @@ function um_recaptcha_settings( $settings ) {
                 'id'       		=> 'g_recaptcha_status',
                 'type'     		=> 'checkbox',
                 'label'   		=> __( 'Enable Google reCAPTCHA','um-recaptcha' ),
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_status' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_status' ),
                 'tooltip' 	   		=> __('Turn on or off your Google reCAPTCHA on your site registration and login forms by default.','um-recaptcha'),
             ),
 
@@ -23,8 +21,6 @@ function um_recaptcha_settings( $settings ) {
                 'id'       		=> 'g_recaptcha_sitekey',
                 'type'     		=> 'text',
                 'label'   		=> __( 'Site Key','um-recaptcha' ),
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_sitekey' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_sitekey' ),
                 'tooltip' 	   		=> __('You can register your site and generate a site key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>','um-recaptcha'),
                 'size'      => 'medium',
             ),
@@ -32,8 +28,6 @@ function um_recaptcha_settings( $settings ) {
             array(
                 'id'       		=> 'g_recaptcha_secretkey',
                 'type'     		=> 'text',
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_secretkey' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_secretkey' ),
                 'label'   		=> __( 'Secret Key','um-recaptcha' ),
                 'tooltip' 	   		=> __('Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>','um-recaptcha'),
                 'size'      => 'medium',
@@ -42,8 +36,6 @@ function um_recaptcha_settings( $settings ) {
                 'id'       		=> 'g_recaptcha_type',
                 'type'     		=> 'select',
                 'label'   		=> __( 'Type','um-recaptcha' ),
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_type' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_type' ),
                 'tooltip' 	   		=> __('The type of reCAPTCHA to serve.','um-recaptcha'),
                 'options' 		=> array(
                     'audio'    		 => 'Audio',
@@ -55,8 +47,6 @@ function um_recaptcha_settings( $settings ) {
                 'id'       		=> 'g_recaptcha_language_code',
                 'type'     		=> 'select',
                 'label'   		=> __( 'Language','um-recaptcha' ),
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_language_code' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_language_code' ),
                 'tooltip' 	   		=> __('Select the language to be used in your reCAPTCHA.','um-recaptcha'),
                 'options' 		=> array(
                     'ar'     => 'Arabic',
@@ -136,8 +126,6 @@ function um_recaptcha_settings( $settings ) {
                 'id'       		=> 'g_recaptcha_theme',
                 'type'     		=> 'select',
                 'label'   		=> __( 'Theme','um-recaptcha' ),
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_theme' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_theme' ),
                 'tooltip' 	   		=> __('Select a color theme of the widget.','um-recaptcha'),
                 'options' 		=> array(
                     'dark'     => 'Dark',
@@ -149,8 +137,6 @@ function um_recaptcha_settings( $settings ) {
                 'id'       		=> 'g_recaptcha_size',
                 'type'     		=> 'select',
                 'label'   		=> __( 'Size','um-recaptcha' ),
-                'value' 		=> UM()->um_get_option( 'g_recaptcha_size' ),
-                'default' 		=> UM()->um_get_default( 'g_recaptcha_size' ),
                 'tooltip' 	   		=> __('The type of reCAPTCHA to serve.','um-recaptcha'),
                 'options' 		=> array(
                     'compact'     		 => 'Compact',

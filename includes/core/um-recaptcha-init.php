@@ -91,9 +91,9 @@ class UM_reCAPTCHA_API {
 	function captcha_allowed( $args ) {
 		$enable = false;
 		
-		$your_sitekey = um_get_option('g_recaptcha_sitekey');
-		$your_secret = um_get_option('g_recaptcha_secretkey');
-		$recaptcha = um_get_option('g_recaptcha_status');
+		$your_sitekey = UM()->options()->get('g_recaptcha_sitekey');
+		$your_secret = UM()->options()->get('g_recaptcha_secretkey');
+		$recaptcha = UM()->options()->get('g_recaptcha_status');
 		
 		if ( $recaptcha )
 			$enable = true;

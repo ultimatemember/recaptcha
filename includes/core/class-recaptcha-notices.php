@@ -21,9 +21,9 @@ class reCAPTCHA_Notices {
 		
 		$skip_this = add_query_arg( 'um_adm_action', 'skip_recaptcha_notice' );
 		
-		$status = um_get_option('g_recaptcha_status');
-		$sitekey = um_get_option('g_recaptcha_sitekey');
-		$secretkey = um_get_option('g_recaptcha_secretkey');
+		$status = UM()->options()->get('g_recaptcha_status');
+		$sitekey = UM()->options()->get('g_recaptcha_sitekey');
+		$secretkey = UM()->options()->get('g_recaptcha_secretkey');
 		
 		if ( $status && ( !$sitekey || !$secretkey ) ) {
 			

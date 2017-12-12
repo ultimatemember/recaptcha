@@ -10,12 +10,12 @@
 		if ( ! UM()->reCAPTCHA_API()->captcha_allowed( $args ) )
 			return;
 
-		$your_sitekey = um_get_option( 'g_recaptcha_sitekey' );
+		$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
 
 		$options = array(
-			'data-type'  => um_get_option( 'g_recaptcha_type' ),
-			'data-size'  => um_get_option( 'g_recaptcha_size' ),
-			'data-theme' => um_get_option( 'g_recaptcha_theme' ),
+			'data-type'  => UM()->options()->get( 'g_recaptcha_type' ),
+			'data-size'  => UM()->options()->get( 'g_recaptcha_size' ),
+			'data-theme' => UM()->options()->get( 'g_recaptcha_theme' ),
 		);
 		?>
 
@@ -83,7 +83,7 @@
 
 		if (!UM()->reCAPTCHA_API()->captcha_allowed( $args )) return;
 
-		$your_secret = trim( um_get_option( 'g_recaptcha_secretkey' ) );
+		$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
 		$client_captcha_response = $_POST['g-recaptcha-response'];
 		$user_ip = $_SERVER['REMOTE_ADDR'];
 

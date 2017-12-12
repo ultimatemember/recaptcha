@@ -1,6 +1,6 @@
 <div class="um-admin-metabox">
 
-	<?php $status = um_get_option( 'g_recaptcha_status' );
+	<?php $status = UM()->options()->get( 'g_recaptcha_status' );
 
 	if ( $status ) { ?>
 
