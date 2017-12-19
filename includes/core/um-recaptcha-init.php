@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 
 class UM_reCAPTCHA_API {
     private static $instance;

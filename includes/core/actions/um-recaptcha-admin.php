@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 
 	add_action( 'um_admin_custom_register_metaboxes', 'um_recaptcha_add_metabox_register' );
 	function um_recaptcha_add_metabox_register( $action ) {

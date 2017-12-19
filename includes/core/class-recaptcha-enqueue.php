@@ -1,7 +1,7 @@
 <?php
-
 namespace um_ext\um_recaptcha\core;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class reCAPTCHA_Enqueue {
 
