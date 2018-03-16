@@ -40,7 +40,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 
             if ( ! function_exists( 'UM' ) ) {
                 require_once um_path . 'includes/class-dependencies.php';
-                $is_um_active = is_um_active();
+                $is_um_active = um\is_um_active();
             } else {
                 $is_um_active = UM()->dependencies()->ultimatemember_active_check();
             }
