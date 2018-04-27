@@ -17,11 +17,14 @@ define( 'um_recaptcha_path', plugin_dir_path( __FILE__ ) );
 define( 'um_recaptcha_plugin', plugin_basename( __FILE__ ) );
 define( 'um_recaptcha_extension', $plugin_data['Name'] );
 define( 'um_recaptcha_version', $plugin_data['Version'] );
+define( 'um_recaptcha_textdomain', 'um-recaptcha' );
 
 define( 'um_recaptcha_requires', '2.0' );
 
 function um_recaptcha_plugins_loaded() {
-    load_plugin_textdomain( 'um-recaptcha', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	$locale = ( get_locale() != '' ) ? get_locale() : 'en_US';
+	load_textdomain( um_recaptcha_textdomain, WP_LANG_DIR . '/plugins/' . um_recaptcha_textdomain . '-' . $locale . '.mo' );
+    load_plugin_textdomain( um_recaptcha_textdomain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'um_recaptcha_plugins_loaded', 0 );
 
