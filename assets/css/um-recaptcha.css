@@ -3,4 +3,7 @@ div.um .g-recaptcha {
 	margin: auto;
 	margin-bottom: 30px;
 }
-	
+
+.um-password .um-field .g-recaptcha {
+	margin-bottom: 0;
+}

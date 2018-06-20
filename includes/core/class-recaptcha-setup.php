@@ -16,6 +16,7 @@ class Recaptcha_Setup {
             'g_recaptcha_theme' => 'light',
             'g_recaptcha_type' => 'image',
             'g_recaptcha_size' => 'normal',
+            'g_recaptcha_password_reset' => 0,
         );
     }
 

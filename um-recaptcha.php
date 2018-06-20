@@ -3,7 +3,7 @@
 Plugin Name: Ultimate Member - Google reCAPTCHA
 Plugin URI: http://ultimatemember.com/
 Description: Protect your website from spam and integrate Google reCAPTCHA into your Ultimate Member forms
-Version: 2.0.1
+Version: 2.0.2
 Author: Ultimate Member
 Author URI: http://ultimatemember.com/
 */
@@ -19,7 +19,7 @@ define( 'um_recaptcha_extension', $plugin_data['Name'] );
 define( 'um_recaptcha_version', $plugin_data['Version'] );
 define( 'um_recaptcha_textdomain', 'um-recaptcha' );
 
-define( 'um_recaptcha_requires', '2.0' );
+define( 'um_recaptcha_requires', '2.0.18' );
 
 function um_recaptcha_plugins_loaded() {
 	$locale = ( get_locale() != '' ) ? get_locale() : 'en_US';
