@@ -15,7 +15,6 @@ class reCAPTCHA_Enqueue {
 	 * reCAPTCHA_Enqueue constructor.
 	 */
 	function __construct() {
-		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ), 0 );
 	}
 
 
@@ -25,6 +24,9 @@ class reCAPTCHA_Enqueue {
 	function wp_enqueue_scripts() {
 		wp_register_style( 'um_recaptcha', um_recaptcha_url . 'assets/css/um-recaptcha.css' );
 		wp_enqueue_style( 'um_recaptcha' );
+
+		wp_register_script( 'um-recaptcha', um_recaptcha_url . 'assets/js/um-recaptcha.js', array( 'jquery' ), um_recaptcha_version, true );
+		wp_enqueue_script( 'um-recaptcha' );
 
 		$language_code = UM()->options()->get( 'g_recaptcha_language_code' );
 		wp_enqueue_script(

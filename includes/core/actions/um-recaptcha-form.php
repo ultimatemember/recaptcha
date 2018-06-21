@@ -20,7 +20,7 @@ function um_recaptcha_add_captcha( $args ) {
 	);
 
 	if ( 'invisible' == $options['data-size'] ) { ?>
-		<script>
+		<script type="text/javascript">
 
 			var onSubmit = function (token) {
 				var me = jQuery('.um-<?php echo esc_js( $args['form_id'] ); ?> form');
@@ -39,21 +39,30 @@ function um_recaptcha_add_captcha( $args ) {
 				jQuery('.um-<?php echo esc_js( $args['form_id'] );?> #um-submit-btn').addClass('um-has-recaptcha');
 			});
 
+
+			function um_recaptcha_refresh() {
+				onloadCallback();
+			}
+
 		</script>
 
 	<?php } else {
 
 		$options['data-sitekey'] = $your_sitekey; ?>
 
-		<script>
-			var onloadCallback = function () {
-				jQuery('.g-recaptcha').each(function (i) {
+		<script type="text/javascript">
+			var onloadCallback = function() {
+				jQuery('.g-recaptcha').each( function(i) {
 					grecaptcha.render(jQuery(this).attr('id'), {
 						'sitekey': jQuery(this).attr('data-sitekey'),
 						'theme': jQuery(this).attr('data-theme')
 					});
-
 				});
+			};
+
+			function um_recaptcha_refresh() {
+				jQuery('.g-recaptcha').html('');
+				onloadCallback();
 			}
 		</script>
 	<?php }
@@ -144,3 +153,23 @@ function um_recaptcha_enqueue_scripts( $args ) {
 add_action( 'um_pre_register_shortcode', 'um_recaptcha_enqueue_scripts' );
 add_action( 'um_pre_login_shortcode', 'um_recaptcha_enqueue_scripts' );
 add_action( 'um_pre_password_shortcode', 'um_recaptcha_enqueue_scripts' );
+
+
+/**
+ * reCAPTCHA scripts/styles enqueue
+ *
+ * @uses   hook actions: um_pre_register_shortcode
+ *                       um_pre_login_shortcode
+ */
+function um_recaptcha_directory_enqueue_scripts( $args ) {
+	if ( ! UM()->reCAPTCHA_API()->captcha_allowed( $args ) ) {
+		return;
+	}
+
+	if ( is_user_logged_in() || empty( $args['show_pm_button'] ) ) {
+		return;
+	}
+
+	UM()->reCAPTCHA_API()->enqueue()->wp_enqueue_scripts();
+}
+add_action( 'um_pre_directory_shortcode', 'um_recaptcha_directory_enqueue_scripts', 10, 1 );
