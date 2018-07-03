@@ -1,3 +1,8 @@
+Version 2.0.2
+
+* Added: Ability to add reCaptcha to Password Reset Form
+* Fixed: reCaptcha displaying in modal window
+
 Version 2.0.1
 
 * Added: Loading translation from "wp-content/languages/plugins/" directory
