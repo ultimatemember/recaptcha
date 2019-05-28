@@ -32,4 +32,7 @@ if ( ! empty( $options['uninstall_on_delete'] ) ) {
     }
 
     update_option( 'um_options', $options );
+
+	delete_option( 'um_recaptcha_last_version_upgrade' );
+	delete_option( 'um_recaptcha_version' );
 }
