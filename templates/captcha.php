@@ -17,7 +17,7 @@ if( !defined( 'ABSPATH' ) ) {
 </div>
 
 <?php if( UM()->form()->has_error( 'recaptcha' ) ) { ?>
-	<div class="um-field-error"><?php _e( UM()->form()->errors[ 'recaptcha' ] ); ?></div>;
+	<div class="um-field-error"><?php _e( UM()->form()->errors[ 'recaptcha' ] ); ?></div>
 <?php } ?>
 
 <script type="text/javascript">
