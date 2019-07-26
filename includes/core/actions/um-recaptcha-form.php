@@ -75,7 +75,7 @@ function um_recaptcha_add_captcha( $args ) {
 	} ?>
 
 	<div class="um-field">
-		<div class="g-recaptcha" id="um-<?php _e( $args['form_id'] ); ?>" <?php echo $attrs; ?> ></div>
+		<div class="g-recaptcha" id="um-<?php esc_attr_e( $args['form_id'] ); ?>" <?php echo $attrs; ?> ></div>
 	</div>
 
 	<?php if ( UM()->form()->has_error( 'recaptcha' ) ) {
