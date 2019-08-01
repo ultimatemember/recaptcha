@@ -11,76 +11,22 @@ function um_recaptcha_add_captcha( $args ) {
 		return;
 	}
 
-	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
-
 	$options = array(
-		'data-type'  => UM()->options()->get( 'g_recaptcha_type' ),
-		'data-size'  => UM()->options()->get( 'g_recaptcha_size' ),
-		'data-theme' => UM()->options()->get( 'g_recaptcha_theme' ),
+			'data-type'		 => UM()->options()->get( 'g_recaptcha_type' ),
+			'data-size'		 => UM()->options()->get( 'g_recaptcha_size' ),
+			'data-theme'	 => UM()->options()->get( 'g_recaptcha_theme' ),
+			'data-sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' )
 	);
-
-	if ( 'invisible' == $options['data-size'] ) { ?>
-		<script type="text/javascript">
-
-			var onSubmit = function (token) {
-				var me = jQuery('.um-<?php echo esc_js( $args['form_id'] ); ?> form');
-				me.attr('disabled', 'disabled');
-				me.submit();
-			};
-
-			var onloadCallback = function () {
-				grecaptcha.render('um-submit-btn', {
-					'sitekey': '<?php echo esc_js( $your_sitekey ); ?>',
-					'callback': onSubmit
-				});
-			};
-
-			jQuery(document).ready(function () {
-				jQuery('.um-<?php echo esc_js( $args['form_id'] );?> #um-submit-btn').addClass('um-has-recaptcha');
-			});
-
-
-			function um_recaptcha_refresh() {
-				onloadCallback();
-			}
-
-		</script>
-
-	<?php } else {
-
-		$options['data-sitekey'] = $your_sitekey; ?>
-
-		<script type="text/javascript">
-			var onloadCallback = function() {
-				jQuery('.g-recaptcha').each( function(i) {
-					grecaptcha.render(jQuery(this).attr('id'), {
-						'sitekey': jQuery(this).attr('data-sitekey'),
-						'theme': jQuery(this).attr('data-theme')
-					});
-				});
-			};
-
-			function um_recaptcha_refresh() {
-				jQuery('.g-recaptcha').html('');
-				onloadCallback();
-			}
-		</script>
-	<?php }
 
 	$attrs = '';
 	foreach ( $options as $att => $value ) {
 		if ( $value ) {
 			$attrs .= " {$att}=\"{$value}\" ";
 		}
-	} ?>
-
-	<div class="um-field">
-		<div class="g-recaptcha" id="um-<?php _e( $args['form_id'] ); ?>" <?php echo $attrs; ?> ></div>
-	</div>
-
-	<?php if ( UM()->form()->has_error( 'recaptcha' ) ) {
-		echo '<div class="um-field-error">' . UM()->form()->errors['recaptcha'] . '</div>';
 	}
+
+	$t_args = compact( 'args', 'attrs', 'options', 'your_sitekey' );
+	UM()->get_template( 'captcha.php', um_recaptcha_plugin, $t_args, true );
 }
 add_action( 'um_after_register_fields', 'um_recaptcha_add_captcha', 500 );
 add_action( 'um_after_login_fields', 'um_recaptcha_add_captcha', 500 );
