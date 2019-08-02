@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: UM reCAPTCHA\n"
-"POT-Creation-Date: 2019-08-01 16:56+0300\n"
-"PO-Revision-Date: 2019-08-01 16:56+0300\n"
+"Project-Id-Version: Ultimate Member - reCAPTCHA\n"
+"POT-Creation-Date: 2019-08-02 12:02+0300\n"
+"PO-Revision-Date: 2019-08-02 12:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -21,39 +21,149 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/admin/templates/form/login_recaptcha.php:7
-#: includes/admin/templates/form/register_recaptcha.php:7
+#: includes/admin/class-recaptcha-admin.php:42
+msgid ""
+"Google reCAPTCHA is active on your site. However you need to fill in both "
+"your <strong>site key and secret key</strong> to start protecting your site "
+"against spam."
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:46
+msgid "I already have the keys"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:48
+msgid "Generate your site and secret key"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:71
+#: includes/admin/class-recaptcha-admin.php:90
+#: includes/admin/class-recaptcha-admin.php:108
+msgid "Google reCAPTCHA"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:113
+msgid "Enable Google reCAPTCHA"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:114
+msgid ""
+"Turn on or off your Google reCAPTCHA on your site registration and login "
+"forms by default."
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:120
+msgid "Site Key"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:121
+msgid ""
+"You can register your site and generate a site key via <a href=\"https://www."
+"google.com/recaptcha/\">Google reCAPTCHA</a>"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:129
+msgid "Secret Key"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:130
+msgid ""
+"Keep this a secret. You can get your secret key via <a href=\"https://www."
+"google.com/recaptcha/\">Google reCAPTCHA</a>"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:137
+msgid "Type"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:138
+#: includes/admin/class-recaptcha-admin.php:242
+msgid "The type of reCAPTCHA to serve."
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:140
+msgid "Audio"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:141
+msgid "Image"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:149
+msgid "Language"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:150
+msgid "Select the language to be used in your reCAPTCHA."
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:229
+msgid "Theme"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:230
+msgid "Select a color theme of the widget."
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:232
+msgid "Dark"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:233
+msgid "Light"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:241
+msgid "Size"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:244
+msgid "Compact"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:245
+msgid "Normal"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:246
+msgid "Invisible"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:254
+msgid "Enable Google reCAPTCHA on password reset form"
+msgstr ""
+
+#: includes/admin/class-recaptcha-admin.php:255
+msgid "Display the google Google reCAPTCHA on password reset form."
+msgstr ""
+
+#: includes/admin/templates/form/login_recaptcha.php:10
+#: includes/admin/templates/form/register_recaptcha.php:9
 msgid ""
 "Google reCAPTCHA seems to be <strong style=\"color:#7ACF58\">enabled</"
 "strong> by default."
 msgstr ""
 
-#: includes/admin/templates/form/login_recaptcha.php:11
-#: includes/admin/templates/form/register_recaptcha.php:11
+#: includes/admin/templates/form/login_recaptcha.php:14
+#: includes/admin/templates/form/register_recaptcha.php:13
 msgid ""
 "Google reCAPTCHA seems to be <strong style=\"color:#C74A4A\">disabled</"
 "strong> by default."
 msgstr ""
 
-#: includes/admin/templates/form/login_recaptcha.php:22
-#: includes/admin/templates/form/register_recaptcha.php:22
+#: includes/admin/templates/form/login_recaptcha.php:25
+#: includes/admin/templates/form/register_recaptcha.php:24
 msgid "reCAPTCHA status on this form"
 msgstr ""
 
-#: includes/admin/templates/form/login_recaptcha.php:25
-#: includes/admin/templates/form/register_recaptcha.php:25
+#: includes/admin/templates/form/login_recaptcha.php:28
+#: includes/admin/templates/form/register_recaptcha.php:27
 msgid "No"
 msgstr ""
 
-#: includes/admin/templates/form/login_recaptcha.php:26
-#: includes/admin/templates/form/register_recaptcha.php:26
+#: includes/admin/templates/form/login_recaptcha.php:29
+#: includes/admin/templates/form/register_recaptcha.php:28
 msgid "Yes"
-msgstr ""
-
-#: includes/core/actions/um-recaptcha-admin.php:14
-#: includes/core/actions/um-recaptcha-admin.php:34
-#: includes/core/filters/um-recaptcha-settings.php:13
-msgid "Google reCAPTCHA"
 msgstr ""
 
 #: includes/core/actions/um-recaptcha-form.php:59
@@ -76,90 +186,7 @@ msgstr ""
 msgid "Please confirm you are not a robot"
 msgstr ""
 
-#: includes/core/class-recaptcha-notices.php:36
-#, php-format
-msgid ""
-"Google reCAPTCHA is active on your site. However you need to fill in both "
-"your <strong>site key and secret key</strong> to start protecting your site "
-"against spam. <a href=\"%s\">Hide this notice</a>"
-msgstr ""
-
-#: includes/core/class-recaptcha-notices.php:40
-msgid "I already have the keys"
-msgstr ""
-
-#: includes/core/class-recaptcha-notices.php:41
-msgid "Generate your site and secret key"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:18
-msgid "Enable Google reCAPTCHA"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:19
-msgid ""
-"Turn on or off your Google reCAPTCHA on your site registration and login "
-"forms by default."
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:25
-msgid "Site Key"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:26
-msgid ""
-"You can register your site and generate a site key via <a href=\"https://www."
-"google.com/recaptcha/\">Google reCAPTCHA</a>"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:34
-msgid "Secret Key"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:35
-msgid ""
-"Keep this a secret. You can get your secret key via <a href=\"https://www."
-"google.com/recaptcha/\">Google reCAPTCHA</a>"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:42
-msgid "Type"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:43
-#: includes/core/filters/um-recaptcha-settings.php:147
-msgid "The type of reCAPTCHA to serve."
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:54
-msgid "Language"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:55
-msgid "Select the language to be used in your reCAPTCHA."
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:134
-msgid "Theme"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:135
-msgid "Select a color theme of the widget."
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:146
-msgid "Size"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:159
-msgid "Enable Google reCAPTCHA on password reset form"
-msgstr ""
-
-#: includes/core/filters/um-recaptcha-settings.php:160
-msgid "Display the google Google reCAPTCHA on password reset form."
-msgstr ""
-
-#: um-recaptcha.php:40 um-recaptcha.php:56
+#: um-recaptcha.php:42 um-recaptcha.php:58
 #, php-format
 msgid ""
 "The <strong>%s</strong> extension requires the Ultimate Member plugin to be "
@@ -168,7 +195,7 @@ msgid ""
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "UM reCAPTCHA"
+msgid "Ultimate Member - reCAPTCHA"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
