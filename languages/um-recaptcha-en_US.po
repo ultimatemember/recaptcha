@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Ultimate Member - Google reCAPTCHA\n"
-"POT-Creation-Date: 2018-07-03 17:51+0300\n"
-"PO-Revision-Date: 2018-07-03 17:51+0300\n"
+"Project-Id-Version: UM reCAPTCHA\n"
+"POT-Creation-Date: 2019-08-01 16:56+0300\n"
+"PO-Revision-Date: 2019-08-01 16:56+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -50,33 +50,33 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-admin.php:13
-#: includes/core/actions/um-recaptcha-admin.php:30
+#: includes/core/actions/um-recaptcha-admin.php:14
+#: includes/core/actions/um-recaptcha-admin.php:34
 #: includes/core/filters/um-recaptcha-settings.php:13
 msgid "Google reCAPTCHA"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:113
+#: includes/core/actions/um-recaptcha-form.php:59
 msgid "The secret parameter is missing."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:114
+#: includes/core/actions/um-recaptcha-form.php:60
 msgid "The secret parameter is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:115
+#: includes/core/actions/um-recaptcha-form.php:61
 msgid "The response parameter is missing."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:116
+#: includes/core/actions/um-recaptcha-form.php:62
 msgid "The response parameter is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:127
+#: includes/core/actions/um-recaptcha-form.php:73
 msgid "Please confirm you are not a robot"
 msgstr ""
 
-#: includes/core/class-recaptcha-notices.php:33
+#: includes/core/class-recaptcha-notices.php:36
 #, php-format
 msgid ""
 "Google reCAPTCHA is active on your site. However you need to fill in both "
@@ -84,11 +84,11 @@ msgid ""
 "against spam. <a href=\"%s\">Hide this notice</a>"
 msgstr ""
 
-#: includes/core/class-recaptcha-notices.php:37
+#: includes/core/class-recaptcha-notices.php:40
 msgid "I already have the keys"
 msgstr ""
 
-#: includes/core/class-recaptcha-notices.php:38
+#: includes/core/class-recaptcha-notices.php:41
 msgid "Generate your site and secret key"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 msgid "Display the google Google reCAPTCHA on password reset form."
 msgstr ""
 
-#: um-recaptcha.php:38 um-recaptcha.php:54
+#: um-recaptcha.php:40 um-recaptcha.php:56
 #, php-format
 msgid ""
 "The <strong>%s</strong> extension requires the Ultimate Member plugin to be "
@@ -168,12 +168,11 @@ msgid ""
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Ultimate Member - Google reCAPTCHA"
+msgid "UM reCAPTCHA"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-#. Author URI of the plugin/theme
-msgid "http://ultimatemember.com/"
+msgid "https://ultimatemember.com/extensions/google-recaptcha/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -184,4 +183,8 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "Ultimate Member"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://ultimatemember.com/"
 msgstr ""

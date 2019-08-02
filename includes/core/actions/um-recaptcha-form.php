@@ -7,15 +7,15 @@
  * @param $args
  */
 function um_recaptcha_add_captcha( $args ) {
-	if ( ! UM()->reCAPTCHA_API()->captcha_allowed( $args ) ) {
+	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
 	$options = array(
-			'data-type'		 => UM()->options()->get( 'g_recaptcha_type' ),
-			'data-size'		 => UM()->options()->get( 'g_recaptcha_size' ),
-			'data-theme'	 => UM()->options()->get( 'g_recaptcha_theme' ),
-			'data-sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' )
+		'data-type'     => UM()->options()->get( 'g_recaptcha_type' ),
+		'data-size'     => UM()->options()->get( 'g_recaptcha_size' ),
+		'data-theme'    => UM()->options()->get( 'g_recaptcha_theme' ),
+		'data-sitekey'  => UM()->options()->get( 'g_recaptcha_sitekey' )
 	);
 
 	$attrs = '';
@@ -43,7 +43,7 @@ function um_recaptcha_validate( $args ) {
 		return;
 	}
 
-	if ( ! UM()->reCAPTCHA_API()->captcha_allowed( $args ) ) {
+	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
@@ -90,11 +90,11 @@ add_action( 'um_reset_password_errors_hook', 'um_recaptcha_validate', 20 );
  *                       um_pre_login_shortcode
  */
 function um_recaptcha_enqueue_scripts( $args ) {
-	if ( ! UM()->reCAPTCHA_API()->captcha_allowed( $args ) ) {
+	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
-	UM()->reCAPTCHA_API()->enqueue()->wp_enqueue_scripts();
+	UM()->reCAPTCHA()->enqueue()->wp_enqueue_scripts();
 }
 add_action( 'um_pre_register_shortcode', 'um_recaptcha_enqueue_scripts' );
 add_action( 'um_pre_login_shortcode', 'um_recaptcha_enqueue_scripts' );
@@ -108,7 +108,7 @@ add_action( 'um_pre_password_shortcode', 'um_recaptcha_enqueue_scripts' );
  *                       um_pre_login_shortcode
  */
 function um_recaptcha_directory_enqueue_scripts( $args ) {
-	if ( ! UM()->reCAPTCHA_API()->captcha_allowed( $args ) ) {
+	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
@@ -116,6 +116,6 @@ function um_recaptcha_directory_enqueue_scripts( $args ) {
 		return;
 	}
 
-	UM()->reCAPTCHA_API()->enqueue()->wp_enqueue_scripts();
+	UM()->reCAPTCHA()->enqueue()->wp_enqueue_scripts();
 }
 add_action( 'um_pre_directory_shortcode', 'um_recaptcha_directory_enqueue_scripts', 10, 1 );

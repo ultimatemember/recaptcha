@@ -6,32 +6,29 @@
  *
  * This template can be overridden by copying it to yourtheme/ultimate-member/um-recaptcha/captcha.php
  */
-if( !defined( 'ABSPATH' ) ) {
-	exit;
-}
-?>
+if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
 <!-- um-recaptcha/templates/captcha.php -->
 <div class="um-field">
-	<div class="g-recaptcha" id="um-<?php _e( $args[ 'form_id' ] ); ?>" <?php echo $attrs; ?> ></div>
+	<div class="g-recaptcha" id="um-<?php echo esc_attr( $args['form_id'] ); ?>" <?php echo $attrs; ?>></div>
 </div>
 
-<?php if( UM()->form()->has_error( 'recaptcha' ) ) { ?>
+<?php if ( UM()->form()->has_error( 'recaptcha' ) ) { ?>
 	<div class="um-field-error"><?php _e( UM()->form()->errors[ 'recaptcha' ] ); ?></div>
 <?php } ?>
 
 <script type="text/javascript">
-<?php if( 'invisible' == $options[ 'data-size' ] ) { ?>
+	<?php if ( 'invisible' == $options[ 'data-size' ] ) { ?>
 
-		var onSubmit = function (token) {
-			var me = jQuery('.um-<?php echo esc_js( $args[ 'form_id' ] ); ?> form');
+		var onSubmit = function( token ) {
+			var me = jQuery('.um-<?php echo esc_js( $args['form_id'] ); ?> form');
 			me.attr('disabled', 'disabled');
 			me.submit();
 		};
 
-		var onloadCallback = function () {
+		var onloadCallback = function() {
 			grecaptcha.render('um-submit-btn', {
-				'sitekey': '<?php echo esc_js( $options[ 'data-sitekey' ] ); ?>',
+				'sitekey': '<?php echo esc_js( $options['data-sitekey'] ); ?>',
 				'callback': onSubmit
 			});
 		};
@@ -44,11 +41,11 @@ if( !defined( 'ABSPATH' ) ) {
 			jQuery('.um-<?php echo esc_js( $args[ 'form_id' ] ); ?> #um-submit-btn').addClass('um-has-recaptcha');
 		});
 
-<?php } else { ?>
+	<?php } else { ?>
 
 		var onloadCallback = function () {
-			jQuery('.g-recaptcha').each(function (i) {
-				grecaptcha.render(jQuery(this).attr('id'), {
+			jQuery('.g-recaptcha').each( function (i) {
+				grecaptcha.render( jQuery(this).attr('id'), {
 					'sitekey': jQuery(this).attr('data-sitekey'),
 					'theme': jQuery(this).attr('data-theme')
 				});
@@ -60,5 +57,5 @@ if( !defined( 'ABSPATH' ) ) {
 			onloadCallback();
 		}
 
-<?php } ?>
+	<?php } ?>
 </script>
