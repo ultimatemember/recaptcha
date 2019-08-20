@@ -58,8 +58,10 @@ function um_recaptcha_validate( $args ) {
 	$error_codes = array(
 		'missing-input-secret'   => __( 'The secret parameter is missing.', 'um-recaptcha' ),
 		'invalid-input-secret'   => __( 'The secret parameter is invalid or malformed.', 'um-recaptcha' ),
-		'missing-input-response' => __( 'The response parameter is missing.', 'um-recaptcha' ),
+		'missing-input-response' => __( 'Please confirm you are not a robot', 'um-recaptcha' ),
 		'invalid-input-response' => __( 'The response parameter is invalid or malformed.', 'um-recaptcha' ),
+		'bad-request'            => __( 'The request is invalid or malformed.', 'um-recaptcha' ),
+		'timeout-or-duplicate'   => __( 'The response is no longer valid: either is too old or has been used previously.', 'um-recaptcha' ),
 	);
 
 
@@ -69,11 +71,7 @@ function um_recaptcha_validate( $args ) {
 
 		if ( isset( $result->{'error-codes'} ) && ! $result->success ) {
 			foreach ( $result->{'error-codes'} as $key => $error_code ) {
-				if ( $error_code == 'missing-input-response' ) {
-					UM()->form()->add_error( 'recaptcha', __( 'Please confirm you are not a robot', 'um-recaptcha' ) );
-				} else {
-					UM()->form()->add_error( 'recaptcha', $error_codes[ $error_code ] );
-				}
+				UM()->form()->add_error( 'recaptcha', $error_codes[ $error_code ] );
 			}
 		}
 
