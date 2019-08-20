@@ -6,7 +6,7 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -49,6 +49,10 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 3. Screenshot 3
 
 == Changelog ==
+
+= 2.1.1: 20 August, 2019 =
+
+* Fixed PHP notice about deprecated variable
 
 = 2.1.0: 2 August, 2019 =
 

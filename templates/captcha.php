@@ -14,11 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 </div>
 
 <?php if ( UM()->form()->has_error( 'recaptcha' ) ) { ?>
-	<div class="um-field-error"><?php _e( UM()->form()->errors[ 'recaptcha' ] ); ?></div>
+	<div class="um-field-error"><?php _e( UM()->form()->errors['recaptcha'] ); ?></div>
 <?php } ?>
 
 <script type="text/javascript">
-	<?php if ( 'invisible' == $options[ 'data-size' ] ) { ?>
+	<?php if ( 'invisible' == $options['data-size'] ) { ?>
 
 		var onSubmit = function( token ) {
 			var me = jQuery('.um-<?php echo esc_js( $args['form_id'] ); ?> form');
@@ -37,8 +37,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 			onloadCallback();
 		}
 
-		jQuery(document).ready(function () {
-			jQuery('.um-<?php echo esc_js( $args[ 'form_id' ] ); ?> #um-submit-btn').addClass('um-has-recaptcha');
+		jQuery(document).ready( function() {
+			jQuery('.um-<?php echo esc_js( $args['form_id'] ); ?> #um-submit-btn').addClass('um-has-recaptcha');
 		});
 
 	<?php } else { ?>

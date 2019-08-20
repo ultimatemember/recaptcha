@@ -25,7 +25,7 @@ function um_recaptcha_add_captcha( $args ) {
 		}
 	}
 
-	$t_args = compact( 'args', 'attrs', 'options', 'your_sitekey' );
+	$t_args = compact( 'args', 'attrs', 'options' );
 	UM()->get_template( 'captcha.php', um_recaptcha_plugin, $t_args, true );
 }
 add_action( 'um_after_register_fields', 'um_recaptcha_add_captcha', 500 );
