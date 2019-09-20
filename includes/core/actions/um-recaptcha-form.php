@@ -7,26 +7,42 @@
  * @param $args
  */
 function um_recaptcha_add_captcha( $args ) {
-	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
+	if( !UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
-	$options = array(
-		'data-type'     => UM()->options()->get( 'g_recaptcha_type' ),
-		'data-size'     => UM()->options()->get( 'g_recaptcha_size' ),
-		'data-theme'    => UM()->options()->get( 'g_recaptcha_theme' ),
-		'data-sitekey'  => UM()->options()->get( 'g_recaptcha_sitekey' )
-	);
+	$version = UM()->options()->get( 'g_recaptcha_version' );
+	switch( $version ) {
+		case 'v3':
 
-	$attrs = '';
-	foreach ( $options as $att => $value ) {
-		if ( $value ) {
-			$attrs .= " {$att}=\"{$value}\" ";
-		}
+			$t_args = compact( 'args' );
+			UM()->get_template( 'captcha_v3.php', um_recaptcha_plugin, $t_args, true );
+
+			break;
+
+		case 'v2':
+		default:
+
+			$options = array(
+					'data-type'		 => UM()->options()->get( 'g_recaptcha_type' ),
+					'data-size'		 => UM()->options()->get( 'g_recaptcha_size' ),
+					'data-theme'	 => UM()->options()->get( 'g_recaptcha_theme' ),
+					'data-sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' )
+			);
+
+			$attrs = '';
+			foreach( $options as $att => $value ) {
+				if( $value ) {
+					$attrs .= " {$att}=\"{$value}\" ";
+				}
+			}
+
+			$t_args = compact( 'args', 'attrs', 'options' );
+			UM()->get_template( 'captcha.php', um_recaptcha_plugin, $t_args, true );
+
+			break;
 	}
-
-	$t_args = compact( 'args', 'attrs', 'options' );
-	UM()->get_template( 'captcha.php', um_recaptcha_plugin, $t_args, true );
+	wp_enqueue_script( 'um-recaptcha' );
 }
 add_action( 'um_after_register_fields', 'um_recaptcha_add_captcha', 500 );
 add_action( 'um_after_login_fields', 'um_recaptcha_add_captcha', 500 );
@@ -47,8 +63,19 @@ function um_recaptcha_validate( $args ) {
 		return;
 	}
 
-	$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
-	$client_captcha_response = $_POST['g-recaptcha-response'];
+	$version = UM()->options()->get( 'g_recaptcha_version' );
+	switch( $version ) {
+		case 'v3':
+			$your_secret = trim( UM()->options()->get( 'g_reCAPTCHA_secret_key' ) );
+			break;
+
+		case 'v2':
+		default:
+			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
+			break;
+	}
+
+	$client_captcha_response = filter_input( INPUT_POST, 'g-recaptcha-response' );
 	$user_ip = $_SERVER['REMOTE_ADDR'];
 
 	$response = wp_remote_get(

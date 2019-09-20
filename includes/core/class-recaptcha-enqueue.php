@@ -25,14 +25,35 @@ class reCAPTCHA_Enqueue {
 		wp_register_style( 'um_recaptcha', um_recaptcha_url . 'assets/css/um-recaptcha.css' );
 		wp_enqueue_style( 'um_recaptcha' );
 
-		wp_register_script( 'um-recaptcha', um_recaptcha_url . 'assets/js/um-recaptcha.js', array( 'jquery' ), um_recaptcha_version, true );
+		$version = UM()->options()->get( 'g_recaptcha_version' );
+		switch( $version ) {
+			case 'v3':
+
+				$site_key = UM()->options()->get( 'g_reCAPTCHA_site_key' );
+
+				wp_register_script( 'google-recapthca-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key" );
+				wp_register_script( 'um-recaptcha', um_recaptcha_url . 'assets/js/um-recaptcha.js', array( 'jquery', 'google-recapthca-api-v3' ), um_recaptcha_version, true );
+
+				break;
+
+			case 'v2':
+			default:
+
+				$language_code = UM()->options()->get( 'g_recaptcha_language_code' );
+				$site_key = UM()->options()->get( 'g_recaptcha_sitekey' );
+
+				wp_register_script( 'google-recapthca-api-v2', "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code" );
+				wp_register_script( 'um-recaptcha', um_recaptcha_url . 'assets/js/um-recaptcha.js', array( 'jquery', 'google-recapthca-api-v2' ), um_recaptcha_version, true );
+
+				break;
+		}
+
 		wp_enqueue_script( 'um-recaptcha' );
 
-		$language_code = UM()->options()->get( 'g_recaptcha_language_code' );
-		wp_enqueue_script(
-			'google-recapthca-api',
-			"https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code"
-		);
+		wp_localize_script( 'um-recaptcha', 'umRecaptchaData', array(
+				'version'	 => $version,
+				'site_key' => $site_key
+		) );
 	}
 
 }

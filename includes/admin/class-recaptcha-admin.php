@@ -113,6 +113,38 @@ class Recaptcha_Admin {
 					'label'     => __( 'Enable Google reCAPTCHA', 'um-recaptcha' ),
 					'tooltip'   => __( 'Turn on or off your Google reCAPTCHA on your site registration and login forms by default.', 'um-recaptcha' ),
 				),
+				array(
+					'id'					 => 'g_recaptcha_version',
+					'type'				 => 'select',
+					'label'				 => __( 'reCAPTCHA type', 'um-recaptcha' ),
+					'tooltip'			 => __( 'Choose the type of reCAPTCHA for this site key. A site key only works with a single reCAPTCHA site type.', 'um-recaptcha' ),
+					'options'			 => array(
+						'v2' => __( 'reCAPTCHA v2', 'um-recaptcha' ),
+						'v3' => __( 'reCAPTCHA v3', 'um-recaptcha' ),
+					),
+					'size'				 => 'medium',
+					'description'	 => __( 'See  <a href="https://g.co/recaptcha/sitetypes" target="_blank">Site Types</a> for more details.', 'um-recaptcha' ),
+					'conditional'	 => array( 'g_recaptcha_status', '=', 1 )
+				),
+				/* reCAPTCHA v3 */
+				array(
+					'id'					 => 'g_reCAPTCHA_site_key',
+					'type'				 => 'text',
+					'label'				 => __( 'Site Key', 'um-recaptcha' ),
+					'tooltip'			 => __( 'You can register your site and generate a site key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
+					'size'				 => 'medium',
+					'conditional'	 => array( 'g_recaptcha_version', '=', 'v3' )
+				),
+				array(
+					'id'					 => 'g_reCAPTCHA_secret_key',
+					'type'				 => 'text',
+					'label'				 => __( 'Secret Key', 'um-recaptcha' ),
+					'tooltip'			 => __( 'Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
+					'size'				 => 'medium',
+					'conditional'	 => array( 'g_recaptcha_version', '=', 'v3' )
+				),
+
+				/* reCAPTCHA v2 */
 
 				array(
 					'id'            => 'g_recaptcha_sitekey',
@@ -120,16 +152,15 @@ class Recaptcha_Admin {
 					'label'         => __( 'Site Key', 'um-recaptcha' ),
 					'tooltip'       => __( 'You can register your site and generate a site key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
 					'size'          => 'medium',
-					'conditional'   => array( 'g_recaptcha_status', '=', 1 ),
+					'conditional'   => array( 'g_recaptcha_version', '=', 'v2' )
 				),
-
 				array(
 					'id'            => 'g_recaptcha_secretkey',
 					'type'          => 'text',
 					'label'         => __( 'Secret Key', 'um-recaptcha' ),
 					'tooltip'       => __( 'Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
 					'size'          => 'medium',
-					'conditional'   => array( 'g_recaptcha_status', '=', 1 ),
+					'conditional'   => array( 'g_recaptcha_version', '=', 'v2' )
 				),
 				array(
 					'id'            => 'g_recaptcha_type',
@@ -141,7 +172,7 @@ class Recaptcha_Admin {
 						'image' => __( 'Image', 'um-recaptcha' ),
 					),
 					'size'          => 'small',
-					'conditional'   => array( 'g_recaptcha_status', '=', 1 ),
+					'conditional'   => array( 'g_recaptcha_version', '=', 'v2' )
 				),
 				array(
 					'id'        => 'g_recaptcha_language_code',
@@ -221,7 +252,7 @@ class Recaptcha_Admin {
 						'zu'     => 'Zulu'
 					),
 					'size'          => 'small',
-					'conditional'   => array( 'g_recaptcha_status', '=', 1 ),
+					'conditional'   => array( 'g_recaptcha_version', '=', 'v2' )
 				),
 				array(
 					'id'            => 'g_recaptcha_theme',
@@ -233,7 +264,7 @@ class Recaptcha_Admin {
 						'light' => __( 'Light', 'um-recaptcha' ),
 					),
 					'size'          => 'small',
-					'conditional'   => array( 'g_recaptcha_status', '=', 1 ),
+					'conditional'   => array( 'g_recaptcha_version', '=', 'v2' )
 				),
 				array(
 					'id'            => 'g_recaptcha_size',
@@ -246,14 +277,17 @@ class Recaptcha_Admin {
 						'invisible' => __( 'Invisible', 'um-recaptcha' ),
 					),
 					'size'          => 'small',
-					'conditional'   => array( 'g_recaptcha_status', '=', 1 ),
+					'conditional'   => array( 'g_recaptcha_version', '=', 'v2' )
 				),
+
+				/* Forms */
+
 				array(
 					'id'            => 'g_recaptcha_password_reset',
 					'type'          => 'checkbox',
 					'label'         => __( 'Enable Google reCAPTCHA on password reset form', 'um-recaptcha' ),
 					'tooltip'       => __( 'Display the google Google reCAPTCHA on password reset form.', 'um-recaptcha' ),
-					'conditional'   => array( 'g_recaptcha_status', '=', 1 ),
+					'conditional'   => array( 'g_recaptcha_status', '=', 1 )
 				),
 			)
 		);
