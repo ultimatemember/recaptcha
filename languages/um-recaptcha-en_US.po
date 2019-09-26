@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ultimate Member - reCAPTCHA\n"
-"POT-Creation-Date: 2019-08-02 12:02+0300\n"
-"PO-Revision-Date: 2019-08-02 12:02+0300\n"
+"POT-Creation-Date: 2019-08-20 15:38+0300\n"
+"PO-Revision-Date: 2019-08-20 15:38+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -175,15 +175,21 @@ msgid "The secret parameter is invalid or malformed."
 msgstr ""
 
 #: includes/core/actions/um-recaptcha-form.php:61
-msgid "The response parameter is missing."
+msgid "Please confirm you are not a robot"
 msgstr ""
 
 #: includes/core/actions/um-recaptcha-form.php:62
 msgid "The response parameter is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:73
-msgid "Please confirm you are not a robot"
+#: includes/core/actions/um-recaptcha-form.php:63
+msgid "The request is invalid or malformed."
+msgstr ""
+
+#: includes/core/actions/um-recaptcha-form.php:64
+msgid ""
+"The response is no longer valid: either is too old or has been used "
+"previously."
 msgstr ""
 
 #: um-recaptcha.php:42 um-recaptcha.php:58

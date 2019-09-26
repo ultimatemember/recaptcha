@@ -76,6 +76,7 @@ function um_recaptcha_validate( $args ) {
 	}
 
 	$client_captcha_response = filter_input( INPUT_POST, 'g-recaptcha-response' );
+	$client_captcha_response = sanitize_key( $client_captcha_response );
 	$user_ip = $_SERVER['REMOTE_ADDR'];
 
 	$response = wp_remote_get(
