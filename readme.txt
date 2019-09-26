@@ -50,6 +50,10 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 == Changelog ==
 
+= 2.1.2: 20 September, 2019 =
+
+* New: Google reCAPTCHA v3
+
 = 2.1.1: 20 August, 2019 =
 
 * Fixed PHP notice about deprecated variable

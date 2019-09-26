@@ -8,7 +8,6 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
-<!-- um-recaptcha/templates/captcha.php -->
 <div class="um-field">
 	<div class="g-recaptcha" id="um-<?php echo esc_attr( $args['form_id'] ); ?>" <?php echo $attrs; ?>></div>
 </div>
