@@ -75,13 +75,12 @@ function um_recaptcha_validate( $args ) {
 			break;
 	}
 
+	/* Don't sanitize this input! */
 	$client_captcha_response = filter_input( INPUT_POST, 'g-recaptcha-response' );
-	$client_captcha_response = sanitize_key( $client_captcha_response );
+
 	$user_ip = $_SERVER['REMOTE_ADDR'];
 
-	$response = wp_remote_get(
-	"https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip"
-	);
+	$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
 
 	$error_codes = array(
 		'missing-input-secret'   => __( 'The secret parameter is missing.', 'um-recaptcha' ),
