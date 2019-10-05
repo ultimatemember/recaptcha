@@ -50,7 +50,7 @@ class Recaptcha_Admin {
 
 		<?php $message = ob_get_clean();
 
-		UM()->notices()->add_notice( 'um_recaptcha_notice', array(
+		UM()->admin()->notices()->add_notice( 'um_recaptcha_notice', array(
 			'class'         => 'updated',
 			'message'       => $message,
 			'dismissible'   => true,

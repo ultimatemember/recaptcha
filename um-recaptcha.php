@@ -8,6 +8,7 @@ Author: Ultimate Member
 Author URI: http://ultimatemember.com/
 Text Domain: um-recaptcha
 Domain Path: /languages
+UM version: 2.1.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -23,7 +24,7 @@ define( 'um_recaptcha_extension', $plugin_data['Name'] );
 define( 'um_recaptcha_version', $plugin_data['Version'] );
 define( 'um_recaptcha_textdomain', 'um-recaptcha' );
 
-define( 'um_recaptcha_requires', '2.0.54' );
+define( 'um_recaptcha_requires', '2.1.0' );
 
 function um_recaptcha_plugins_loaded() {
 	$locale = ( get_locale() != '' ) ? get_locale() : 'en_US';
