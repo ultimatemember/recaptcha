@@ -6,7 +6,7 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 2.1.2
+Stable tag: 2.1.1
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.1.0
@@ -51,7 +51,7 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 == Changelog ==
 
-= 2.1.2: xx October, 2019 =
+= 2.1.2: xx November, 2019 =
 
 * Added: Google reCAPTCHA v3
 
