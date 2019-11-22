@@ -29,8 +29,8 @@ class Recaptcha_Admin {
 	function add_admin_notice() {
 
 		$status = UM()->options()->get( 'g_recaptcha_status' );
-		$sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
-		$secretkey = UM()->options()->get( 'g_recaptcha_secretkey' );
+		$sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
+		$secretkey = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
 
 		if ( ! $status || ( $sitekey && $secretkey ) ) {
 			return;
@@ -38,13 +38,10 @@ class Recaptcha_Admin {
 
 		ob_start(); ?>
 
-		<p>
-			<?php _e( 'Google reCAPTCHA is active on your site. However you need to fill in both your <strong>site key and secret key</strong> to start protecting your site against spam.', 'um-recaptcha' ); ?>
-		</p>
+		<p><?php _e( 'Google reCAPTCHA is active on your site. However you need to fill in both your <strong>site key and secret key</strong> to start protecting your site against spam.', 'um-recaptcha' ); ?></p>
 
 		<p>
-			<a href="<?php echo admin_url( 'admin.php?page=um_options' ) ?>" class="button button-primary"><?php _e( 'I already have the keys', 'um-recaptcha' ) ?></a>
-			&nbsp;
+			<a href="<?php echo admin_url( 'admin.php?page=um_options&tab=extensions&section=recaptcha' ) ?>" class="button button-primary"><?php _e( 'I already have the keys', 'um-recaptcha' ) ?></a>&nbsp;
 			<a href="http://google.com/recaptcha" class="button-secondary" target="_blank"><?php _e( 'Generate your site and secret key', 'um-recaptcha' ) ?></a>
 		</p>
 
