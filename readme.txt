@@ -6,7 +6,7 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.1.0
@@ -50,6 +50,12 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 3. Screenshot 3
 
 == Changelog ==
+
+= Important: Please update to Ultimate Member 2.1 before updating the extension =
+
+= 2.1.3: 4 December, 2019 =
+
+* Fixed: Admin notice if the settings are empty
 
 = 2.1.2: 11 November, 2019 =
 
