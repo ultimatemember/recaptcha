@@ -5,7 +5,7 @@ Contributors: ultimatemember, champsupertramp, nsinelnikov
 Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: 2.1.3
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -53,7 +53,7 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.1.3: 4 December, 2019 =
+= 2.1.3: 21 January, 2020 =
 
 * Fixed: Admin notice if the settings are empty
 
