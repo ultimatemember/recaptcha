@@ -33,6 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 		};
 
 		function um_recaptcha_refresh() {
+			grecaptcha.reset();
 			onloadCallback();
 		}
 
@@ -53,6 +54,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
 		function um_recaptcha_refresh() {
 			jQuery('.g-recaptcha').html('');
+			grecaptcha.reset();
 			onloadCallback();
 		}
 
