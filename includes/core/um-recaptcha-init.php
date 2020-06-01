@@ -111,23 +111,23 @@ class UM_reCAPTCHA {
 	 */
 	function captcha_allowed( $args ) {
 		$enable = false;
-		
-		$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
-		$your_secret = UM()->options()->get( 'g_recaptcha_secretkey' );
+
 		$recaptcha = UM()->options()->get( 'g_recaptcha_status' );
-		
+		$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
+		$your_secret = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+
 		if ( $recaptcha ) {
 			$enable = true;
 		}
-		
+
 		if ( isset( $args['g_recaptcha_status'] ) && $args['g_recaptcha_status'] ) {
 			$enable = true;
 		}
-		
+
 		if ( isset( $args['g_recaptcha_status'] ) && ! $args['g_recaptcha_status'] ) {
 			$enable = false;
 		}
-		
+
 		if ( ! $your_sitekey || ! $your_secret ) {
 			$enable = false;
 		}

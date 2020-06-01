@@ -7,7 +7,7 @@
  * @param $args
  */
 function um_recaptcha_add_captcha( $args ) {
-	if( !UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
+	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
@@ -24,10 +24,10 @@ function um_recaptcha_add_captcha( $args ) {
 		default:
 
 			$options = array(
-					'data-type'		 => UM()->options()->get( 'g_recaptcha_type' ),
-					'data-size'		 => UM()->options()->get( 'g_recaptcha_size' ),
-					'data-theme'	 => UM()->options()->get( 'g_recaptcha_theme' ),
-					'data-sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' )
+				'data-type'     => UM()->options()->get( 'g_recaptcha_type' ),
+				'data-size'     => UM()->options()->get( 'g_recaptcha_size' ),
+				'data-theme'    => UM()->options()->get( 'g_recaptcha_theme' ),
+				'data-sitekey'  => UM()->options()->get( 'g_recaptcha_sitekey' )
 			);
 
 			$attrs = '';

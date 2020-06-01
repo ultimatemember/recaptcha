@@ -6,7 +6,7 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.1.0
@@ -52,6 +52,11 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 == Changelog ==
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
+
+= 2.1.6: 2 June, 2020 =
+
+* Fixed: reCAPTCHA v3 keys settings on init
+* Tweak: updated translations
 
 = 2.1.5: 1 April, 2020 =
 
