@@ -33,7 +33,7 @@ if (typeof (umRecaptchaData) !== 'undefined' && umRecaptchaData.version === 'v3'
 				$form.append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
 			}
 
-			$form.off('submit', um_recaptcha_validate_form).submit();
+			$form.off('submit', um_recaptcha_validate_form).trigger('submit');
 		});
 	}
 
