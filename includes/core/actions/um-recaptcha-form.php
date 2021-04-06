@@ -59,10 +59,6 @@ function um_recaptcha_validate( $args ) {
 		return;
 	}
 
-	if( ! wp_doing_ajax() ) {
-		return;
-	}
-
 	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
@@ -92,7 +88,7 @@ function um_recaptcha_validate( $args ) {
 		'missing-input-response' => __( 'Please confirm you are not a robot', 'um-recaptcha' ),
 		'invalid-input-response' => __( 'The response parameter is invalid or malformed.', 'um-recaptcha' ),
 		'bad-request'            => __( 'The request is invalid or malformed.', 'um-recaptcha' ),
-		'timeout-or-duplicate'   => __( 'The response is no longer valid: either is too old or has been used previously. ', 'um-recaptcha' ),
+		'timeout-or-duplicate'   => __( 'The response is no longer valid: either is too old or has been used previously.', 'um-recaptcha' ),
 	);
 
 
