@@ -1,4 +1,6 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
+<?php if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
 /**
@@ -23,18 +25,26 @@ function um_recaptcha_add_captcha( $args ) {
 		case 'v2':
 		default:
 
-			$options = [
-				'data-type'     => UM()->options()->get( 'g_recaptcha_type' ),
-				'data-size'     => UM()->options()->get( 'g_recaptcha_size' ),
-				'data-theme'    => UM()->options()->get( 'g_recaptcha_theme' ),
-				'data-sitekey'  => UM()->options()->get( 'g_recaptcha_sitekey' )
-			];
+			$options = array(
+				'data-type'    => UM()->options()->get( 'g_recaptcha_type' ),
+				'data-size'    => UM()->options()->get( 'g_recaptcha_size' ),
+				'data-theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
+				'data-sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' ),
+			);
 
-			$attrs = '';
-			foreach( $options as $att => $value ) {
-				if( $value ) {
-					$attrs .= " {$att}=\"{$value}\" ";
+			$attrs = array();
+			foreach ( $options as $att => $value ) {
+				if ( $value ) {
+					$att = esc_html( $att );
+					$value = esc_attr( $value );
+					$attrs[] = "{$att}=\"{$value}\"";
 				}
+			}
+
+			if ( ! empty( $attrs ) ) {
+				$attrs = implode( ' ', $attrs );
+			} else {
+				$attrs = '';
 			}
 
 			$t_args = compact( 'args', 'attrs', 'options' );
@@ -58,7 +68,7 @@ add_action( 'um_after_password_reset_fields', 'um_recaptcha_add_captcha', 500 );
  * @param $args
  */
 function um_recaptcha_validate( $args ) {
-	if ( isset( $args['mode'] ) && ! in_array( $args['mode'], ['login', 'register', 'password'] ) && ! isset( $args['_social_login_form'] ) ) {
+	if ( isset( $args['mode'] ) && ! in_array( $args['mode'], array( 'login', 'register', 'password' ), true ) && ! isset( $args['_social_login_form'] ) ) {
 		return;
 	}
 
@@ -77,7 +87,7 @@ function um_recaptcha_validate( $args ) {
 			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
 			break;
 	}
-	
+
 	if ( empty( $_POST['g-recaptcha-response'] ) ) {
 		UM()->form()->add_error( 'recaptcha', __( 'Please confirm you are not a robot', 'um-recaptcha' ) );
 		return;
@@ -85,18 +95,17 @@ function um_recaptcha_validate( $args ) {
 		$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
 	}
 
-	$user_ip = $_SERVER['REMOTE_ADDR'];
-
+	$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
 	$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
 
 	if ( is_array( $response ) ) {
 
-		$result = json_decode( $response['body'] );
+		$result         = json_decode( $response['body'] );
+		$validate_score = apply_filters( 'um_recaptcha_score_validation', 0.6 );
 
-		if ( isset( $result->score ) && $result->score < 0.6 ) {
+		if ( isset( $result->score ) && $result->score < $validate_score ) {
 			UM()->form()->add_error( 'recaptcha', __( 'reCAPTCHA: it is very likely a bot.', 'um-recaptcha' ) );
 		} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
-			
 			$error_codes = array(
 				'missing-input-secret'   => __( 'The secret parameter is missing.', 'um-recaptcha' ),
 				'invalid-input-secret'   => __( 'The secret parameter is invalid or malformed.', 'um-recaptcha' ),
@@ -134,6 +143,8 @@ add_action( 'um_pre_password_shortcode', 'um_recaptcha_enqueue_scripts' );
 
 /**
  * reCAPTCHA scripts/styles enqueue in member directory
+ *
+ * @param array $args
  */
 function um_recaptcha_directory_enqueue_scripts( $args ) {
 	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
