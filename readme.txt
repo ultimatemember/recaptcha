@@ -53,7 +53,7 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.1.9: 1 July, 2021 =
+= 2.1.9: 8 July, 2021 =
 
 * Added: reCAPTCHA v3 validation via score
 
