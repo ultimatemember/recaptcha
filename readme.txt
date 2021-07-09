@@ -53,6 +53,11 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
+= 2.2.0: 9 July, 2021 =
+
+* Added: Setting for reCAPTCHA v3 validation score
+* Added: Ability to populate score settings for different forms
+
 = 2.1.9: 8 July, 2021 =
 
 * Added: reCAPTCHA v3 validation via score

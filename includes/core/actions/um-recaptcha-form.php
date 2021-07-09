@@ -100,8 +100,21 @@ function um_recaptcha_validate( $args ) {
 
 	if ( is_array( $response ) ) {
 
-		$result         = json_decode( $response['body'] );
-		$validate_score = apply_filters( 'um_recaptcha_score_validation', 0.6 );
+		$result = json_decode( $response['body'] );
+
+		$score = UM()->options()->get( 'g_reCAPTCHA_score' );
+		if ( ! empty( $args['g_recaptcha_score'] ) ) {
+			// use form setting for score
+			$score = $args['g_recaptcha_score'];
+		}
+
+		if ( empty( $score ) ) {
+			// set default 0.6 because Google recommend by default set 0.5 score
+			// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
+			$score = 0.6;
+		}
+		// available to change score based on form $args
+		$validate_score = apply_filters( 'um_recaptcha_score_validation', $score, $args );
 
 		if ( isset( $result->score ) && $result->score < $validate_score ) {
 			UM()->form()->add_error( 'recaptcha', __( 'reCAPTCHA: it is very likely a bot.', 'um-recaptcha' ) );

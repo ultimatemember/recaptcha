@@ -144,6 +144,14 @@ class Recaptcha_Admin {
 					'size'        => 'medium',
 					'conditional' => array( 'g_recaptcha_version', '=', 'v3' ),
 				),
+				array(
+					'id'          => 'g_reCAPTCHA_score',
+					'type'        => 'text',
+					'label'       => __( 'reCAPTCHA Score', 'um-recaptcha' ),
+					'tooltip'     => __( 'Consider answers with a score >= to the specified as safe. Set the score in the 0 to 1 range. E.g. 0.5', 'um-recaptcha' ),
+					'size'        => 'small',
+					'conditional' => array( 'g_recaptcha_version', '=', 'v3' ),
+				),
 				/* reCAPTCHA v2 */
 				array(
 					'id'          => 'g_recaptcha_sitekey',

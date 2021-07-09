@@ -1,7 +1,10 @@
 <?php
 namespace um_ext\um_recaptcha\core;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 class Recaptcha_Setup {
 	var $settings_defaults;
@@ -14,6 +17,7 @@ class Recaptcha_Setup {
 			/* reCAPTCHA v3 */
 			'g_reCAPTCHA_site_key'       => '',
 			'g_reCAPTCHA_secret_key'     => '',
+			'g_reCAPTCHA_score'          => '0.9',
 
 			/* reCAPTCHA v2 */
 			'g_recaptcha_sitekey'        => '',
