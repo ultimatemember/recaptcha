@@ -34,6 +34,7 @@
 			'type'  => 'text',
 			'label' => __( 'reCAPTCHA score', 'um-recaptcha' ),
 			'value' => UM()->query()->get_meta_value( '_um_register_g_recaptcha_score', null, UM()->options()->get( 'g_reCAPTCHA_score' ) ),
+			'conditional' => array( '_um_register_g_recaptcha_status', '=', '1' ),
 		);
 	}
 
