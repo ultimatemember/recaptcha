@@ -129,7 +129,8 @@ function um_recaptcha_validate( $args ) {
 			);
 
 			foreach ( $result->{'error-codes'} as $key => $error_code ) {
-				UM()->form()->add_error( 'recaptcha', $error_codes[ $error_code ] );
+				$error = array_key_exists( $error_code, $error_codes ) ? $error_codes[ $error_code ] : sprintf( __( 'Undefined error. Key: %s', 'um-recaptcha' ), $error_code );
+				UM()->form()->add_error( 'recaptcha', $error );
 			}
 		}
 
