@@ -53,6 +53,10 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
+= 2.2.1: XX December, 2021 =
+
+* Fixed: Duplicate error message on login
+
 = 2.2.0: 20 July, 2021 =
 
 * Added: Setting for reCAPTCHA v3 validation score

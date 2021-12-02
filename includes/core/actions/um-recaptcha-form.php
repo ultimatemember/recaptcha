@@ -172,3 +172,21 @@ function um_recaptcha_directory_enqueue_scripts( $args ) {
 	UM()->reCAPTCHA()->enqueue()->wp_enqueue_scripts();
 }
 add_action( 'um_pre_directory_shortcode', 'um_recaptcha_directory_enqueue_scripts', 10, 1 );
+
+
+/**
+ * Don't display reCAPTCHA error message twice on login
+ *
+ * @since   2.2.1
+ *
+ * @param   string $error_message  Error message
+ * @param   string $error_key      A key of the error
+ * @return  string                 Filtered error message
+ */
+function um_recaptcha_hide_errors( $error_message, $error_key ){
+	if( 'recaptcha' === $error_key ){
+		$error_message = '';
+	}
+	return $error_message;
+}
+add_filter( 'login_errors', 'um_recaptcha_hide_errors', 10, 2 );
