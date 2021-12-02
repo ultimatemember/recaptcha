@@ -6,7 +6,7 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.1.0
@@ -53,8 +53,9 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.2.1: XX December, 2021 =
+= 2.2.1: 6 December, 2021 =
 
+* Fixed: Undefined error message when reCAPTCHA is invalid
 * Fixed: Duplicate error message on login
 
 = 2.2.0: 20 July, 2021 =
