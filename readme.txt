@@ -53,7 +53,7 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.2.1: 6 December, 2021 =
+= 2.2.1: 16 December, 2021 =
 
 * Fixed: Undefined error message when reCAPTCHA is invalid
 * Fixed: Duplicate error message on login
