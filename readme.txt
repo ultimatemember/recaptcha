@@ -5,8 +5,8 @@ Contributors: ultimatemember, champsupertramp, nsinelnikov
 Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
-Tested up to: 5.8
-Stable tag: 2.2.1
+Tested up to: 5.9
+Stable tag: 2.2.2
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.1.0
@@ -52,6 +52,10 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 == Changelog ==
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
+
+= 2.2.2: February 9, 2022 =
+
+* Fixed: Extension settings structure
 
 = 2.2.1: 16 December, 2021 =
 

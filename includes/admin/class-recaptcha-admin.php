@@ -103,9 +103,7 @@ class Recaptcha_Admin {
 	 * @return mixed
 	 */
 	public function add_settings( $settings ) {
-		$key = ! empty( $settings['extensions']['sections'] ) ? 'recaptcha' : '';
-
-		$settings['extensions']['sections'][ $key ] = array(
+		$settings['extensions']['sections']['recaptcha'] = array(
 			'title'  => __( 'Google reCAPTCHA', 'um-recaptcha' ),
 			'fields' => array(
 				array(
