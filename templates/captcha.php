@@ -6,14 +6,19 @@
  *
  * This template can be overridden by copying it to yourtheme/ultimate-member/um-recaptcha/captcha.php
  */
-if ( ! defined( 'ABSPATH' ) ) exit; ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+// phpcs:disable VariableAnalysis
+// There are "undefined" variables here because they're defined in the code that includes this file as a template.
+?>
 
 <div class="um-field">
-	<div class="g-recaptcha" id="um-<?php echo esc_attr( $args['form_id'] ); ?>" <?php echo $attrs; ?>></div>
+	<div class="g-recaptcha" id="um-<?php echo esc_attr( $args['form_id'] ); ?>" <?php /** @noinspection PhpUndefinedVariableInspection */ echo esc_html( $attrs ); ?>></div>
 </div>
 
 <?php if ( UM()->form()->has_error( 'recaptcha' ) ) { ?>
-	<div class="um-field-error"><?php _e( UM()->form()->errors['recaptcha'] ); ?></div>
+	<div class="um-field-error"><?php echo esc_html( UM()->form()->errors['recaptcha'] ); ?></div>
 <?php } ?>
 
 <script type="text/javascript">

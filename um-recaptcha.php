@@ -3,7 +3,7 @@
 Plugin Name: Ultimate Member - reCAPTCHA
 Plugin URI: https://ultimatemember.com/extensions/google-recaptcha/
 Description: Protect your website from spam and integrate Google reCAPTCHA into your Ultimate Member forms
-Version: 2.2.2
+Version: 2.3.0
 Author: Ultimate Member
 Author URI: http://ultimatemember.com/
 Text Domain: um-recaptcha
@@ -11,25 +11,28 @@ Domain Path: /languages
 UM version: 2.1.0
 */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-require_once( ABSPATH.'wp-admin/includes/plugin.php' );
+/** @noinspection PhpIncludeInspection */
+require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 $plugin_data = get_plugin_data( __FILE__ );
 
-define( 'um_recaptcha_url', plugin_dir_url( __FILE__ ) );
-define( 'um_recaptcha_path', plugin_dir_path( __FILE__ ) );
-define( 'um_recaptcha_plugin', plugin_basename( __FILE__ ) );
-define( 'um_recaptcha_extension', $plugin_data['Name'] );
-define( 'um_recaptcha_version', $plugin_data['Version'] );
-define( 'um_recaptcha_textdomain', 'um-recaptcha' );
+define( 'UM_RECAPTCHA_URL', plugin_dir_url( __FILE__ ) );
+define( 'UM_RECAPTCHA_PATH', plugin_dir_path( __FILE__ ) );
+define( 'UM_RECAPTCHA_PLUGIN', plugin_basename( __FILE__ ) );
+define( 'UM_RECAPTCHA_EXTENSION', $plugin_data['Name'] );
+define( 'UM_RECAPTCHA_VERSION', $plugin_data['Version'] );
+define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
 
-define( 'um_recaptcha_requires', '2.1.0' );
+define( 'UM_RECAPTCHA_REQUIRES', '2.1.0' );
 
 function um_recaptcha_plugins_loaded() {
-	$locale = ( get_locale() != '' ) ? get_locale() : 'en_US';
-	load_textdomain( um_recaptcha_textdomain, WP_LANG_DIR . '/plugins/' . um_recaptcha_textdomain . '-' . $locale . '.mo' );
-	load_plugin_textdomain( um_recaptcha_textdomain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	$locale = ( '' !== get_locale() ) ? get_locale() : 'en_US';
+	load_textdomain( UM_RECAPTCHA_TEXTDOMAIN, WP_LANG_DIR . '/plugins/' . UM_RECAPTCHA_TEXTDOMAIN . '-' . $locale . '.mo' );
+	load_plugin_textdomain( UM_RECAPTCHA_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'um_recaptcha_plugins_loaded', 0 );
 
@@ -37,16 +40,25 @@ add_action( 'plugins_loaded', 'um_recaptcha_check_dependencies', -20 );
 
 if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 	function um_recaptcha_check_dependencies() {
-		if ( ! defined( 'um_path' ) || ! file_exists( um_path  . 'includes/class-dependencies.php' ) ) {
+		if ( ! defined( 'um_path' ) || ! file_exists( um_path . 'includes/class-dependencies.php' ) ) {
 			//UM is not installed
 			function um_recaptcha_dependencies() {
-				echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-recaptcha' ), um_recaptcha_extension ) . '</p></div>';
+				$allowed_html = array(
+					'a'      => array(
+						'href'   => array(),
+						'target' => true,
+					),
+					'strong' => array(),
+				);
+				// translators: %s: Google reCAPTCHA extension name
+				echo '<div class="error"><p>' . wp_kses( sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-recaptcha' ), UM_RECAPTCHA_EXTENSION ), $allowed_html ) . '</p></div>';
 			}
 
 			add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 		} else {
 
 			if ( ! function_exists( 'UM' ) ) {
+				/** @noinspection PhpIncludeInspection */
 				require_once um_path . 'includes/class-dependencies.php';
 				$is_um_active = um\is_um_active();
 			} else {
@@ -56,44 +68,58 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 			if ( ! $is_um_active ) {
 				//UM is not active
 				function um_recaptcha_dependencies() {
-					echo '<div class="error"><p>' . sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-recaptcha' ), um_recaptcha_extension ) . '</p></div>';
+					$allowed_html = array(
+						'a'      => array(
+							'href'   => array(),
+							'target' => true,
+						),
+						'strong' => array(),
+					);
+					// translators: %s: Google reCAPTCHA extension name
+					echo '<div class="error"><p>' . wp_kses( sprintf( __( 'The <strong>%s</strong> extension requires the Ultimate Member plugin to be activated to work properly. You can download it <a href="https://wordpress.org/plugins/ultimate-member">here</a>', 'um-recaptcha' ), UM_RECAPTCHA_EXTENSION ), $allowed_html ) . '</p></div>';
 				}
 
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
-			} elseif ( true !== UM()->dependencies()->compare_versions( um_recaptcha_requires, um_recaptcha_version, 'recaptcha', um_recaptcha_extension ) ) {
+			} elseif ( true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ) ) {
 				//UM old version is active
 				function um_recaptcha_dependencies() {
-					echo '<div class="error"><p>' . UM()->dependencies()->compare_versions( um_recaptcha_requires, um_recaptcha_version, 'recaptcha', um_recaptcha_extension ) . '</p></div>';
+					$allowed_html = array(
+						'strong' => array(),
+					);
+					// translators: %s: Google reCAPTCHA extension name
+					echo '<div class="error"><p>' . wp_kses( UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ), $allowed_html ) . '</p></div>';
 				}
 
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
 			} else {
-				require_once um_recaptcha_path . 'includes/core/um-recaptcha-init.php';
+				/** @noinspection PhpIncludeInspection */
+				require_once UM_RECAPTCHA_PATH . 'includes/core/class-um-recaptcha.php';
 			}
 		}
 	}
 }
 
 
-register_activation_hook( um_recaptcha_plugin, 'um_recaptcha_activation_hook' );
+register_activation_hook( UM_RECAPTCHA_PLUGIN, 'um_recaptcha_activation_hook' );
 function um_recaptcha_activation_hook() {
 	//first install
 	$version = get_option( 'um_recaptcha_version' );
 	if ( ! $version ) {
-		update_option( 'um_recaptcha_last_version_upgrade', um_recaptcha_version );
+		update_option( 'um_recaptcha_last_version_upgrade', UM_RECAPTCHA_VERSION );
 	}
 
-	if ( $version != um_recaptcha_version ) {
-		update_option( 'um_recaptcha_version', um_recaptcha_version );
+	if ( UM_RECAPTCHA_VERSION !== $version ) {
+		update_option( 'um_recaptcha_version', UM_RECAPTCHA_VERSION );
 	}
 
 	//run setup
-	if ( ! class_exists( 'um_ext\um_recaptcha\core\Recaptcha_Setup' ) ) {
-		require_once um_recaptcha_path . 'includes/core/class-recaptcha-setup.php';
+	if ( ! class_exists( 'um_ext\um_recaptcha\core\Setup' ) ) {
+		/** @noinspection PhpIncludeInspection */
+		require_once UM_RECAPTCHA_PATH . 'includes/core/class-setup.php';
 	}
 
-	$recaptcha_setup = new um_ext\um_recaptcha\core\Recaptcha_Setup();
+	$recaptcha_setup = new um_ext\um_recaptcha\core\Setup();
 	$recaptcha_setup->run_setup();
 }

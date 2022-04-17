@@ -2,7 +2,7 @@
 	exit;
 }
 
-/* wp-login.php */
+/* Handle reCAPTCHA via wp-login.php */
 
 
 /**
@@ -28,7 +28,7 @@ function um_add_recaptcha_login_form_classes( $classes, $action ) {
 	}
 
 	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
-	$your_secret = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+	$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
 
 	if ( ! $your_sitekey || ! $your_secret ) {
 		return $classes;
@@ -64,22 +64,22 @@ function um_login_form_scripts() {
 	}
 
 	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
-	$your_secret = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+	$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
 
 	if ( ! $your_sitekey || ! $your_secret ) {
 		return;
 	}
 
-	wp_register_style( 'um_recaptcha', um_recaptcha_url . 'assets/css/wp-recaptcha.css' );
-	wp_enqueue_style( 'um_recaptcha' );
+	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . UM()->enqueue()->suffix . '.css', array(), UM_RECAPTCHA_VERSION );
+	wp_enqueue_style( 'um-recaptcha' );
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
-	switch( $version ) {
+	switch ( $version ) {
 		case 'v3':
 			$site_key = UM()->options()->get( 'g_reCAPTCHA_site_key' );
 
-			wp_register_script( 'google-recaptcha-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key" );
-			wp_register_script( 'um-recaptcha', um_recaptcha_url . 'assets/js/wp-recaptcha.js', array( 'jquery', 'google-recaptcha-api-v3' ), um_recaptcha_version, true );
+			wp_register_script( 'google-recaptcha-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key", array(), '3.0', false );
+			wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/wp-recaptcha' . UM()->enqueue()->suffix . '.js', array( 'jquery', 'google-recaptcha-api-v3' ), UM_RECAPTCHA_VERSION, true );
 
 			wp_localize_script(
 				'um-recaptcha',
@@ -96,7 +96,7 @@ function um_login_form_scripts() {
 			$language_code = UM()->options()->get( 'g_recaptcha_language_code' );
 			$language_code = apply_filters( 'um_recaptcha_language_code', $language_code );
 
-			wp_register_script( 'google-recaptcha-api-v2', "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code" );
+			wp_register_script( 'google-recaptcha-api-v2', "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code", array(), '2.0', false );
 			wp_enqueue_script( 'google-recaptcha-api-v2' );
 			break;
 	}
@@ -118,7 +118,7 @@ function um_add_recaptcha_wp_login_form() {
 	}
 
 	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
-	$your_secret = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+	$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
 
 	if ( ! $your_sitekey || ! $your_secret ) {
 		return;
@@ -126,15 +126,12 @@ function um_add_recaptcha_wp_login_form() {
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
 
-	switch( $version ) {
+	switch ( $version ) {
 		case 'v3':
-
-			UM()->get_template( 'wp-captcha_v3.php', um_recaptcha_plugin, array(), true );
+			UM()->get_template( 'wp-captcha-v3.php', UM_RECAPTCHA_PLUGIN, array(), true );
 			break;
-
 		case 'v2':
 		default:
-
 			$options = array(
 				'data-type'    => UM()->options()->get( 'g_recaptcha_type' ),
 				'data-size'    => UM()->options()->get( 'g_recaptcha_size' ),
@@ -145,8 +142,8 @@ function um_add_recaptcha_wp_login_form() {
 			$attrs = array();
 			foreach ( $options as $att => $value ) {
 				if ( $value ) {
-					$att = esc_html( $att );
-					$value = esc_attr( $value );
+					$att     = esc_html( $att );
+					$value   = esc_attr( $value );
 					$attrs[] = "{$att}=\"{$value}\"";
 				}
 			}
@@ -157,7 +154,15 @@ function um_add_recaptcha_wp_login_form() {
 				$attrs = '';
 			}
 
-			UM()->get_template( 'wp-captcha.php', um_recaptcha_plugin, array( 'attrs' => $attrs, 'options' => $options ), true );
+			UM()->get_template(
+				'wp-captcha.php',
+				UM_RECAPTCHA_PLUGIN,
+				array(
+					'attrs'   => $attrs,
+					'options' => $options,
+				),
+				true
+			);
 			break;
 	}
 }
@@ -189,6 +194,7 @@ function um_authenticate_recaptcha_errors( $errors ) {
 		return $errors;
 	}
 
+	// phpcs:disable WordPress.Security.NonceVerification -- getting value from GET line
 	if ( isset( $_GET['um-recaptcha-error'] ) ) {
 		$code = ! empty( $_GET['um-recaptcha-error'] ) ? sanitize_key( $_GET['um-recaptcha-error'] ) : 'undefined';
 
@@ -221,11 +227,13 @@ function um_authenticate_recaptcha_errors( $errors ) {
 				$errors->add( 'recaptcha_' . $code, sprintf( __( '<strong>Error</strong>: Undefined reCAPTCHA error.', 'um-recaptcha' ), $code ) );
 				break;
 			default:
+				// translators: %s: Google reCAPTCHA error code
 				$errors->add( 'recaptcha_' . $code, sprintf( __( '<strong>Error</strong>: reCAPTCHA Code: %s', 'um-recaptcha' ), $code ) );
 				break;
 		}
 	}
 	return $errors;
+	// phpcs:enable WordPress.Security.NonceVerification -- getting value from GET line
 }
 add_filter( 'wp_login_errors', 'um_authenticate_recaptcha_errors', 10, 1 );
 
@@ -237,6 +245,7 @@ add_filter( 'wp_login_errors', 'um_authenticate_recaptcha_errors', 10, 1 );
  * @param $password
  */
 function um_authenticate_recaptcha_action( $username, $password ) {
+	// phpcs:disable WordPress.Security.NonceVerification -- already verified here via wp-login.php or wp_login_form()
 	if ( ! UM()->options()->get( 'g_recaptcha_wp_login_form' ) ) {
 		return;
 	}
@@ -255,7 +264,7 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 	}
 
 	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
-	$your_secret = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+	$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
 
 	if ( ! $your_sitekey || ! $your_secret ) {
 		return;
@@ -264,12 +273,12 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 	$version = UM()->options()->get( 'g_recaptcha_version' );
 
 	$redirect     = isset( $_GET['redirect_to'] ) ? esc_url_raw( $_GET['redirect_to'] ) : '';
-	$force_reauth = isset( $_GET['reauth'] ) ? ( bool ) $_GET['reauth'] : false;
+	$force_reauth = isset( $_GET['reauth'] ) ? (bool) $_GET['reauth'] : false;
 
 	// for the wp_login_form() function login widget
 	// $redirect URL in this case will use the widget current URL from where was request to wp-login.php
 	if ( ! empty( $_REQUEST['um_login_form'] ) && ! empty( $redirect ) ) {
-		$query = parse_url( $redirect, PHP_URL_QUERY );
+		$query = wp_parse_url( $redirect, PHP_URL_QUERY );
 		parse_str( $query, $query_args );
 
 		if ( array_key_exists( 'redirect_to', $query_args ) ) {
@@ -281,7 +290,7 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 		}
 	}
 
-	switch( $version ) {
+	switch ( $version ) {
 		case 'v3':
 			$your_secret = trim( UM()->options()->get( 'g_reCAPTCHA_secret_key' ) );
 
@@ -311,14 +320,7 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 					wp_safe_redirect( add_query_arg( array( 'um-recaptcha-error' => 'score' ), wp_login_url( $redirect, $force_reauth ) ) );
 					exit;
 				} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
-					$error_codes = array(
-						'missing-input-secret'   => __( '<strong>Error</strong>: The secret parameter is missing.', 'um-recaptcha' ),
-						'invalid-input-secret'   => __( '<strong>Error</strong>: The secret parameter is invalid or malformed.', 'um-recaptcha' ),
-						'missing-input-response' => __( '<strong>Error</strong>: The response parameter is missing.', 'um-recaptcha' ),
-						'invalid-input-response' => __( '<strong>Error</strong>: The response parameter is invalid or malformed.', 'um-recaptcha' ),
-						'bad-request'            => __( '<strong>Error</strong>: The request is invalid or malformed.', 'um-recaptcha' ),
-						'timeout-or-duplicate'   => __( '<strong>Error</strong>: The response is no longer valid: either is too old or has been used previously.', 'um-recaptcha' ),
-					);
+					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
 
 					foreach ( $result->{'error-codes'} as $key => $error_code ) {
 						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
@@ -348,14 +350,7 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 				$result = json_decode( $response['body'] );
 
 				if ( isset( $result->{'error-codes'} ) && ! $result->success ) {
-					$error_codes = array(
-						'missing-input-secret'   => __( '<strong>Error</strong>: The secret parameter is missing.', 'um-recaptcha' ),
-						'invalid-input-secret'   => __( '<strong>Error</strong>: The secret parameter is invalid or malformed.', 'um-recaptcha' ),
-						'missing-input-response' => __( '<strong>Error</strong>: The response parameter is missing.', 'um-recaptcha' ),
-						'invalid-input-response' => __( '<strong>Error</strong>: The response parameter is invalid or malformed.', 'um-recaptcha' ),
-						'bad-request'            => __( '<strong>Error</strong>: The request is invalid or malformed.', 'um-recaptcha' ),
-						'timeout-or-duplicate'   => __( '<strong>Error</strong>: The response is no longer valid: either is too old or has been used previously.', 'um-recaptcha' ),
-					);
+					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
 
 					foreach ( $result->{'error-codes'} as $key => $error_code ) {
 						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
@@ -367,10 +362,20 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 			}
 			break;
 	}
+	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via wp-login.php or wp_login_form()
 }
 add_action( 'wp_authenticate', 'um_authenticate_recaptcha_action', 2, 2 );
 
 
+/* Handle reCAPTCHA via `wp_login_form()` */
+
+
+/**
+ * @param $content
+ * @param $args
+ *
+ * @return string
+ */
 function um_add_recaptcha_login_form( $content, $args ) {
 	if ( ! UM()->options()->get( 'g_recaptcha_wp_login_form_widget' ) ) {
 		return $content;
@@ -386,24 +391,23 @@ function um_add_recaptcha_login_form( $content, $args ) {
 	}
 
 	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
-	$your_secret = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+	$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
 
 	if ( ! $your_sitekey || ! $your_secret ) {
 		return $content;
 	}
 
-	wp_register_style( 'um_recaptcha', um_recaptcha_url . 'assets/css/wp-recaptcha.css' );
-	wp_enqueue_style( 'um_recaptcha' );
+	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . UM()->enqueue()->suffix . '.css', array(), UM_RECAPTCHA_VERSION );
+	wp_enqueue_style( 'um-recaptcha' );
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
 
-	switch( $version ) {
+	switch ( $version ) {
 		case 'v3':
-
 			$site_key = UM()->options()->get( 'g_reCAPTCHA_site_key' );
 
-			wp_register_script( 'google-recaptcha-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key" );
-			wp_register_script( 'um-recaptcha', um_recaptcha_url . 'assets/js/wp-recaptcha.js', array( 'jquery', 'google-recaptcha-api-v3' ), um_recaptcha_version, true );
+			wp_register_script( 'google-recaptcha-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key", array(), '3.0', false );
+			wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/wp-recaptcha' . UM()->enqueue()->suffix . '.js', array( 'jquery', 'google-recaptcha-api-v3' ), UM_RECAPTCHA_VERSION, true );
 
 			wp_localize_script(
 				'um-recaptcha',
@@ -415,15 +419,19 @@ function um_add_recaptcha_login_form( $content, $args ) {
 
 			wp_enqueue_script( 'um-recaptcha' );
 
-			$content .= UM()->get_template( 'wp-captcha_v3.php', um_recaptcha_plugin, array(), false );
+			$content .= UM()->get_template(
+				'wp-captcha-v3.php',
+				UM_RECAPTCHA_PLUGIN,
+				array(),
+				false
+			);
 			break;
 		case 'v2':
 		default:
-
 			$language_code = UM()->options()->get( 'g_recaptcha_language_code' );
 			$language_code = apply_filters( 'um_recaptcha_language_code', $language_code );
 
-			wp_register_script( 'google-recaptcha-api-v2', "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code" );
+			wp_register_script( 'google-recaptcha-api-v2', "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code", array(), '2.0', false );
 			wp_enqueue_script( 'google-recaptcha-api-v2' );
 
 			$options = array(
@@ -436,8 +444,8 @@ function um_add_recaptcha_login_form( $content, $args ) {
 			$attrs = array();
 			foreach ( $options as $att => $value ) {
 				if ( $value ) {
-					$att = esc_html( $att );
-					$value = esc_attr( $value );
+					$att     = esc_html( $att );
+					$value   = esc_attr( $value );
 					$attrs[] = "{$att}=\"{$value}\"";
 				}
 			}
@@ -448,7 +456,15 @@ function um_add_recaptcha_login_form( $content, $args ) {
 				$attrs = '';
 			}
 
-			$content .= UM()->get_template( 'wp-captcha.php', um_recaptcha_plugin, array( 'attrs' => $attrs, 'options' => $options ), false );
+			$content .= UM()->get_template(
+				'wp-captcha.php',
+				UM_RECAPTCHA_PLUGIN,
+				array(
+					'attrs'   => $attrs,
+					'options' => $options,
+				),
+				false
+			);
 			break;
 	}
 
@@ -457,30 +473,25 @@ function um_add_recaptcha_login_form( $content, $args ) {
 add_filter( 'login_form_middle', 'um_add_recaptcha_login_form', 10, 2 );
 
 
-
-
 /**
  * add recaptcha
  *
  * @param $args
  */
 function um_recaptcha_add_captcha( $args ) {
-	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
-	switch( $version ) {
+	switch ( $version ) {
 		case 'v3':
-
 			$t_args = compact( 'args' );
-			UM()->get_template( 'captcha_v3.php', um_recaptcha_plugin, $t_args, true );
+			UM()->get_template( 'captcha-v3.php', UM_RECAPTCHA_PLUGIN, $t_args, true );
 
 			break;
-
 		case 'v2':
 		default:
-
 			$options = array(
 				'data-type'    => UM()->options()->get( 'g_recaptcha_type' ),
 				'data-size'    => UM()->options()->get( 'g_recaptcha_size' ),
@@ -491,8 +502,8 @@ function um_recaptcha_add_captcha( $args ) {
 			$attrs = array();
 			foreach ( $options as $att => $value ) {
 				if ( $value ) {
-					$att = esc_html( $att );
-					$value = esc_attr( $value );
+					$att     = esc_html( $att );
+					$value   = esc_attr( $value );
 					$attrs[] = "{$att}=\"{$value}\"";
 				}
 			}
@@ -504,7 +515,7 @@ function um_recaptcha_add_captcha( $args ) {
 			}
 
 			$t_args = compact( 'args', 'attrs', 'options' );
-			UM()->get_template( 'captcha.php', um_recaptcha_plugin, $t_args, true );
+			UM()->get_template( 'captcha.php', UM_RECAPTCHA_PLUGIN, $t_args, true );
 
 			break;
 	}
@@ -524,20 +535,20 @@ add_action( 'um_after_password_reset_fields', 'um_recaptcha_add_captcha', 500 );
  * @param $args
  */
 function um_recaptcha_validate( $args ) {
+	// phpcs:disable WordPress.Security.NonceVerification -- already verified here via UM Form nonce
 	if ( isset( $args['mode'] ) && ! in_array( $args['mode'], array( 'login', 'register', 'password' ), true ) && ! isset( $args['_social_login_form'] ) ) {
 		return;
 	}
 
-	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
-	switch( $version ) {
+	switch ( $version ) {
 		case 'v3':
 			$your_secret = trim( UM()->options()->get( 'g_reCAPTCHA_secret_key' ) );
 			break;
-
 		case 'v2':
 		default:
 			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
@@ -555,7 +566,6 @@ function um_recaptcha_validate( $args ) {
 	$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
 
 	if ( is_array( $response ) ) {
-
 		$result = json_decode( $response['body'] );
 
 		$score = UM()->options()->get( 'g_reCAPTCHA_score' );
@@ -575,22 +585,16 @@ function um_recaptcha_validate( $args ) {
 		if ( isset( $result->score ) && $result->score < $validate_score ) {
 			UM()->form()->add_error( 'recaptcha', __( 'reCAPTCHA: it is very likely a bot.', 'um-recaptcha' ) );
 		} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
-			$error_codes = array(
-				'missing-input-secret'   => __( 'The secret parameter is missing.', 'um-recaptcha' ),
-				'invalid-input-secret'   => __( 'The secret parameter is invalid or malformed.', 'um-recaptcha' ),
-				'missing-input-response' => __( 'The response parameter is missing.', 'um-recaptcha' ),
-				'invalid-input-response' => __( 'The response parameter is invalid or malformed.', 'um-recaptcha' ),
-				'bad-request'            => __( 'The request is invalid or malformed.', 'um-recaptcha' ),
-				'timeout-or-duplicate'   => __( 'The response is no longer valid: either is too old or has been used previously.', 'um-recaptcha' ),
-			);
+			$error_codes = UM()->ReCAPTCHA()->error_codes_list();
 
 			foreach ( $result->{'error-codes'} as $key => $error_code ) {
+				// translators: %s: Google reCAPTCHA error code
 				$error = array_key_exists( $error_code, $error_codes ) ? $error_codes[ $error_code ] : sprintf( __( 'Undefined error. Key: %s', 'um-recaptcha' ), $error_code );
 				UM()->form()->add_error( 'recaptcha', $error );
 			}
 		}
-
 	}
+	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via UM Form nonce
 }
 add_action( 'um_submit_form_errors_hook', 'um_recaptcha_validate', 20 );
 add_action( 'um_reset_password_errors_hook', 'um_recaptcha_validate', 20 );
@@ -598,13 +602,15 @@ add_action( 'um_reset_password_errors_hook', 'um_recaptcha_validate', 20 );
 
 /**
  * reCAPTCHA scripts/styles enqueue in the page with a form
+ *
+ * @param array $args
  */
 function um_recaptcha_enqueue_scripts( $args ) {
-	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
-	UM()->reCAPTCHA()->enqueue()->wp_enqueue_scripts();
+	UM()->ReCAPTCHA()->enqueue()->wp_enqueue_scripts();
 }
 add_action( 'um_pre_register_shortcode', 'um_recaptcha_enqueue_scripts' );
 add_action( 'um_pre_login_shortcode', 'um_recaptcha_enqueue_scripts' );
@@ -617,7 +623,7 @@ add_action( 'um_pre_password_shortcode', 'um_recaptcha_enqueue_scripts' );
  * @param array $args
  */
 function um_recaptcha_directory_enqueue_scripts( $args ) {
-	if ( ! UM()->reCAPTCHA()->captcha_allowed( $args ) ) {
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
 		return;
 	}
 
@@ -625,7 +631,7 @@ function um_recaptcha_directory_enqueue_scripts( $args ) {
 		return;
 	}
 
-	UM()->reCAPTCHA()->enqueue()->wp_enqueue_scripts();
+	UM()->ReCAPTCHA()->enqueue()->wp_enqueue_scripts();
 }
 add_action( 'um_pre_directory_shortcode', 'um_recaptcha_directory_enqueue_scripts', 10, 1 );
 
