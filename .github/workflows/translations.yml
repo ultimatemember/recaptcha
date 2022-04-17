@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: adding github workspace as safe directory
-          run: git config --global --add safe.directory /github/workspace
+        run: git config --global --add safe.directory /github/workspace
       - uses: actions/checkout@v2
       - name: WordPress .pot File Generator
         uses: iamdharmesh/action-wordpress-pot-generator@main
