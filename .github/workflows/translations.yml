@@ -9,16 +9,12 @@ jobs:
   WP_Generate_POT_File:
     runs-on: ubuntu-latest
     steps:
-      - name: adding github workspace as safe directory
-        run: |
-          git init
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/checkout@v2
       - name: WordPress .pot File Generator
         uses: iamdharmesh/action-wordpress-pot-generator@main
         with:
           destination_path: './languages'
-          slug: 'um-recaptcha'
+          slug: 'recaptcha'
           text_domain: 'um-recaptcha'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_POT }}
