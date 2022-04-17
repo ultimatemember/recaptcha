@@ -50,12 +50,11 @@ class reCAPTCHA_Enqueue {
 				break;
 		}
 
-		wp_enqueue_script( 'um-recaptcha' );
-
 		wp_localize_script( 'um-recaptcha', 'umRecaptchaData', array(
 			'version'   => $version,
 			'site_key'  => $site_key,
 		) );
-	}
 
+		wp_enqueue_script( 'um-recaptcha' );
+	}
 }

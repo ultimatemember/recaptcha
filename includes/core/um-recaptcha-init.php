@@ -1,4 +1,6 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
+<?php if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
 /**
@@ -40,6 +42,7 @@ class UM_reCAPTCHA {
 
 		add_action( 'plugins_loaded', array( &$this, 'init' ), 0 );
 	}
+
 
 	/**
 	 * @return $this

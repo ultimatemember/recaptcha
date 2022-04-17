@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <?php } ?>
 
 <script type="text/javascript">
-	<?php if ( 'invisible' == $options['data-size'] ) { ?>
+	<?php if ( 'invisible' === $options['data-size'] ) { ?>
 
 		var onSubmit = function( token ) {
 			var me = jQuery('.um-<?php echo esc_js( $args['form_id'] ); ?> form');

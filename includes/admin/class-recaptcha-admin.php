@@ -69,7 +69,7 @@ class Recaptcha_Admin {
 		add_meta_box(
 			"um-admin-form-register_recaptcha{" . um_recaptcha_path . "}",
 			__('Google reCAPTCHA'),
-			array( UM()->metabox(), 'load_metabox_form'),
+			array( UM()->metabox(), 'load_metabox_form' ),
 			'um_form',
 			'side',
 			'default'
@@ -209,7 +209,7 @@ class Recaptcha_Admin {
 						'fr'     => 'French',
 						'fr-CA'  => 'French (Canadian)',
 						'gl'     => 'Galician',
-						'ka'     => 'Georgian',
+						'ka'     => __( 'Kartuli', 'um-recaptcha' ),
 						'de'     => 'German',
 						'de-AT'  => 'German (Austria)',
 						'de-CH'  => 'German (Switzerland)',
@@ -260,18 +260,6 @@ class Recaptcha_Admin {
 					'conditional' => array( 'g_recaptcha_version', '=', 'v2' ),
 				),
 				array(
-					'id'          => 'g_recaptcha_theme',
-					'type'        => 'select',
-					'label'       => __( 'Theme', 'um-recaptcha' ),
-					'tooltip'     => __( 'Select a color theme of the widget.', 'um-recaptcha' ),
-					'options'     => array(
-						'dark'  => __( 'Dark', 'um-recaptcha' ),
-						'light' => __( 'Light', 'um-recaptcha' ),
-					),
-					'size'        => 'small',
-					'conditional' => array( 'g_recaptcha_version', '=', 'v2' ),
-				),
-				array(
 					'id'          => 'g_recaptcha_size',
 					'type'        => 'select',
 					'label'       => __( 'Size', 'um-recaptcha' ),
@@ -284,12 +272,38 @@ class Recaptcha_Admin {
 					'size'        => 'small',
 					'conditional' => array( 'g_recaptcha_version', '=', 'v2' ),
 				),
+				array(
+					'id'          => 'g_recaptcha_theme',
+					'type'        => 'select',
+					'label'       => __( 'Theme', 'um-recaptcha' ),
+					'tooltip'     => __( 'Select a color theme of the widget.', 'um-recaptcha' ),
+					'options'     => array(
+						'dark'  => __( 'Dark', 'um-recaptcha' ),
+						'light' => __( 'Light', 'um-recaptcha' ),
+					),
+					'size'        => 'small',
+					'conditional' => array( 'g_recaptcha_size', '!=', 'invisible' ),
+				),
 				/* Forms */
 				array(
 					'id'          => 'g_recaptcha_password_reset',
 					'type'        => 'checkbox',
 					'label'       => __( 'Enable Google reCAPTCHA on password reset form', 'um-recaptcha' ),
 					'tooltip'     => __( 'Display the google Google reCAPTCHA on password reset form.', 'um-recaptcha' ),
+					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+				),
+				array(
+					'id'          => 'g_recaptcha_wp_login_form',
+					'type'        => 'checkbox',
+					'label'       => __( 'Enable Google reCAPTCHA on wp-login.php form', 'um-recaptcha' ),
+					'tooltip'     => __( 'Display the google Google reCAPTCHA on wp-login.php form.', 'um-recaptcha' ),
+					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+				),
+				array(
+					'id'          => 'g_recaptcha_wp_login_form_widget',
+					'type'        => 'checkbox',
+					'label'       => __( 'Enable Google reCAPTCHA on login form through `wp_login_form()`', 'um-recaptcha' ),
+					'tooltip'     => __( 'Display the google Google reCAPTCHA on login form through `wp_login_form()`.', 'um-recaptcha' ),
 					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
 				),
 			),
