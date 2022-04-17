@@ -9,9 +9,10 @@ jobs:
   WP_Generate_POT_File:
     runs-on: ubuntu-latest
     steps:
+      - name: adding github workspace as safe directory
+          run: git config --global --add safe.directory /github/workspace
       - uses: actions/checkout@v2
       - name: WordPress .pot File Generator
-        run: git config --global --add safe.directory /github/workspace
         uses: iamdharmesh/action-wordpress-pot-generator@main
         with:
           destination_path: './languages'
