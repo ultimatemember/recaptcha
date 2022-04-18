@@ -53,6 +53,21 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
+= 2.3.0: April xx, 2022 =
+
+* Added: reCAPTCHA for wp-login.php form
+* Added: reCAPTCHA for wp-login.php lostpassword form
+* Added: reCAPTCHA for the login form through `wp_login_form()` function
+
+* Templates required update:
+  - captcha.php
+  - captcha_v3.php (please rename it in theme and use proper filename captcha-v3.php)
+
+* Cached and optimized/minified assets(JS/CSS) must be flushed/re-generated after upgrade
+
+* Tweak: Using PHPCS and WPCS for security enhancements
+* Tweak: Changed main function for getting reCAPTCHA extension class. It's `UM()->ReCAPTCHA()` for now.
+
 = 2.2.2: February 9, 2022 =
 
 * Fixed: Extension settings structure
