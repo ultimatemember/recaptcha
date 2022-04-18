@@ -188,11 +188,11 @@ add_action( 'lostpassword_form', 'um_add_recaptcha_wp_lostpassword_form' );
 
 /**
  * @param \WP_Error $errors
- * @param $user_data
  *
  * @return mixed
  */
-function um_recaptcha_validate_lostpassword_form( $errors, $user_data ) {
+function um_recaptcha_validate_lostpassword_form( $errors ) {
+	// phpcs:disable WordPress.Security.NonceVerification -- already verified here via wp-login.php
 	if ( um_is_api_request() ) {
 		return $errors;
 	}
@@ -286,8 +286,9 @@ function um_recaptcha_validate_lostpassword_form( $errors, $user_data ) {
 	}
 
 	return $errors;
+	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via wp-login.php
 }
-add_filter( 'lostpassword_errors', 'um_recaptcha_validate_lostpassword_form', 10, 2 );
+add_filter( 'lostpassword_errors', 'um_recaptcha_validate_lostpassword_form', 10, 1 );
 
 
 /**
