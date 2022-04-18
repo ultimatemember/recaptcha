@@ -5,10 +5,10 @@
 // There are "undefined" variables here because they're defined in the code that includes this file as a template.
 ?>
 
-<div class="g-recaptcha" id="um-login-recaptcha" <?php /** @noinspection PhpUndefinedVariableInspection */ echo esc_html( $attrs ); ?>></div>
+<div class="g-recaptcha" id="um-login-recaptcha" data-type="<?php /** @noinspection PhpUndefinedVariableInspection */ echo esc_attr( $type ); ?>" data-size="<?php /** @noinspection PhpUndefinedVariableInspection */ echo esc_attr( $size ); ?>" data-theme="<?php /** @noinspection PhpUndefinedVariableInspection */ echo esc_attr( $theme ); ?>" data-sitekey="<?php /** @noinspection PhpUndefinedVariableInspection */ echo esc_attr( $sitekey ); ?>"></div>
 
 <script type="text/javascript">
-	<?php if ( 'invisible' === $options['data-size'] ) { ?>
+	<?php if ( 'invisible' === $size ) { ?>
 
 		var onSubmit = function( token ) {
 			var me = jQuery('#loginform');
@@ -18,7 +18,7 @@
 
 		var onloadCallback = function() {
 			grecaptcha.render( 'wp-submit', {
-				'sitekey': '<?php echo esc_js( $options['data-sitekey'] ); ?>',
+				'sitekey': '<?php echo esc_js( $sitekey ); ?>',
 				'callback': onSubmit
 			});
 		};

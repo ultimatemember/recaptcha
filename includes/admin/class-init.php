@@ -297,8 +297,15 @@ class Init {
 				array(
 					'id'          => 'g_recaptcha_password_reset',
 					'type'        => 'checkbox',
-					'label'       => __( 'Enable Google reCAPTCHA on password reset form', 'um-recaptcha' ),
-					'tooltip'     => __( 'Display the google Google reCAPTCHA on password reset form.', 'um-recaptcha' ),
+					'label'       => __( 'Enable Google reCAPTCHA on the UM password reset form', 'um-recaptcha' ),
+					'tooltip'     => __( 'Display the google Google reCAPTCHA on the Ultimate Member password reset form.', 'um-recaptcha' ),
+					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+				),
+				array(
+					'id'          => 'g_recaptcha_wp_lostpasswordform',
+					'type'        => 'checkbox',
+					'label'       => __( 'Enable Google reCAPTCHA on wp-login.php lost password form', 'um-recaptcha' ),
+					'tooltip'     => __( 'Display the google Google reCAPTCHA on wp-login.php lost password form.', 'um-recaptcha' ),
 					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
 				),
 				array(

@@ -153,6 +153,7 @@ class UM_ReCAPTCHA {
 			'invalid-input-response' => __( '<strong>Error</strong>: The response parameter is invalid or malformed.', 'um-recaptcha' ),
 			'bad-request'            => __( '<strong>Error</strong>: The request is invalid or malformed.', 'um-recaptcha' ),
 			'timeout-or-duplicate'   => __( '<strong>Error</strong>: The response is no longer valid: either is too old or has been used previously.', 'um-recaptcha' ),
+			'undefined'              => __( '<strong>Error</strong>: Undefined reCAPTCHA error.', 'um-recaptcha' ),
 		);
 
 		return $error_codes;

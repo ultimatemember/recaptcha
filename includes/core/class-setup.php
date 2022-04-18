@@ -40,6 +40,7 @@ class Setup {
 			'g_recaptcha_type'                 => 'image',
 			'g_recaptcha_size'                 => 'normal',
 			'g_recaptcha_password_reset'       => 0,
+			'g_recaptcha_wp_lostpasswordform'  => 0,
 			'g_recaptcha_wp_login_form'        => 0,
 			'g_recaptcha_wp_login_form_widget' => 0,
 		);
