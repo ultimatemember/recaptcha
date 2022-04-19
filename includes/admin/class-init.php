@@ -24,6 +24,67 @@ class Init {
 		add_action( 'um_admin_custom_register_metaboxes', array( &$this, 'add_metabox_register' ), 10 );
 		add_action( 'um_admin_custom_login_metaboxes', array( &$this, 'add_metabox_login' ), 10 );
 		add_filter( 'um_settings_structure', array( &$this, 'add_settings' ), 10, 1 );
+		add_filter( 'um_settings_map', array( &$this, 'settings_map' ), 10, 1 );
+	}
+
+
+	/**
+	 * @param array $settings_map
+	 *
+	 * @return array
+	 */
+	public function settings_map( $settings_map ) {
+		$settings_map = array_merge(
+			$settings_map,
+			array(
+				'g_recaptcha_status'               => array(
+					'sanitize' => 'bool',
+				),
+				'g_recaptcha_version'              => array(
+					'sanitize' => 'text',
+				),
+				'g_reCAPTCHA_site_key'             => array(
+					'sanitize' => 'text',
+				),
+				'g_reCAPTCHA_secret_key'           => array(
+					'sanitize' => 'text',
+				),
+				'g_reCAPTCHA_score'                => array(
+					'sanitize' => 'text',
+				),
+				'g_recaptcha_sitekey'              => array(
+					'sanitize' => 'text',
+				),
+				'g_recaptcha_secretkey'            => array(
+					'sanitize' => 'text',
+				),
+				'g_recaptcha_type'                 => array(
+					'sanitize' => 'key',
+				),
+				'g_recaptcha_language_code'        => array(
+					'sanitize' => 'text',
+				),
+				'g_recaptcha_size'                 => array(
+					'sanitize' => 'key',
+				),
+				'g_recaptcha_theme'                => array(
+					'sanitize' => 'key',
+				),
+				'g_recaptcha_password_reset'       => array(
+					'sanitize' => 'bool',
+				),
+				'g_recaptcha_wp_lostpasswordform'  => array(
+					'sanitize' => 'bool',
+				),
+				'g_recaptcha_wp_login_form'        => array(
+					'sanitize' => 'bool',
+				),
+				'g_recaptcha_wp_login_form_widget' => array(
+					'sanitize' => 'bool',
+				),
+			)
+		);
+		return $settings_map;
 	}
 
 
