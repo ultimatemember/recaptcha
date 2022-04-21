@@ -43,6 +43,24 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 2. That's it. Go to Ultimate Member > Settings to customize plugin options
 3. For more details, please visit the official [Documentation](http://docs.ultimatemember.com/) page.
 
+== Frequently Asked Questions ==
+
+= Does the Ultimate Member plugin need to be activated to use this plugin? =
+
+Yes. The Ultimate Member reCAPTCHA plugin adds the Google reCAPTCHA to Ultimate Member Forms (Login, Registration, Password reset), so the main Ultimate Member plugin needs to be installed and active.
+
+= Does this plugin add Google reCAPTCHA to the wp-login.php form? =
+
+Yes, the plugin can add the Google reCAPTCHA to the WordPress native login form to improve the security of the wp-login.php form. This can help with spam registration via the native WordPress registration form if you have enabled from your wp-install settings to allow anyone to register via the native WP registration method. We support wp-login.php form's login and lostpassword actions and WordPress native wp_login_form() widget.
+
+= What versions of Google reCAPTCHA does the plugin support? =
+
+Both v2 and v3. The plugin supports both the checkbox for the 2nd version and the invisible reCAPTCHA of the 2nd version. The plugin doesn't support Enterprise reCAPTCHA at this time.
+
+= Does this plugin help stop spam registration? =
+
+Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, it can help stop/reduce spam registrations. However, this plugin will only protect forms added by the Ultimate Member plugin and the native wp-login.php login/registration form. It does not add the reCAPTCHA to other forms added by other plugins.
+
 == Screenshots ==
 
 1. Screenshot 1
@@ -57,6 +75,7 @@ Got a problem or need help with Ultimate Member? Head over to our [documentation
 
 * Added: reCAPTCHA for wp-login.php form
 * Added: reCAPTCHA for wp-login.php lostpassword form
+* Added: reCAPTCHA for wp-login.php register form
 * Added: reCAPTCHA for the login form through `wp_login_form()` function
 
 * Templates required update:

@@ -11,7 +11,7 @@
 	<?php if ( 'invisible' === $size ) { ?>
 
 		var onSubmit = function( token ) {
-			var me = jQuery('#loginform');
+			var me = jQuery('#<?php echo esc_js( $mode ); ?>form');
 			me.attr('disabled', 'disabled');
 			me.submit();
 		};

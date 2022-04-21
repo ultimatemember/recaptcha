@@ -43,6 +43,7 @@ class Setup {
 			'g_recaptcha_wp_lostpasswordform'  => 0,
 			'g_recaptcha_wp_login_form'        => 0,
 			'g_recaptcha_wp_login_form_widget' => 0,
+			'g_recaptcha_wp_register_form'     => 0,
 		);
 	}
 

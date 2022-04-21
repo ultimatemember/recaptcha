@@ -26,7 +26,7 @@ function um_add_recaptcha_login_form_classes( $classes, $action ) {
 		return $classes;
 	}
 
-	if ( ( 'login' === $action && UM()->options()->get( 'g_recaptcha_wp_login_form' ) ) || ( ( 'lostpassword' === $action || 'retrievepassword' === $action ) && UM()->options()->get( 'g_recaptcha_wp_lostpasswordform' ) ) ) {
+	if ( ( 'login' === $action && UM()->options()->get( 'g_recaptcha_wp_login_form' ) ) || ( ( 'lostpassword' === $action || 'retrievepassword' === $action ) && UM()->options()->get( 'g_recaptcha_wp_lostpasswordform' ) ) || ( 'register' === $action && UM()->options()->get( 'g_recaptcha_wp_register_form' ) ) ) {
 		$version = UM()->options()->get( 'g_recaptcha_version' );
 		if ( 'v3' === $version ) {
 			return $classes;
@@ -61,7 +61,7 @@ function um_login_form_scripts() {
 		return;
 	}
 
-	if ( ! ( UM()->options()->get( 'g_recaptcha_wp_login_form' ) || UM()->options()->get( 'g_recaptcha_wp_lostpasswordform' ) ) ) {
+	if ( ! ( UM()->options()->get( 'g_recaptcha_wp_login_form' ) || UM()->options()->get( 'g_recaptcha_wp_lostpasswordform' ) || UM()->options()->get( 'g_recaptcha_wp_register_form' ) ) ) {
 		return;
 	}
 
@@ -131,6 +131,7 @@ function um_add_recaptcha_wp_login_form() {
 				'wp-captcha.php',
 				UM_RECAPTCHA_PLUGIN,
 				array(
+					'mode'    => 'login',
 					'type'    => UM()->options()->get( 'g_recaptcha_type' ),
 					'size'    => UM()->options()->get( 'g_recaptcha_size' ),
 					'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
@@ -144,6 +145,160 @@ function um_add_recaptcha_wp_login_form() {
 add_action( 'login_form', 'um_add_recaptcha_wp_login_form' );
 
 
+/**
+ * Add reCAPTCHA block to the wp-login.php page Register mode
+ */
+function um_add_recaptcha_wp_register_form() {
+	if ( ! UM()->options()->get( 'g_recaptcha_wp_register_form' ) ) {
+		return;
+	}
+
+	$recaptcha = UM()->options()->get( 'g_recaptcha_status' );
+	if ( ! $recaptcha ) {
+		return;
+	}
+
+	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
+	$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+
+	if ( ! $your_sitekey || ! $your_secret ) {
+		return;
+	}
+
+	$version = UM()->options()->get( 'g_recaptcha_version' );
+
+	switch ( $version ) {
+		case 'v3':
+			UM()->get_template( 'wp-captcha-v3.php', UM_RECAPTCHA_PLUGIN, array(), true );
+			break;
+		case 'v2':
+		default:
+			UM()->get_template(
+				'wp-captcha.php',
+				UM_RECAPTCHA_PLUGIN,
+				array(
+					'mode'    => 'register',
+					'type'    => UM()->options()->get( 'g_recaptcha_type' ),
+					'size'    => UM()->options()->get( 'g_recaptcha_size' ),
+					'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
+					'sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' ),
+				),
+				true
+			);
+			break;
+	}
+}
+add_action( 'register_form', 'um_add_recaptcha_wp_register_form' );
+
+
+/**
+ * @param \WP_Error $errors
+ *
+ * @return mixed
+ */
+function um_recaptcha_validate_register_form( $errors ) {
+	// phpcs:disable WordPress.Security.NonceVerification -- already verified here via wp-login.php
+	if ( um_is_api_request() ) {
+		return $errors;
+	}
+
+	if ( ! UM()->options()->get( 'g_recaptcha_wp_register_form' ) ) {
+		return $errors;
+	}
+
+	$recaptcha = UM()->options()->get( 'g_recaptcha_status' );
+	if ( ! $recaptcha ) {
+		return $errors;
+	}
+
+	$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
+	$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+
+	if ( ! $your_sitekey || ! $your_secret ) {
+		return $errors;
+	}
+
+	$version = UM()->options()->get( 'g_recaptcha_version' );
+
+	switch ( $version ) {
+		case 'v3':
+			$your_secret = trim( UM()->options()->get( 'g_reCAPTCHA_secret_key' ) );
+
+			if ( empty( $_POST['g-recaptcha-response'] ) ) {
+				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
+				return $errors;
+			} else {
+				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
+			}
+
+			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
+
+			if ( is_array( $response ) ) {
+				$result = json_decode( $response['body'] );
+
+				$score = UM()->options()->get( 'g_reCAPTCHA_score' );
+				if ( empty( $score ) ) {
+					// set default 0.6 because Google recommend by default set 0.5 score
+					// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
+					$score = 0.6;
+				}
+				// available to change score based on form $args
+				$validate_score = apply_filters( 'um_recaptcha_score_validation', $score );
+
+				if ( isset( $result->score ) && $result->score < (float) $validate_score ) {
+					$errors->add( 'um-recaptcha-score', __( '<strong>Error</strong>: It is very likely a bot.', 'um-recaptcha' ) );
+					return $errors;
+				} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
+					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
+
+					foreach ( $result->{'error-codes'} as $key => $error_code ) {
+						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
+						$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
+						return $errors;
+					}
+				}
+			}
+			break;
+		case 'v2':
+		default:
+			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
+
+			if ( empty( $_POST['g-recaptcha-response'] ) ) {
+				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
+				return $errors;
+			} else {
+				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
+			}
+
+			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
+
+			if ( is_array( $response ) ) {
+				$result = json_decode( $response['body'] );
+
+				if ( isset( $result->{'error-codes'} ) && ! $result->success ) {
+					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
+
+					foreach ( $result->{'error-codes'} as $key => $error_code ) {
+						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
+						$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
+						return $errors;
+					}
+				}
+			}
+			break;
+	}
+
+	return $errors;
+	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via wp-login.php
+}
+add_filter( 'registration_errors', 'um_recaptcha_validate_register_form', 10, 1 );
+
+
+/**
+ * Add reCAPTCHA block to the wp-login.php page Lost Password mode
+ */
 function um_add_recaptcha_wp_lostpassword_form() {
 	if ( ! UM()->options()->get( 'g_recaptcha_wp_lostpasswordform' ) ) {
 		return;
@@ -173,6 +328,7 @@ function um_add_recaptcha_wp_lostpassword_form() {
 				'wp-captcha.php',
 				UM_RECAPTCHA_PLUGIN,
 				array(
+					'mode'    => 'login',
 					'type'    => UM()->options()->get( 'g_recaptcha_type' ),
 					'size'    => UM()->options()->get( 'g_recaptcha_size' ),
 					'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
@@ -560,6 +716,7 @@ function um_add_recaptcha_login_form( $content, $args ) {
 				'wp-captcha.php',
 				UM_RECAPTCHA_PLUGIN,
 				array(
+					'mode'    => 'login',
 					'type'    => UM()->options()->get( 'g_recaptcha_type' ),
 					'size'    => UM()->options()->get( 'g_recaptcha_size' ),
 					'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),

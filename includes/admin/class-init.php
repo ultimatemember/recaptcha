@@ -82,6 +82,9 @@ class Init {
 				'g_recaptcha_wp_login_form_widget' => array(
 					'sanitize' => 'bool',
 				),
+				'g_recaptcha_wp_register_form'     => array(
+					'sanitize' => 'bool',
+				),
 			)
 		);
 		return $settings_map;
@@ -381,6 +384,13 @@ class Init {
 					'type'        => 'checkbox',
 					'label'       => __( 'Enable Google reCAPTCHA on login form through `wp_login_form()`', 'um-recaptcha' ),
 					'tooltip'     => __( 'Display the google Google reCAPTCHA on login form through `wp_login_form()`.', 'um-recaptcha' ),
+					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+				),
+				array(
+					'id'          => 'g_recaptcha_wp_register_form',
+					'type'        => 'checkbox',
+					'label'       => __( 'Enable Google reCAPTCHA on wp-login.php registration form', 'um-recaptcha' ),
+					'tooltip'     => __( 'Display the google Google reCAPTCHA on wp-login.php registration form`.', 'um-recaptcha' ),
 					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
 				),
 			),
