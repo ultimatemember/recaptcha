@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Ultimate Member - reCAPTCHA\n"
-"POT-Creation-Date: 2022-04-19 01:01+0300\n"
-"PO-Revision-Date: 2022-04-19 01:00+0300\n"
+"POT-Creation-Date: 2022-04-21 22:25+0300\n"
+"PO-Revision-Date: 2022-04-21 22:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,459 +21,467 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/admin/class-init.php:48
+#: includes/admin/class-init.php:112
 msgid ""
 "Google reCAPTCHA is active on your site. However you need to fill in both "
 "your <strong>site key and secret key</strong> to start protecting your site "
 "against spam."
 msgstr ""
 
-#: includes/admin/class-init.php:51
+#: includes/admin/class-init.php:115
 msgid "I already have the keys"
 msgstr ""
 
-#: includes/admin/class-init.php:52
+#: includes/admin/class-init.php:116
 msgid "Generate your site and secret key"
 msgstr ""
 
-#: includes/admin/class-init.php:80 includes/admin/class-init.php:99
-#: includes/admin/class-init.php:116
+#: includes/admin/class-init.php:144 includes/admin/class-init.php:163
+#: includes/admin/class-init.php:180
 msgid "Google reCAPTCHA"
 msgstr ""
 
-#: includes/admin/class-init.php:121
+#: includes/admin/class-init.php:185
 msgid "Enable Google reCAPTCHA"
 msgstr ""
 
-#: includes/admin/class-init.php:122
+#: includes/admin/class-init.php:186
 msgid ""
 "Turn on or off your Google reCAPTCHA on your site registration and login "
 "forms by default."
 msgstr ""
 
-#: includes/admin/class-init.php:127
+#: includes/admin/class-init.php:191
 msgid "reCAPTCHA type"
 msgstr ""
 
-#: includes/admin/class-init.php:128
+#: includes/admin/class-init.php:192
 msgid ""
 "Choose the type of reCAPTCHA for this site key. A site key only works with a "
 "single reCAPTCHA site type."
 msgstr ""
 
-#: includes/admin/class-init.php:130
+#: includes/admin/class-init.php:194
 msgid "reCAPTCHA v2"
 msgstr ""
 
-#: includes/admin/class-init.php:131
+#: includes/admin/class-init.php:195
 msgid "reCAPTCHA v3"
 msgstr ""
 
-#: includes/admin/class-init.php:134
+#: includes/admin/class-init.php:198
 msgid ""
 "See <a href=\"https://g.co/recaptcha/sitetypes\" target=\"_blank\">Site "
 "Types</a> for more details."
 msgstr ""
 
-#: includes/admin/class-init.php:141 includes/admin/class-init.php:166
+#: includes/admin/class-init.php:205 includes/admin/class-init.php:230
 msgid "Site Key"
 msgstr ""
 
-#: includes/admin/class-init.php:142 includes/admin/class-init.php:167
+#: includes/admin/class-init.php:206 includes/admin/class-init.php:231
 msgid ""
 "You can register your site and generate a site key via <a href=\"https://www."
 "google.com/recaptcha/\">Google reCAPTCHA</a>"
 msgstr ""
 
-#: includes/admin/class-init.php:149 includes/admin/class-init.php:174
+#: includes/admin/class-init.php:213 includes/admin/class-init.php:238
 msgid "Secret Key"
 msgstr ""
 
-#: includes/admin/class-init.php:150 includes/admin/class-init.php:175
+#: includes/admin/class-init.php:214 includes/admin/class-init.php:239
 msgid ""
 "Keep this a secret. You can get your secret key via <a href=\"https://www."
 "google.com/recaptcha/\">Google reCAPTCHA</a>"
 msgstr ""
 
-#: includes/admin/class-init.php:157
+#: includes/admin/class-init.php:221
 msgid "reCAPTCHA Score"
 msgstr ""
 
-#: includes/admin/class-init.php:158
+#: includes/admin/class-init.php:222
 msgid ""
 "Consider answers with a score >= to the specified as safe. Set the score in "
 "the 0 to 1 range. E.g. 0.5"
 msgstr ""
 
-#: includes/admin/class-init.php:182
+#: includes/admin/class-init.php:246
 msgid "Type"
 msgstr ""
 
-#: includes/admin/class-init.php:183 includes/admin/class-init.php:275
+#: includes/admin/class-init.php:247 includes/admin/class-init.php:339
 msgid "The type of reCAPTCHA to serve."
 msgstr ""
 
-#: includes/admin/class-init.php:185
+#: includes/admin/class-init.php:249
 msgid "Audio"
 msgstr ""
 
-#: includes/admin/class-init.php:186
+#: includes/admin/class-init.php:250
 msgid "Image"
 msgstr ""
 
-#: includes/admin/class-init.php:194
+#: includes/admin/class-init.php:258
 msgid "Language"
 msgstr ""
 
-#: includes/admin/class-init.php:195
+#: includes/admin/class-init.php:259
 msgid "Select the language to be used in your reCAPTCHA."
 msgstr ""
 
-#: includes/admin/class-init.php:197
+#: includes/admin/class-init.php:261
 msgid "Arabic"
 msgstr ""
 
-#: includes/admin/class-init.php:198
+#: includes/admin/class-init.php:262
 msgid "Afrikaans"
 msgstr ""
 
-#: includes/admin/class-init.php:199
+#: includes/admin/class-init.php:263
 msgid "Amharic"
 msgstr ""
 
-#: includes/admin/class-init.php:200
+#: includes/admin/class-init.php:264
 msgid "Armenian"
 msgstr ""
 
-#: includes/admin/class-init.php:201
+#: includes/admin/class-init.php:265
 msgid "Azerbaijani"
 msgstr ""
 
-#: includes/admin/class-init.php:202
+#: includes/admin/class-init.php:266
 msgid "Basque"
 msgstr ""
 
-#: includes/admin/class-init.php:203
+#: includes/admin/class-init.php:267
 msgid "Bengali"
 msgstr ""
 
-#: includes/admin/class-init.php:204
+#: includes/admin/class-init.php:268
 msgid "Bulgarian"
 msgstr ""
 
-#: includes/admin/class-init.php:205
+#: includes/admin/class-init.php:269
 msgid "Catalan"
 msgstr ""
 
-#: includes/admin/class-init.php:206
+#: includes/admin/class-init.php:270
 msgid "Chinese (Hong Kong)"
 msgstr ""
 
-#: includes/admin/class-init.php:207
+#: includes/admin/class-init.php:271
 msgid "Chinese (Simplified)"
 msgstr ""
 
-#: includes/admin/class-init.php:208
+#: includes/admin/class-init.php:272
 msgid "Chinese (Traditional)"
 msgstr ""
 
-#: includes/admin/class-init.php:209
+#: includes/admin/class-init.php:273
 msgid "Croatian"
 msgstr ""
 
-#: includes/admin/class-init.php:210
+#: includes/admin/class-init.php:274
 msgid "Czech"
 msgstr ""
 
-#: includes/admin/class-init.php:211
+#: includes/admin/class-init.php:275
 msgid "Danish"
 msgstr ""
 
-#: includes/admin/class-init.php:212
+#: includes/admin/class-init.php:276
 msgid "Dutch"
 msgstr ""
 
-#: includes/admin/class-init.php:213
+#: includes/admin/class-init.php:277
 msgid "English (UK)"
 msgstr ""
 
-#: includes/admin/class-init.php:214
+#: includes/admin/class-init.php:278
 msgid "English (US)"
 msgstr ""
 
-#: includes/admin/class-init.php:215
+#: includes/admin/class-init.php:279
 msgid "Estonian"
 msgstr ""
 
-#: includes/admin/class-init.php:216
+#: includes/admin/class-init.php:280
 msgid "Filipino"
 msgstr ""
 
-#: includes/admin/class-init.php:217
+#: includes/admin/class-init.php:281
 msgid "Finnish"
 msgstr ""
 
-#: includes/admin/class-init.php:218
+#: includes/admin/class-init.php:282
 msgid "French"
 msgstr ""
 
-#: includes/admin/class-init.php:219
+#: includes/admin/class-init.php:283
 msgid "French (Canadian)"
 msgstr ""
 
-#: includes/admin/class-init.php:220
+#: includes/admin/class-init.php:284
 msgid "Galician"
 msgstr ""
 
-#: includes/admin/class-init.php:221
+#: includes/admin/class-init.php:285
 msgid "Kartuli"
 msgstr ""
 
-#: includes/admin/class-init.php:222
+#: includes/admin/class-init.php:286
 msgid "German"
 msgstr ""
 
-#: includes/admin/class-init.php:223
+#: includes/admin/class-init.php:287
 msgid "German (Austria)"
 msgstr ""
 
-#: includes/admin/class-init.php:224
+#: includes/admin/class-init.php:288
 msgid "German (Switzerland)"
 msgstr ""
 
-#: includes/admin/class-init.php:225
+#: includes/admin/class-init.php:289
 msgid "Greek"
 msgstr ""
 
-#: includes/admin/class-init.php:226
+#: includes/admin/class-init.php:290
 msgid "Gujarati"
 msgstr ""
 
-#: includes/admin/class-init.php:227
+#: includes/admin/class-init.php:291
 msgid "Hebrew"
 msgstr ""
 
-#: includes/admin/class-init.php:228
+#: includes/admin/class-init.php:292
 msgid "Hindi"
 msgstr ""
 
-#: includes/admin/class-init.php:229
+#: includes/admin/class-init.php:293
 msgid "Hungarain"
 msgstr ""
 
-#: includes/admin/class-init.php:230
+#: includes/admin/class-init.php:294
 msgid "Icelandic"
 msgstr ""
 
-#: includes/admin/class-init.php:231
+#: includes/admin/class-init.php:295
 msgid "Indonesian"
 msgstr ""
 
-#: includes/admin/class-init.php:232
+#: includes/admin/class-init.php:296
 msgid "Italian"
 msgstr ""
 
-#: includes/admin/class-init.php:233
+#: includes/admin/class-init.php:297
 msgid "Japanese"
 msgstr ""
 
-#: includes/admin/class-init.php:234
+#: includes/admin/class-init.php:298
 msgid "Kannada"
 msgstr ""
 
-#: includes/admin/class-init.php:235
+#: includes/admin/class-init.php:299
 msgid "Korean"
 msgstr ""
 
-#: includes/admin/class-init.php:236
+#: includes/admin/class-init.php:300
 msgid "Laothian"
 msgstr ""
 
-#: includes/admin/class-init.php:237
+#: includes/admin/class-init.php:301
 msgid "Latvian"
 msgstr ""
 
-#: includes/admin/class-init.php:238
+#: includes/admin/class-init.php:302
 msgid "Lithuanian"
 msgstr ""
 
-#: includes/admin/class-init.php:239
+#: includes/admin/class-init.php:303
 msgid "Malay"
 msgstr ""
 
-#: includes/admin/class-init.php:240
+#: includes/admin/class-init.php:304
 msgid "Malayalam"
 msgstr ""
 
-#: includes/admin/class-init.php:241
+#: includes/admin/class-init.php:305
 msgid "Marathi"
 msgstr ""
 
-#: includes/admin/class-init.php:242
+#: includes/admin/class-init.php:306
 msgid "Mongolian"
 msgstr ""
 
-#: includes/admin/class-init.php:243
+#: includes/admin/class-init.php:307
 msgid "Norwegian"
 msgstr ""
 
-#: includes/admin/class-init.php:244
+#: includes/admin/class-init.php:308
 msgid "Persian"
 msgstr ""
 
-#: includes/admin/class-init.php:245
+#: includes/admin/class-init.php:309
 msgid "Polish"
 msgstr ""
 
-#: includes/admin/class-init.php:246
+#: includes/admin/class-init.php:310
 msgid "Portuguese"
 msgstr ""
 
-#: includes/admin/class-init.php:247
+#: includes/admin/class-init.php:311
 msgid "Portuguese (Brazil)"
 msgstr ""
 
-#: includes/admin/class-init.php:248
+#: includes/admin/class-init.php:312
 msgid "Portuguese (Portugal)"
 msgstr ""
 
-#: includes/admin/class-init.php:249
+#: includes/admin/class-init.php:313
 msgid "Romanian"
 msgstr ""
 
-#: includes/admin/class-init.php:250
+#: includes/admin/class-init.php:314
 msgid "Russian"
 msgstr ""
 
-#: includes/admin/class-init.php:251
+#: includes/admin/class-init.php:315
 msgid "Serbian"
 msgstr ""
 
-#: includes/admin/class-init.php:252
+#: includes/admin/class-init.php:316
 msgid "Sinhalese"
 msgstr ""
 
-#: includes/admin/class-init.php:253
+#: includes/admin/class-init.php:317
 msgid "Slovak"
 msgstr ""
 
-#: includes/admin/class-init.php:254
+#: includes/admin/class-init.php:318
 msgid "Slovenian"
 msgstr ""
 
-#: includes/admin/class-init.php:255
+#: includes/admin/class-init.php:319
 msgid "Spanish"
 msgstr ""
 
-#: includes/admin/class-init.php:256
+#: includes/admin/class-init.php:320
 msgid "Spanish (Latin America)"
 msgstr ""
 
-#: includes/admin/class-init.php:257
+#: includes/admin/class-init.php:321
 msgid "Swahili"
 msgstr ""
 
-#: includes/admin/class-init.php:258
+#: includes/admin/class-init.php:322
 msgid "Swedish"
 msgstr ""
 
-#: includes/admin/class-init.php:259
+#: includes/admin/class-init.php:323
 msgid "Tamil"
 msgstr ""
 
-#: includes/admin/class-init.php:260
+#: includes/admin/class-init.php:324
 msgid "Telugu"
 msgstr ""
 
-#: includes/admin/class-init.php:261
+#: includes/admin/class-init.php:325
 msgid "Thai"
 msgstr ""
 
-#: includes/admin/class-init.php:262
+#: includes/admin/class-init.php:326
 msgid "Turkish"
 msgstr ""
 
-#: includes/admin/class-init.php:263
+#: includes/admin/class-init.php:327
 msgid "Ukrainian"
 msgstr ""
 
-#: includes/admin/class-init.php:264
+#: includes/admin/class-init.php:328
 msgid "Urdu"
 msgstr ""
 
-#: includes/admin/class-init.php:265
+#: includes/admin/class-init.php:329
 msgid "Vietnamese"
 msgstr ""
 
-#: includes/admin/class-init.php:266
+#: includes/admin/class-init.php:330
 msgid "Zulu"
 msgstr ""
 
-#: includes/admin/class-init.php:274
+#: includes/admin/class-init.php:338
 msgid "Size"
 msgstr ""
 
-#: includes/admin/class-init.php:277
+#: includes/admin/class-init.php:341
 msgid "Compact"
 msgstr ""
 
-#: includes/admin/class-init.php:278
+#: includes/admin/class-init.php:342
 msgid "Normal"
 msgstr ""
 
-#: includes/admin/class-init.php:279
+#: includes/admin/class-init.php:343
 msgid "Invisible"
 msgstr ""
 
-#: includes/admin/class-init.php:287
+#: includes/admin/class-init.php:351
 msgid "Theme"
 msgstr ""
 
-#: includes/admin/class-init.php:288
+#: includes/admin/class-init.php:352
 msgid "Select a color theme of the widget."
 msgstr ""
 
-#: includes/admin/class-init.php:290
+#: includes/admin/class-init.php:354
 msgid "Dark"
 msgstr ""
 
-#: includes/admin/class-init.php:291
+#: includes/admin/class-init.php:355
 msgid "Light"
 msgstr ""
 
-#: includes/admin/class-init.php:300
+#: includes/admin/class-init.php:364
 msgid "Enable Google reCAPTCHA on the UM password reset form"
 msgstr ""
 
-#: includes/admin/class-init.php:301
+#: includes/admin/class-init.php:365
 msgid ""
 "Display the google Google reCAPTCHA on the Ultimate Member password reset "
 "form."
 msgstr ""
 
-#: includes/admin/class-init.php:307
+#: includes/admin/class-init.php:371
 msgid "Enable Google reCAPTCHA on wp-login.php lost password form"
 msgstr ""
 
-#: includes/admin/class-init.php:308
+#: includes/admin/class-init.php:372
 msgid "Display the google Google reCAPTCHA on wp-login.php lost password form."
 msgstr ""
 
-#: includes/admin/class-init.php:314
+#: includes/admin/class-init.php:378
 msgid "Enable Google reCAPTCHA on wp-login.php form"
 msgstr ""
 
-#: includes/admin/class-init.php:315
+#: includes/admin/class-init.php:379
 msgid "Display the google Google reCAPTCHA on wp-login.php form."
 msgstr ""
 
-#: includes/admin/class-init.php:321
+#: includes/admin/class-init.php:385
 msgid "Enable Google reCAPTCHA on login form through `wp_login_form()`"
 msgstr ""
 
-#: includes/admin/class-init.php:322
+#: includes/admin/class-init.php:386
 msgid ""
 "Display the google Google reCAPTCHA on login form through `wp_login_form()`."
+msgstr ""
+
+#: includes/admin/class-init.php:392
+msgid "Enable Google reCAPTCHA on wp-login.php registration form"
+msgstr ""
+
+#: includes/admin/class-init.php:393
+msgid "Display the google Google reCAPTCHA on wp-login.php registration form`."
 msgstr ""
 
 #: includes/admin/templates/form/login-recaptcha.php:16
@@ -510,70 +518,73 @@ msgstr ""
 msgid "reCAPTCHA score"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:223
-#: includes/core/actions/um-recaptcha-form.php:263
-#: includes/core/actions/um-recaptcha-form.php:325
+#: includes/core/actions/um-recaptcha-form.php:228
+#: includes/core/actions/um-recaptcha-form.php:268
+#: includes/core/actions/um-recaptcha-form.php:379
+#: includes/core/actions/um-recaptcha-form.php:419
+#: includes/core/actions/um-recaptcha-form.php:481
 msgid "<strong>Error</strong>: Please confirm you are not a robot."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:245
-#: includes/core/actions/um-recaptcha-form.php:328
+#: includes/core/actions/um-recaptcha-form.php:250
+#: includes/core/actions/um-recaptcha-form.php:401
+#: includes/core/actions/um-recaptcha-form.php:484
 msgid "<strong>Error</strong>: It is very likely a bot."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:331
+#: includes/core/actions/um-recaptcha-form.php:487
 #: includes/core/class-um-recaptcha.php:150
 msgid "<strong>Error</strong>: The secret parameter is missing."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:334
+#: includes/core/actions/um-recaptcha-form.php:490
 #: includes/core/class-um-recaptcha.php:151
 msgid "<strong>Error</strong>: The secret parameter is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:337
+#: includes/core/actions/um-recaptcha-form.php:493
 #: includes/core/class-um-recaptcha.php:152
 msgid "<strong>Error</strong>: The response parameter is missing."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:340
+#: includes/core/actions/um-recaptcha-form.php:496
 #: includes/core/class-um-recaptcha.php:153
 msgid "<strong>Error</strong>: The response parameter is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:343
+#: includes/core/actions/um-recaptcha-form.php:499
 #: includes/core/class-um-recaptcha.php:154
 msgid "<strong>Error</strong>: The request is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:346
+#: includes/core/actions/um-recaptcha-form.php:502
 #: includes/core/class-um-recaptcha.php:155
 msgid ""
 "<strong>Error</strong>: The response is no longer valid: either is too old "
 "or has been used previously."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:349
+#: includes/core/actions/um-recaptcha-form.php:505
 #: includes/core/class-um-recaptcha.php:156
 msgid "<strong>Error</strong>: Undefined reCAPTCHA error."
 msgstr ""
 
 #. translators: %s: Google reCAPTCHA error code
-#: includes/core/actions/um-recaptcha-form.php:353
+#: includes/core/actions/um-recaptcha-form.php:509
 #, php-format
 msgid "<strong>Error</strong>: reCAPTCHA Code: %s"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:646
+#: includes/core/actions/um-recaptcha-form.php:803
 msgid "Please confirm you are not a robot"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:673
+#: includes/core/actions/um-recaptcha-form.php:830
 msgid "reCAPTCHA: it is very likely a bot."
 msgstr ""
 
 #. translators: %s: Google reCAPTCHA error code
-#: includes/core/actions/um-recaptcha-form.php:679
+#: includes/core/actions/um-recaptcha-form.php:836
 #, php-format
 msgid "Undefined error. Key: %s"
 msgstr ""

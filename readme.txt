@@ -6,7 +6,7 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
 Tested up to: 5.9
-Stable tag: 2.2.2
+Stable tag: 2.3.0
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.1.0
@@ -71,7 +71,7 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.3.0: April xx, 2022 =
+= 2.3.0: April 21, 2022 =
 
 * Added: reCAPTCHA for wp-login.php form
 * Added: reCAPTCHA for wp-login.php lostpassword form
@@ -85,7 +85,7 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 * Cached and optimized/minified assets(JS/CSS) must be flushed/re-generated after upgrade
 
 * Tweak: Using PHPCS and WPCS for security enhancements
-* Tweak: Changed main function for getting reCAPTCHA extension class. It's `UM()->ReCAPTCHA()` for now.
+* Tweak: Changed main function for getting reCAPTCHA extension class. It's `UM()->ReCAPTCHA()` for now
 
 = 2.2.2: February 9, 2022 =
 
