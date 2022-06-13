@@ -644,6 +644,10 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 }
 add_action( 'wp_authenticate', 'um_authenticate_recaptcha_action', 2, 2 );
 
+function um_remove_authenticate_recaptcha_action() {
+	remove_action( 'wp_authenticate', 'um_authenticate_recaptcha_action', 2 );
+}
+add_action( 'um_before_signon_after_account_changes', 'um_remove_authenticate_recaptcha_action' );
 
 /* Handle reCAPTCHA via `wp_login_form()` */
 

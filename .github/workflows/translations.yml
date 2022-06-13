@@ -17,4 +17,4 @@ jobs:
           slug: 'recaptcha'
           text_domain: 'um-recaptcha'
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_POT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
