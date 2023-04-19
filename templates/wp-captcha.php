@@ -1,4 +1,14 @@
-<?php if ( ! defined( 'ABSPATH' ) ) {
+<?php
+/**
+ * Template for the UM Google reCAPTCHA
+ *
+ * Called from the um_add_recaptcha_wp_lostpassword_form(), um_add_recaptcha_login_form() functions
+ * @version 2.3.2
+ *
+ * This template can be overridden by copying it to yourtheme/ultimate-member/um-recaptcha/captcha.php
+ * @var string $mode
+ */
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 // phpcs:disable VariableAnalysis
