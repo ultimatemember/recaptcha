@@ -26,7 +26,7 @@ class Init {
 		add_filter( 'um_settings_structure', array( &$this, 'add_settings' ), 10, 1 );
 		add_filter( 'um_settings_map', array( &$this, 'settings_map' ), 10, 1 );
 
-		add_filter( 'um_override_templates_get_template_path', array( &$this, 'um_recaptcha_get_path_template' ), 10, 2 );
+		add_filter( 'um_override_templates_get_template_path__um-recaptcha', array( &$this, 'um_recaptcha_get_path_template' ), 10, 2 );
 		add_filter( 'um_override_templates_scan_files', array( &$this, 'um_recaptcha_extend_scan_files' ), 10, 1 );
 	}
 
@@ -411,8 +411,8 @@ class Init {
 	 * @return array
 	 */
 	public function um_recaptcha_extend_scan_files( $scan_files ) {
-		$extension_files = UM()->admin_settings()->scan_template_files( UM_RECAPTCHA_PATH . '/templates/' );
-		$scan_files      = array_merge( $scan_files, $extension_files );
+		$extension_files['um-recaptcha'] = UM()->admin_settings()->scan_template_files( UM_RECAPTCHA_PATH . '/templates/' );
+		$scan_files                      = array_merge( $scan_files, $extension_files );
 
 		return $scan_files;
 	}
@@ -431,6 +431,10 @@ class Init {
 			$located = array(
 				'theme' => get_stylesheet_directory() . '/ultimate-member/um-recaptcha/' . $file,
 				'core'  => UM_RECAPTCHA_PATH . 'templates/' . $file,
+			);
+		} else {
+			$located = array(
+					'empty' => true,
 			);
 		}
 
