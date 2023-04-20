@@ -432,10 +432,6 @@ class Init {
 				'theme' => get_stylesheet_directory() . '/ultimate-member/um-recaptcha/' . $file,
 				'core'  => UM_RECAPTCHA_PATH . 'templates/' . $file,
 			);
-		} else {
-			$located = array(
-					'empty' => true,
-			);
 		}
 
 		return $located;
