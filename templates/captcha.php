@@ -3,8 +3,10 @@
  * Template for the UM Google reCAPTCHA
  *
  * Called from the um_recaptcha_add_captcha() function
+ * @version 2.3.2
  *
  * This template can be overridden by copying it to yourtheme/ultimate-member/um-recaptcha/captcha.php
+ * @var array $args
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
