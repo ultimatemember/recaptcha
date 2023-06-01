@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-04-23T22:21:25+00:00\n"
+"POT-Creation-Date: 2023-06-01T12:19:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: um-recaptcha\n"
@@ -77,7 +77,7 @@ msgid "reCAPTCHA v3"
 msgstr ""
 
 #: includes/admin/class-init.php:201
-msgid "See <a href=\"https://g.co/recaptcha/sitetypes\" target=\"_blank\">Site Types</a> for more details."
+msgid "See <a href=\"https://developers.google.com/recaptcha/docs/versions\" target=\"_blank\">Site Types</a> for more details."
 msgstr ""
 
 #: includes/admin/class-init.php:208
