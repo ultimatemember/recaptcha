@@ -198,7 +198,7 @@ class Init {
 						'v3' => __( 'reCAPTCHA v3', 'um-recaptcha' ),
 					),
 					'size'        => 'medium',
-					'description' => __( 'See <a href="https://g.co/recaptcha/sitetypes" target="_blank">Site Types</a> for more details.', 'um-recaptcha' ),
+					'description' => __( 'See <a href="https://developers.google.com/recaptcha/docs/versions" target="_blank">Site Types</a> for more details.', 'um-recaptcha' ),
 					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
 				),
 				/* reCAPTCHA v3 */
