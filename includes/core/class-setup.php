@@ -5,7 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 /**
  * Class Setup
  * @package um_ext\um_recaptcha\core
@@ -16,7 +15,6 @@ class Setup {
 	 * @var array
 	 */
 	public $settings_defaults;
-
 
 	/**
 	 * Setup constructor.
@@ -47,7 +45,6 @@ class Setup {
 		);
 	}
 
-
 	/**
 	 *
 	 */
@@ -62,7 +59,6 @@ class Setup {
 
 		update_option( 'um_options', $options );
 	}
-
 
 	/**
 	 *

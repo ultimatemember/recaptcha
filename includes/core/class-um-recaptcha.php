@@ -1,19 +1,24 @@
-<?php if ( ! defined( 'ABSPATH' ) ) {
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 
 /**
  * Class UM_ReCAPTCHA
  */
 class UM_ReCAPTCHA {
 
+	/**
+	 * For backward compatibility with 1.3.x and PHP8.2 compatibility.
+	 *
+	 * @var bool
+	 */
+	public $plugin_inactive = false;
 
 	/**
 	 * @var
 	 */
 	private static $instance;
-
 
 	/**
 	 * @return UM_ReCAPTCHA
@@ -24,7 +29,6 @@ class UM_ReCAPTCHA {
 		}
 		return self::$instance;
 	}
-
 
 	/**
 	 * UM_ReCAPTCHA constructor.
@@ -42,14 +46,12 @@ class UM_ReCAPTCHA {
 		add_action( 'plugins_loaded', array( &$this, 'init' ), 0 );
 	}
 
-
 	/**
 	 * @return $this
 	 */
 	public function get_this() {
 		return $this;
 	}
-
 
 	/**
 	 * @param $defaults
@@ -61,7 +63,6 @@ class UM_ReCAPTCHA {
 		return $defaults;
 	}
 
-
 	/**
 	 * @return um_ext\um_recaptcha\core\Setup()
 	 */
@@ -71,7 +72,6 @@ class UM_ReCAPTCHA {
 		}
 		return UM()->classes['um_recaptcha_setup'];
 	}
-
 
 	/**
 	 * @return um_ext\um_recaptcha\core\Enqueue()
@@ -83,7 +83,6 @@ class UM_ReCAPTCHA {
 		return UM()->classes['um_recaptcha_enqueue'];
 	}
 
-
 	/**
 	 * @return um_ext\um_recaptcha\admin\Init()
 	 */
@@ -94,7 +93,6 @@ class UM_ReCAPTCHA {
 		return UM()->classes['um_recaptcha_admin_init'];
 	}
 
-
 	/**
 	 * Init
 	 */
@@ -102,7 +100,6 @@ class UM_ReCAPTCHA {
 		/** @noinspection PhpIncludeInspection */
 		require_once UM_RECAPTCHA_PATH . 'includes/core/actions/um-recaptcha-form.php';
 	}
-
 
 	/**
 	 * Captcha allowed
@@ -140,7 +137,6 @@ class UM_ReCAPTCHA {
 
 		return ( false === $enable ) ? false : true;
 	}
-
 
 	/**
 	 * @return array

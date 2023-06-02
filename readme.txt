@@ -5,8 +5,8 @@ Contributors: ultimatemember, champsupertramp, nsinelnikov
 Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
-Tested up to: 6.0
-Stable tag: 2.3.1
+Tested up to: 6.2
+Stable tag: 2.3.2
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.1.0
@@ -70,6 +70,12 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 == Changelog ==
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
+
+= 2.3.2: June 02, 2023 =
+
+* Fixed: PHP warnings
+* Fixed: Link to docs
+* Tweak: Template overwrite versioning
 
 = 2.3.1: June 13, 2022 =
 

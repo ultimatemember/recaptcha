@@ -5,20 +5,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 /**
  * Class Enqueue
  * @package um_ext\um_recaptcha\core
  */
 class Enqueue {
 
-
 	/**
 	 * Enqueue constructor.
 	 */
 	public function __construct() {
 	}
-
 
 	/**
 	 * reCAPTCHA scripts/styles enqueue

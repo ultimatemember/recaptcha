@@ -5,14 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 /**
  * Class Init
  *
  * @package um_ext\um_recaptcha\admin
  */
 class Init {
-
 
 	/**
 	 * Initialize the class and set its properties.
@@ -29,7 +27,6 @@ class Init {
 		add_filter( 'um_override_templates_get_template_path__um-recaptcha', array( &$this, 'um_recaptcha_get_path_template' ), 10, 2 );
 		add_filter( 'um_override_templates_scan_files', array( &$this, 'um_recaptcha_extend_scan_files' ), 10, 1 );
 	}
-
 
 	/**
 	 * @param array $settings_map
@@ -93,7 +90,6 @@ class Init {
 		return $settings_map;
 	}
 
-
 	/**
 	 * Adding admin notices about inactive reCAPTCHA when keys are empty
 	 */
@@ -133,7 +129,6 @@ class Init {
 		);
 	}
 
-
 	/**
 	 * Adding metabox for the UM Form type = register
 	 */
@@ -152,7 +147,6 @@ class Init {
 		);
 	}
 
-
 	/**
 	 * Adding metabox for the UM Form type = login
 	 */
@@ -170,7 +164,6 @@ class Init {
 			'default'
 		);
 	}
-
 
 	/**
 	 * Extend settings
@@ -402,7 +395,6 @@ class Init {
 		return $settings;
 	}
 
-
 	/**
 	 * Scan templates from extension
 	 *
@@ -416,7 +408,6 @@ class Init {
 
 		return $scan_files;
 	}
-
 
 	/**
 	 * Get template paths
