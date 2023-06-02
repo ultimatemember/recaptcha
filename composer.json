@@ -10,6 +10,12 @@
    ],
    "minimum-stability": "stable",
    "prefer-stable" : true,
+   "config": {
+     "allow-plugins": {
+       "symfony/flex": true,
+       "dealerdirect/phpcodesniffer-composer-installer": true
+     }
+   },
    "require": {
       "ext-json": "*",
       "ext-dom": "*",
