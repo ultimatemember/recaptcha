@@ -21,7 +21,7 @@ $recaptcha_mode = empty( $args['mode'] ) ? 'homepage' : $args['mode'];
 if ( UM()->form()->has_error( 'recaptcha' ) ) {
 	?>
 
-	<div class="um-field-error"><?php echo esc_html( UM()->form()->errors['recaptcha'] ); ?></div>
+	<div class="um-field-error"><?php echo wp_kses( UM()->form()->errors['recaptcha'], UM()->get_allowed_html( 'templates' ) ); ?></div>
 
 	<?php
 }
