@@ -775,16 +775,17 @@ add_action( 'um_after_password_reset_fields', 'um_recaptcha_add_captcha', 500 );
 
 
 /**
- * form error handling
+ * Login|Register form error handling
  *
  * @link https://developers.google.com/recaptcha/docs/verify#api_request
  * @link https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
  *
- * @param $args
+ * @param array $args
+ * @param array $form_data
  */
-function um_recaptcha_validate( $args ) {
+function um_recaptcha_validate( $args, $form_data = array() ) {
 	// phpcs:disable WordPress.Security.NonceVerification -- already verified here via UM Form nonce
-	if ( isset( $args['mode'] ) && ! in_array( $args['mode'], array( 'login', 'register', 'password' ), true ) && ! isset( $args['_social_login_form'] ) ) {
+	if ( ! isset( $args['_social_login_form'] ) && ( ! isset( $form_data['mode'] ) || ! in_array( $form_data['mode'], array( 'login', 'register' ), true ) ) ) {
 		return;
 	}
 
@@ -817,9 +818,9 @@ function um_recaptcha_validate( $args ) {
 		$result = json_decode( $response['body'] );
 
 		$score = UM()->options()->get( 'g_reCAPTCHA_score' );
-		if ( ! empty( $args['g_recaptcha_score'] ) ) {
+		if ( ! empty( $form_data['g_recaptcha_score'] ) ) {
 			// use form setting for score
-			$score = $args['g_recaptcha_score'];
+			$score = $form_data['g_recaptcha_score'];
 		}
 
 		if ( empty( $score ) ) {
@@ -828,7 +829,7 @@ function um_recaptcha_validate( $args ) {
 			$score = 0.6;
 		}
 		// available to change score based on form $args
-		$validate_score = apply_filters( 'um_recaptcha_score_validation', $score, $args );
+		$validate_score = apply_filters( 'um_recaptcha_score_validation', $score, $args, $form_data );
 
 		if ( isset( $result->score ) && $result->score < $validate_score ) {
 			UM()->form()->add_error( 'recaptcha', __( 'reCAPTCHA: it is very likely a bot.', 'um-recaptcha' ) );
@@ -844,8 +845,74 @@ function um_recaptcha_validate( $args ) {
 	}
 	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via UM Form nonce
 }
-add_action( 'um_submit_form_errors_hook', 'um_recaptcha_validate', 20 );
-add_action( 'um_reset_password_errors_hook', 'um_recaptcha_validate', 20 );
+add_action( 'um_submit_form_errors_hook', 'um_recaptcha_validate', 20, 2 );
+
+/**
+ * Reset Password form error handling
+ *
+ * @link https://developers.google.com/recaptcha/docs/verify#api_request
+ * @link https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
+ *
+ * @param $args
+ */
+function um_recaptcha_validate_rp( $args ) {
+	// phpcs:disable WordPress.Security.NonceVerification -- already verified here via UM Form nonce
+	if ( ! isset( $args['mode'] ) || 'password' !== $args['mode'] ) {
+		return;
+	}
+
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
+		return;
+	}
+
+	$version = UM()->options()->get( 'g_recaptcha_version' );
+	switch ( $version ) {
+		case 'v3':
+			$your_secret = trim( UM()->options()->get( 'g_reCAPTCHA_secret_key' ) );
+			break;
+		case 'v2':
+		default:
+			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
+			break;
+	}
+
+	if ( empty( $_POST['g-recaptcha-response'] ) ) {
+		UM()->form()->add_error( 'recaptcha', __( 'Please confirm you are not a robot', 'um-recaptcha' ) );
+		return;
+	} else {
+		$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
+	}
+
+	$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+	$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
+
+	if ( is_array( $response ) ) {
+		$result = json_decode( $response['body'] );
+
+		$score = UM()->options()->get( 'g_reCAPTCHA_score' );
+		if ( empty( $score ) ) {
+			// set default 0.6 because Google recommend by default set 0.5 score
+			// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
+			$score = 0.6;
+		}
+		// available to change score based on form $args
+		$validate_score = apply_filters( 'um_recaptcha_score_validation', $score, $args, null );
+
+		if ( isset( $result->score ) && $result->score < $validate_score ) {
+			UM()->form()->add_error( 'recaptcha', __( 'reCAPTCHA: it is very likely a bot.', 'um-recaptcha' ) );
+		} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
+			$error_codes = UM()->ReCAPTCHA()->error_codes_list();
+
+			foreach ( $result->{'error-codes'} as $key => $error_code ) {
+				// translators: %s: Google reCAPTCHA error code
+				$error = array_key_exists( $error_code, $error_codes ) ? $error_codes[ $error_code ] : sprintf( __( 'Undefined error. Key: %s', 'um-recaptcha' ), $error_code );
+				UM()->form()->add_error( 'recaptcha', $error );
+			}
+		}
+	}
+	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via UM Form nonce
+}
+add_action( 'um_reset_password_errors_hook', 'um_recaptcha_validate_rp', 20 );
 
 
 /**

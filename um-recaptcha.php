@@ -8,7 +8,7 @@ Author: Ultimate Member
 Author URI: http://ultimatemember.com/
 Text Domain: um-recaptcha
 Domain Path: /languages
-UM version: 2.1.0
+UM version: 2.6.7
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
