@@ -6,10 +6,10 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.0
 Tested up to: 6.2
-Stable tag: 2.3.2
+Stable tag: 2.3.3
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
-Requires UM core at least: 2.1.0
+Requires UM core at least: 2.6.7
 
 Stop bots on your registration & login forms with Google reCAPTCHA
 
@@ -70,6 +70,10 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 == Changelog ==
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
+
+= 2.3.3: July 01, 2023 =
+
+* Tweak: Ultimate Member 2.6.7 compatibility
 
 = 2.3.2: June 02, 2023 =
 

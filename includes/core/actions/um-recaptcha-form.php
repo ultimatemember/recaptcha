@@ -742,7 +742,13 @@ add_filter( 'login_form_middle', 'um_add_recaptcha_login_form', 10, 2 );
  * @param $args
  */
 function um_recaptcha_add_captcha( $args ) {
-	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
+	$allowed_args = array(
+		'mode' => $args['mode'],
+	);
+	if ( isset( $args['g_recaptcha_status'] ) ) {
+		$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
+	}
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $allowed_args ) ) {
 		return;
 	}
 
@@ -789,7 +795,13 @@ function um_recaptcha_validate( $args, $form_data = array() ) {
 		return;
 	}
 
-	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args, $form_data ) ) {
+	$allowed_args = array(
+		'mode' => $form_data['mode'],
+	);
+	if ( isset( $form_data['g_recaptcha_status'] ) ) {
+		$allowed_args['g_recaptcha_status'] = $form_data['g_recaptcha_status'];
+	}
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $allowed_args ) ) {
 		return;
 	}
 
@@ -861,7 +873,10 @@ function um_recaptcha_validate_rp( $args ) {
 		return;
 	}
 
-	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
+	$allowed_args = array(
+		'mode' => $args['mode'],
+	);
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $allowed_args ) ) {
 		return;
 	}
 
@@ -921,7 +936,13 @@ add_action( 'um_reset_password_errors_hook', 'um_recaptcha_validate_rp', 20 );
  * @param array $args
  */
 function um_recaptcha_enqueue_scripts( $args ) {
-	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
+	$allowed_args = array(
+		'mode' => $args['mode'],
+	);
+	if ( isset( $args['g_recaptcha_status'] ) ) {
+		$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
+	}
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $allowed_args ) ) {
 		return;
 	}
 
@@ -938,11 +959,28 @@ add_action( 'um_pre_password_shortcode', 'um_recaptcha_enqueue_scripts' );
  * @param array $args
  */
 function um_recaptcha_directory_enqueue_scripts( $args ) {
-	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
+	if ( is_user_logged_in() ) {
 		return;
 	}
 
-	if ( is_user_logged_in() || empty( $args['show_pm_button'] ) ) {
+	$global_hide_pm_button = ! empty( $args['hide_pm_button'] ) ? $args['hide_pm_button'] : ! UM()->options()->get( 'show_pm_button' );
+	if ( $global_hide_pm_button ) {
+		return;
+	}
+
+	$form_data = UM()->query()->post_data( UM()->shortcodes()->core_login_form() );
+	if ( empty( $form_data ) || ! is_array( $form_data ) || ! array_key_exists( 'mode', $form_data ) ) {
+		return;
+	}
+
+	$allowed_args = array(
+		'mode' => $form_data['mode'],
+	);
+	if ( isset( $form_data['g_recaptcha_status'] ) ) {
+		$allowed_args['g_recaptcha_status'] = $form_data['g_recaptcha_status'];
+	}
+
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $allowed_args ) ) {
 		return;
 	}
 
