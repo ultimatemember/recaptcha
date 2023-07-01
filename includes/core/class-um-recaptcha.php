@@ -108,7 +108,7 @@ class UM_ReCAPTCHA {
 	 *
 	 * @return bool
 	 */
-	public function captcha_allowed( $args ) {
+	public function captcha_allowed( $args, $form_data = null ) {
 		$enable = false;
 
 		$recaptcha    = UM()->options()->get( 'g_recaptcha_status' );
@@ -119,12 +119,8 @@ class UM_ReCAPTCHA {
 			$enable = true;
 		}
 
-		if ( isset( $args['g_recaptcha_status'] ) && $args['g_recaptcha_status'] ) {
-			$enable = true;
-		}
-
-		if ( isset( $args['g_recaptcha_status'] ) && ! $args['g_recaptcha_status'] ) {
-			$enable = false;
+		if ( isset( $form_data['g_recaptcha_status'] ) ) {
+			$enable = (bool) $form_data['g_recaptcha_status'];
 		}
 
 		if ( ! $your_sitekey || ! $your_secret ) {

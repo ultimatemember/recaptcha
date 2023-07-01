@@ -789,7 +789,7 @@ function um_recaptcha_validate( $args, $form_data = array() ) {
 		return;
 	}
 
-	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args ) ) {
+	if ( ! UM()->ReCAPTCHA()->captcha_allowed( $args, $form_data ) ) {
 		return;
 	}
 
