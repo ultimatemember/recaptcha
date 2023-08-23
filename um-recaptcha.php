@@ -1,15 +1,19 @@
 <?php
-/*
-Plugin Name: Ultimate Member - reCAPTCHA
-Plugin URI: https://ultimatemember.com/extensions/google-recaptcha/
-Description: Protect your website from spam and integrate Google reCAPTCHA into your Ultimate Member forms
-Version: 2.3.3
-Author: Ultimate Member
-Author URI: http://ultimatemember.com/
-Text Domain: um-recaptcha
-Domain Path: /languages
-UM version: 2.6.7
-*/
+/**
+ * Plugin Name: Ultimate Member - reCAPTCHA
+ * Plugin URI: https://ultimatemember.com/extensions/google-recaptcha/
+ * Description: Protect your website from spam and integrate Google reCAPTCHA into your Ultimate Member forms
+ * Version: 2.3.3
+ * Author: Ultimate Member
+ * Author URI: http://ultimatemember.com/
+ * Text Domain: um-recaptcha
+ * Domain Path: /languages
+ * Requires at least: 5.5
+ * Requires PHP: 5.6
+ * UM version: 2.6.7
+ *
+ * @package UM_reCAPTCHA
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
