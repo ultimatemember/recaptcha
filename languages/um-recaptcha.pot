@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-08-23T10:01:42+00:00\n"
+"POT-Creation-Date: 2023-09-15T08:52:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: um-recaptcha\n"
@@ -515,73 +515,73 @@ msgstr ""
 msgid "reCAPTCHA score"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:228
-#: includes/core/actions/um-recaptcha-form.php:268
-#: includes/core/actions/um-recaptcha-form.php:379
-#: includes/core/actions/um-recaptcha-form.php:419
-#: includes/core/actions/um-recaptcha-form.php:481
+#: includes/core/actions/um-recaptcha-form.php:230
+#: includes/core/actions/um-recaptcha-form.php:270
+#: includes/core/actions/um-recaptcha-form.php:381
+#: includes/core/actions/um-recaptcha-form.php:421
+#: includes/core/actions/um-recaptcha-form.php:483
 msgid "<strong>Error</strong>: Please confirm you are not a robot."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:250
-#: includes/core/actions/um-recaptcha-form.php:401
-#: includes/core/actions/um-recaptcha-form.php:484
+#: includes/core/actions/um-recaptcha-form.php:252
+#: includes/core/actions/um-recaptcha-form.php:403
+#: includes/core/actions/um-recaptcha-form.php:486
 msgid "<strong>Error</strong>: It is very likely a bot."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:487
+#: includes/core/actions/um-recaptcha-form.php:489
 #: includes/core/class-um-recaptcha.php:142
 msgid "<strong>Error</strong>: The secret parameter is missing."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:490
+#: includes/core/actions/um-recaptcha-form.php:492
 #: includes/core/class-um-recaptcha.php:143
 msgid "<strong>Error</strong>: The secret parameter is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:493
+#: includes/core/actions/um-recaptcha-form.php:495
 #: includes/core/class-um-recaptcha.php:144
 msgid "<strong>Error</strong>: The response parameter is missing."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:496
+#: includes/core/actions/um-recaptcha-form.php:498
 #: includes/core/class-um-recaptcha.php:145
 msgid "<strong>Error</strong>: The response parameter is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:499
+#: includes/core/actions/um-recaptcha-form.php:501
 #: includes/core/class-um-recaptcha.php:146
 msgid "<strong>Error</strong>: The request is invalid or malformed."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:502
+#: includes/core/actions/um-recaptcha-form.php:504
 #: includes/core/class-um-recaptcha.php:147
 msgid "<strong>Error</strong>: The response is no longer valid: either is too old or has been used previously."
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:505
+#: includes/core/actions/um-recaptcha-form.php:507
 #: includes/core/class-um-recaptcha.php:148
 msgid "<strong>Error</strong>: Undefined reCAPTCHA error."
 msgstr ""
 
 #. translators: %s: Google reCAPTCHA error code
-#: includes/core/actions/um-recaptcha-form.php:509
+#: includes/core/actions/um-recaptcha-form.php:511
 msgid "<strong>Error</strong>: reCAPTCHA Code: %s"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:820
-#: includes/core/actions/um-recaptcha-form.php:895
+#: includes/core/actions/um-recaptcha-form.php:824
+#: includes/core/actions/um-recaptcha-form.php:899
 msgid "Please confirm you are not a robot"
 msgstr ""
 
-#: includes/core/actions/um-recaptcha-form.php:847
-#: includes/core/actions/um-recaptcha-form.php:917
+#: includes/core/actions/um-recaptcha-form.php:851
+#: includes/core/actions/um-recaptcha-form.php:921
 msgid "reCAPTCHA: it is very likely a bot."
 msgstr ""
 
 #. translators: %s: Google reCAPTCHA error code
-#: includes/core/actions/um-recaptcha-form.php:853
-#: includes/core/actions/um-recaptcha-form.php:923
+#: includes/core/actions/um-recaptcha-form.php:857
+#: includes/core/actions/um-recaptcha-form.php:927
 msgid "Undefined error. Key: %s"
 msgstr ""
 
