@@ -65,7 +65,9 @@ function um_login_form_scripts() {
 		return;
 	}
 
-	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . UM()->enqueue()->suffix . '.css', array(), UM_RECAPTCHA_VERSION );
+	$suffix = UM()->enqueue()::get_suffix();
+
+	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
 	wp_enqueue_style( 'um-recaptcha' );
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
@@ -74,7 +76,7 @@ function um_login_form_scripts() {
 			$site_key = UM()->options()->get( 'g_reCAPTCHA_site_key' );
 
 			wp_register_script( 'google-recaptcha-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key", array(), '3.0', false );
-			wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/wp-recaptcha' . UM()->enqueue()->suffix . '.js', array( 'jquery', 'google-recaptcha-api-v3' ), UM_RECAPTCHA_VERSION, true );
+			wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/wp-recaptcha' . $suffix . '.js', array( 'jquery', 'google-recaptcha-api-v3' ), UM_RECAPTCHA_VERSION, true );
 
 			wp_localize_script(
 				'um-recaptcha',
@@ -679,7 +681,9 @@ function um_add_recaptcha_login_form( $content, $args ) {
 		return $content;
 	}
 
-	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . UM()->enqueue()->suffix . '.css', array(), UM_RECAPTCHA_VERSION );
+	$suffix = UM()->enqueue()::get_suffix();
+
+	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
 	wp_enqueue_style( 'um-recaptcha' );
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
@@ -689,7 +693,7 @@ function um_add_recaptcha_login_form( $content, $args ) {
 			$site_key = UM()->options()->get( 'g_reCAPTCHA_site_key' );
 
 			wp_register_script( 'google-recaptcha-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key", array(), '3.0', false );
-			wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/wp-recaptcha' . UM()->enqueue()->suffix . '.js', array( 'jquery', 'google-recaptcha-api-v3' ), UM_RECAPTCHA_VERSION, true );
+			wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/wp-recaptcha' . $suffix . '.js', array( 'jquery', 'google-recaptcha-api-v3' ), UM_RECAPTCHA_VERSION, true );
 
 			wp_localize_script(
 				'um-recaptcha',

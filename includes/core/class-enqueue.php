@@ -21,7 +21,9 @@ class Enqueue {
 	 * reCAPTCHA scripts/styles enqueue
 	 */
 	public function wp_enqueue_scripts() {
-		wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/um-recaptcha' . UM()->enqueue()->suffix . '.css', array(), UM_RECAPTCHA_VERSION );
+		$suffix = UM()->enqueue()::get_suffix();
+
+		wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/um-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
 		wp_enqueue_style( 'um-recaptcha' );
 
 		$version = UM()->options()->get( 'g_recaptcha_version' );
@@ -30,7 +32,7 @@ class Enqueue {
 				$site_key = UM()->options()->get( 'g_reCAPTCHA_site_key' );
 
 				wp_register_script( 'google-recapthca-api-v3', "https://www.google.com/recaptcha/api.js?render=$site_key", array(), '3.0', false );
-				wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/um-recaptcha' . UM()->enqueue()->suffix . '.js', array( 'jquery', 'google-recapthca-api-v3' ), UM_RECAPTCHA_VERSION, true );
+				wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/um-recaptcha' . $suffix . '.js', array( 'jquery', 'google-recapthca-api-v3' ), UM_RECAPTCHA_VERSION, true );
 
 				break;
 			case 'v2':
@@ -41,7 +43,7 @@ class Enqueue {
 				$site_key = UM()->options()->get( 'g_recaptcha_sitekey' );
 
 				wp_register_script( 'google-recapthca-api-v2', "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=$language_code", array(), '2.0', false );
-				wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/um-recaptcha' . UM()->enqueue()->suffix . '.js', array( 'jquery', 'google-recapthca-api-v2' ), UM_RECAPTCHA_VERSION, true );
+				wp_register_script( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/js/um-recaptcha' . $suffix . '.js', array( 'jquery', 'google-recapthca-api-v2' ), UM_RECAPTCHA_VERSION, true );
 
 				break;
 		}
