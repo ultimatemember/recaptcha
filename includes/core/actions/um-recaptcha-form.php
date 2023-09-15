@@ -65,7 +65,7 @@ function um_login_form_scripts() {
 		return;
 	}
 
-	$suffix = UM()->enqueue()::get_suffix();
+	$suffix = UM()->frontend()->enqueue()::get_suffix();
 
 	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
 	wp_enqueue_style( 'um-recaptcha' );
@@ -681,7 +681,7 @@ function um_add_recaptcha_login_form( $content, $args ) {
 		return $content;
 	}
 
-	$suffix = UM()->enqueue()::get_suffix();
+	$suffix = UM()->frontend()->enqueue()::get_suffix();
 
 	wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/wp-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
 	wp_enqueue_style( 'um-recaptcha' );

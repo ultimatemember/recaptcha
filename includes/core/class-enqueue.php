@@ -21,7 +21,7 @@ class Enqueue {
 	 * reCAPTCHA scripts/styles enqueue
 	 */
 	public function wp_enqueue_scripts() {
-		$suffix = UM()->enqueue()::get_suffix();
+		$suffix = UM()->frontend()->enqueue()::get_suffix();
 
 		wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/um-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
 		wp_enqueue_style( 'um-recaptcha' );
