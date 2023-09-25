@@ -6,10 +6,10 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.5
 Tested up to: 6.3
-Stable tag: 2.3.3
+Stable tag: 2.3.4
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
-Requires UM core at least: 2.6.7
+Requires UM core at least: 2.6.12
 
 Stop bots on your registration & login forms with Google reCAPTCHA
 
