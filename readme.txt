@@ -9,7 +9,7 @@ Tested up to: 6.3
 Stable tag: 2.3.4
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
-Requires UM core at least: 2.6.12
+Requires UM core at least: 2.7.0
 
 Stop bots on your registration & login forms with Google reCAPTCHA
 

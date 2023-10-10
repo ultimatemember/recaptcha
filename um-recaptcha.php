@@ -10,7 +10,7 @@
  * Domain Path: /languages
  * Requires at least: 5.5
  * Requires PHP: 5.6
- * UM version: 2.6.12
+ * UM version: 2.7.0
  *
  * @package UM_reCAPTCHA
  */
@@ -30,7 +30,7 @@ define( 'UM_RECAPTCHA_EXTENSION', $plugin_data['Name'] );
 define( 'UM_RECAPTCHA_VERSION', $plugin_data['Version'] );
 define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
 
-define( 'UM_RECAPTCHA_REQUIRES', '2.6.12' );
+define( 'UM_RECAPTCHA_REQUIRES', '2.7.0' );
 
 function um_recaptcha_plugins_loaded() {
 	$locale = ( '' !== get_locale() ) ? get_locale() : 'en_US';
