@@ -71,7 +71,7 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.3.4: October 9, 2023 =
+= 2.3.4: October 11, 2023 =
 
 * Updated: Dependencies versions based on the recent changes for `UM()->frontend()->enqueue()::get_suffix();`
 
