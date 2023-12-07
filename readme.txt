@@ -71,7 +71,7 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.3.5: December 6, 2023 =
+= 2.3.5: December 7, 2023 =
 
 * Tweak: `um-admin-clear` CSS class. It duplicates WordPress native `clear`. Using WordPress native instead.
 
