@@ -354,7 +354,9 @@ function um_recaptcha_validate_lostpassword_form( $errors ) {
 	if ( um_is_api_request() ) {
 		return $errors;
 	}
-
+	if ( is_admin() ) {
+		return $errors;
+	}
 	if ( ! UM()->options()->get( 'g_recaptcha_wp_lostpasswordform' ) ) {
 		return $errors;
 	}
