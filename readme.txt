@@ -71,7 +71,7 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.3.6: February 19, 2024 =
+= 2.3.6: February 21, 2024 =
 
 * Fixed: Conflict with "Send password reset" wp-admin > Users action
 
