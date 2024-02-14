@@ -6,7 +6,7 @@ Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.5
 Tested up to: 6.4
-Stable tag: 2.3.5
+Stable tag: 2.3.6
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Requires UM core at least: 2.7.0
@@ -70,6 +70,10 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 == Changelog ==
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
+
+= 2.3.6: February 19, 2024 =
+
+* Fixed: Conflict with "Send password reset" wp-admin > Users action
 
 = 2.3.5: December 11, 2023 =
 
