@@ -10,6 +10,7 @@
  * Domain Path: /languages
  * Requires at least: 5.5
  * Requires PHP: 5.6
+ * Requires Plugins: ultimate-member
  * UM version: 2.7.0
  *
  * @package UM_reCAPTCHA
@@ -61,7 +62,6 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 		} else {
 
 			if ( ! function_exists( 'UM' ) ) {
-				/** @noinspection PhpIncludeInspection */
 				require_once um_path . 'includes/class-dependencies.php';
 				$is_um_active = um\is_um_active();
 			} else {
@@ -97,7 +97,6 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
 			} else {
-				/** @noinspection PhpIncludeInspection */
 				require_once UM_RECAPTCHA_PATH . 'includes/core/class-um-recaptcha.php';
 			}
 		}
@@ -119,7 +118,6 @@ function um_recaptcha_activation_hook() {
 
 	//run setup
 	if ( ! class_exists( 'um_ext\um_recaptcha\core\Setup' ) ) {
-		/** @noinspection PhpIncludeInspection */
 		require_once UM_RECAPTCHA_PATH . 'includes/core/class-setup.php';
 	}
 

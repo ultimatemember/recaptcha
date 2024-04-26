@@ -2,10 +2,9 @@
 Author URI: https://ultimatemember.com/
 Plugin URI: https://ultimatemember.com/extensions/google-recaptcha/
 Contributors: ultimatemember, champsupertramp, nsinelnikov
-Donate link:
 Tags: community, member, membership, user-profile
 Requires at least: 5.5
-Tested up to: 6.4
+Tested up to: 6.5
 Stable tag: 2.3.6
 License: GNU Version 2 or Any Later Version
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
