@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-$plugin_data = get_plugin_data( __FILE__ );
+$plugin_data = get_plugin_data( __FILE__, true, false );
 
 define( 'UM_RECAPTCHA_URL', plugin_dir_url( __FILE__ ) );
 define( 'UM_RECAPTCHA_PATH', plugin_dir_path( __FILE__ ) );
