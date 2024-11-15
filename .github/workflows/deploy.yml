@@ -9,10 +9,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build
+      - name: Install Subversion
         run: |
-          npm install
-          npm run build
           sudo apt-get install subversion
       - name: WordPress Plugin Deploy
         id: deploy
@@ -22,6 +20,7 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: um-recaptcha
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
