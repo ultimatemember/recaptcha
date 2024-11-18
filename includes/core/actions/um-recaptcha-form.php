@@ -194,7 +194,7 @@ add_action( 'register_form', 'um_add_recaptcha_wp_register_form' );
 
 
 /**
- * @param \WP_Error $errors
+ * @param WP_Error $errors
  *
  * @return mixed
  */
@@ -228,56 +228,21 @@ function um_recaptcha_validate_register_form( $errors ) {
 
 			if ( empty( $_POST['g-recaptcha-response'] ) ) {
 				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
+
 				return $errors;
-			} else {
-				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
 			}
 
-			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
+			$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
 
-			if ( is_array( $response ) ) {
-				$result = json_decode( $response['body'] );
-
-				$score = UM()->options()->get( 'g_reCAPTCHA_score' );
-				if ( empty( $score ) ) {
-					// set default 0.6 because Google recommend by default set 0.5 score
-					// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
-					$score = 0.6;
-				}
-				// available to change score based on form $args
-				$validate_score = apply_filters( 'um_recaptcha_score_validation', $score );
+			$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'wp_register_form' );
+			if ( ! empty( $result ) ) {
+				$validate_score = UM()->ReCAPTCHA()->get_v3_score();
 
 				if ( isset( $result->score ) && $result->score < (float) $validate_score ) {
 					$errors->add( 'um-recaptcha-score', __( '<strong>Error</strong>: It is very likely a bot.', 'um-recaptcha' ) );
+
 					return $errors;
-				} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
-					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
-
-					foreach ( $result->{'error-codes'} as $key => $error_code ) {
-						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
-						$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
-						return $errors;
-					}
 				}
-			}
-			break;
-		case 'v2':
-		default:
-			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
-
-			if ( empty( $_POST['g-recaptcha-response'] ) ) {
-				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
-				return $errors;
-			} else {
-				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
-			}
-
-			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
-
-			if ( is_array( $response ) ) {
-				$result = json_decode( $response['body'] );
 
 				if ( isset( $result->{'error-codes'} ) && ! $result->success ) {
 					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
@@ -285,17 +250,44 @@ function um_recaptcha_validate_register_form( $errors ) {
 					foreach ( $result->{'error-codes'} as $key => $error_code ) {
 						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
 						$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
+
 						return $errors;
 					}
 				}
 			}
 			break;
+
+		case 'v2':
+		default:
+			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
+
+			if ( empty( $_POST['g-recaptcha-response'] ) ) {
+				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
+
+				return $errors;
+			}
+
+			$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
+
+			$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'wp_register_form' );
+			if ( ! empty( $result ) && isset( $result->{'error-codes'} ) && ! $result->success ) {
+				$error_codes = UM()->ReCAPTCHA()->error_codes_list();
+
+				foreach ( $result->{'error-codes'} as $key => $error_code ) {
+					$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
+					$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
+
+					return $errors;
+				}
+			}
+			break;
+
 	}
 
 	return $errors;
 	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via wp-login.php
 }
-add_filter( 'registration_errors', 'um_recaptcha_validate_register_form', 10, 1 );
+add_filter( 'registration_errors', 'um_recaptcha_validate_register_form' );
 
 
 /**
@@ -345,7 +337,7 @@ add_action( 'lostpassword_form', 'um_add_recaptcha_wp_lostpassword_form' );
 
 
 /**
- * @param \WP_Error $errors
+ * @param WP_Error $errors
  *
  * @return mixed
  */
@@ -381,56 +373,20 @@ function um_recaptcha_validate_lostpassword_form( $errors ) {
 
 			if ( empty( $_POST['g-recaptcha-response'] ) ) {
 				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
+
 				return $errors;
-			} else {
-				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
 			}
+			$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
 
-			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
-
-			if ( is_array( $response ) ) {
-				$result = json_decode( $response['body'] );
-
-				$score = UM()->options()->get( 'g_reCAPTCHA_score' );
-				if ( empty( $score ) ) {
-					// set default 0.6 because Google recommend by default set 0.5 score
-					// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
-					$score = 0.6;
-				}
-				// available to change score based on form $args
-				$validate_score = apply_filters( 'um_recaptcha_score_validation', $score );
+			$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'wp_lostpassword_form' );
+			if ( ! empty( $result ) ) {
+				$validate_score = UM()->ReCAPTCHA()->get_v3_score();
 
 				if ( isset( $result->score ) && $result->score < (float) $validate_score ) {
 					$errors->add( 'um-recaptcha-score', __( '<strong>Error</strong>: It is very likely a bot.', 'um-recaptcha' ) );
+
 					return $errors;
-				} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
-					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
-
-					foreach ( $result->{'error-codes'} as $key => $error_code ) {
-						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
-						$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
-						return $errors;
-					}
 				}
-			}
-			break;
-		case 'v2':
-		default:
-			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
-
-			if ( empty( $_POST['g-recaptcha-response'] ) ) {
-				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
-				return $errors;
-			} else {
-				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
-			}
-
-			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
-
-			if ( is_array( $response ) ) {
-				$result = json_decode( $response['body'] );
 
 				if ( isset( $result->{'error-codes'} ) && ! $result->success ) {
 					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
@@ -438,11 +394,38 @@ function um_recaptcha_validate_lostpassword_form( $errors ) {
 					foreach ( $result->{'error-codes'} as $key => $error_code ) {
 						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
 						$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
+
 						return $errors;
 					}
 				}
 			}
 			break;
+
+		case 'v2':
+		default:
+			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
+
+			if ( empty( $_POST['g-recaptcha-response'] ) ) {
+				$errors->add( 'um-recaptcha-empty', __( '<strong>Error</strong>: Please confirm you are not a robot.', 'um-recaptcha' ) );
+
+				return $errors;
+			}
+
+			$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
+
+			$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'wp_lostpassword_form' );
+			if ( ! empty( $result ) && isset( $result->{'error-codes'} ) && ! $result->success ) {
+				$error_codes = UM()->ReCAPTCHA()->error_codes_list();
+
+				foreach ( $result->{'error-codes'} as $key => $error_code ) {
+					$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
+					$errors->add( 'um-recaptcha-' . $code, $error_codes[ $code ] );
+
+					return $errors;
+				}
+			}
+			break;
+
 	}
 
 	return $errors;
@@ -463,9 +446,9 @@ function um_is_api_request() {
 
 
 /**
- * @param \WP_Error $errors
+ * @param WP_Error $errors
  *
- * @return \WP_Error
+ * @return WP_Error
  */
 function um_authenticate_recaptcha_errors( $errors ) {
 	if ( ! UM()->options()->get( 'g_recaptcha_wp_login_form' ) ) {
@@ -517,7 +500,7 @@ function um_authenticate_recaptcha_errors( $errors ) {
 	return $errors;
 	// phpcs:enable WordPress.Security.NonceVerification -- getting value from GET line
 }
-add_filter( 'wp_login_errors', 'um_authenticate_recaptcha_errors', 10, 1 );
+add_filter( 'wp_login_errors', 'um_authenticate_recaptcha_errors' );
 
 
 /**
@@ -554,7 +537,7 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 
 	$version = UM()->options()->get( 'g_recaptcha_version' );
 
-	$redirect     = isset( $_GET['redirect_to'] ) ? esc_url_raw( $_GET['redirect_to'] ) : '';
+	$redirect     = isset( $_GET['redirect_to'] ) ? esc_url_raw( wp_unslash( $_GET['redirect_to'] ) ) : '';
 	$force_reauth = isset( $_GET['reauth'] ) ? (bool) $_GET['reauth'] : false;
 
 	// for the wp_login_form() function login widget
@@ -579,57 +562,18 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 			if ( empty( $_POST['g-recaptcha-response'] ) ) {
 				wp_safe_redirect( add_query_arg( array( 'um-recaptcha-error' => 'empty' ), wp_login_url( $redirect, $force_reauth ) ) );
 				exit;
-			} else {
-				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
 			}
 
-			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
+			$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
 
-			if ( is_array( $response ) ) {
-				$result = json_decode( $response['body'] );
-
-				$score = UM()->options()->get( 'g_reCAPTCHA_score' );
-				if ( empty( $score ) ) {
-					// set default 0.6 because Google recommend by default set 0.5 score
-					// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
-					$score = 0.6;
-				}
-				// available to change score based on form $args
-				$validate_score = apply_filters( 'um_recaptcha_score_validation', $score );
+			$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'wp_login_form' );
+			if ( ! empty( $result ) ) {
+				$validate_score = UM()->ReCAPTCHA()->get_v3_score();
 
 				if ( isset( $result->score ) && $result->score < (float) $validate_score ) {
 					wp_safe_redirect( add_query_arg( array( 'um-recaptcha-error' => 'score' ), wp_login_url( $redirect, $force_reauth ) ) );
 					exit;
-				} elseif ( isset( $result->{'error-codes'} ) && ! $result->success ) {
-					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
-
-					foreach ( $result->{'error-codes'} as $key => $error_code ) {
-						$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
-
-						wp_safe_redirect( add_query_arg( array( 'um-recaptcha-error' => $code ), wp_login_url( $redirect, $force_reauth ) ) );
-						exit;
-					}
 				}
-			}
-
-			break;
-		case 'v2':
-		default:
-			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
-
-			if ( empty( $_POST['g-recaptcha-response'] ) ) {
-				wp_safe_redirect( add_query_arg( array( 'um-recaptcha-error' => 'empty' ), wp_login_url( $redirect, $force_reauth ) ) );
-				exit;
-			} else {
-				$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
-			}
-
-			$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-			$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
-
-			if ( is_array( $response ) ) {
-				$result = json_decode( $response['body'] );
 
 				if ( isset( $result->{'error-codes'} ) && ! $result->success ) {
 					$error_codes = UM()->ReCAPTCHA()->error_codes_list();
@@ -643,6 +587,31 @@ function um_authenticate_recaptcha_action( $username, $password ) {
 				}
 			}
 			break;
+
+		case 'v2':
+		default:
+			$your_secret = trim( UM()->options()->get( 'g_recaptcha_secretkey' ) );
+
+			if ( empty( $_POST['g-recaptcha-response'] ) ) {
+				wp_safe_redirect( add_query_arg( array( 'um-recaptcha-error' => 'empty' ), wp_login_url( $redirect, $force_reauth ) ) );
+				exit;
+			}
+
+			$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
+
+			$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'wp_login_form' );
+			if ( ! empty( $result ) && isset( $result->{'error-codes'} ) && ! $result->success ) {
+				$error_codes = UM()->ReCAPTCHA()->error_codes_list();
+
+				foreach ( $result->{'error-codes'} as $key => $error_code ) {
+					$code = array_key_exists( $error_code, $error_codes ) ? $error_code : 'undefined';
+
+					wp_safe_redirect( add_query_arg( array( 'um-recaptcha-error' => $code ), wp_login_url( $redirect, $force_reauth ) ) );
+					exit;
+				}
+			}
+			break;
+
 	}
 	// phpcs:enable WordPress.Security.NonceVerification -- already verified here via wp-login.php or wp_login_form()
 }
@@ -825,29 +794,13 @@ function um_recaptcha_validate( $args, $form_data = array() ) {
 	if ( empty( $_POST['g-recaptcha-response'] ) ) {
 		UM()->form()->add_error( 'recaptcha', __( 'Please confirm you are not a robot', 'um-recaptcha' ) );
 		return;
-	} else {
-		$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
 	}
 
-	$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-	$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
+	$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
 
-	if ( is_array( $response ) ) {
-		$result = json_decode( $response['body'] );
-
-		$score = UM()->options()->get( 'g_reCAPTCHA_score' );
-		if ( ! empty( $form_data['g_recaptcha_score'] ) ) {
-			// use form setting for score
-			$score = $form_data['g_recaptcha_score'];
-		}
-
-		if ( empty( $score ) ) {
-			// set default 0.6 because Google recommend by default set 0.5 score
-			// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
-			$score = 0.6;
-		}
-		// available to change score based on form $args
-		$validate_score = apply_filters( 'um_recaptcha_score_validation', $score, $args, $form_data );
+	$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'um_form_shortcode', compact( 'args', 'form_data' ) );
+	if ( ! empty( $result ) ) {
+		$validate_score = UM()->ReCAPTCHA()->get_v3_score( $args, $form_data );
 
 		if ( isset( $result->score ) && $result->score < $validate_score ) {
 			UM()->form()->add_error( 'recaptcha', __( 'reCAPTCHA: it is very likely a bot.', 'um-recaptcha' ) );
@@ -900,24 +853,13 @@ function um_recaptcha_validate_rp( $args ) {
 	if ( empty( $_POST['g-recaptcha-response'] ) ) {
 		UM()->form()->add_error( 'recaptcha', __( 'Please confirm you are not a robot', 'um-recaptcha' ) );
 		return;
-	} else {
-		$client_captcha_response = sanitize_textarea_field( $_POST['g-recaptcha-response'] );
 	}
 
-	$user_ip  = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
-	$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$your_secret&response=$client_captcha_response&remoteip=$user_ip" );
+	$client_captcha_response = sanitize_textarea_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
 
-	if ( is_array( $response ) ) {
-		$result = json_decode( $response['body'] );
-
-		$score = UM()->options()->get( 'g_reCAPTCHA_score' );
-		if ( empty( $score ) ) {
-			// set default 0.6 because Google recommend by default set 0.5 score
-			// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
-			$score = 0.6;
-		}
-		// available to change score based on form $args
-		$validate_score = apply_filters( 'um_recaptcha_score_validation', $score, $args, null );
+	$result = UM()->ReCAPTCHA()->remote_request( $your_secret, $client_captcha_response, 'um_reset_password_shortcode', compact( 'args' ) );
+	if ( ! empty( $result ) ) {
+		$validate_score = UM()->ReCAPTCHA()->get_v3_score( $args );
 
 		if ( isset( $result->score ) && $result->score < $validate_score ) {
 			UM()->form()->add_error( 'recaptcha', __( 'reCAPTCHA: it is very likely a bot.', 'um-recaptcha' ) );
