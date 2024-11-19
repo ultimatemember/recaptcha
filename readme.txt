@@ -70,9 +70,11 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
 
-= 2.3.8: November 18, 2024 =
+= 2.3.8: November 19, 2024 =
 
+* Added: `um_recaptcha_api_response` action hook
 * Fixed: "Load textdomain just in time" issue
+* Tweak: Refactored requests to API
 
 = 2.3.7: April 29, 2024 =
 
