@@ -150,10 +150,88 @@ class UM_ReCAPTCHA {
 
 		return $error_codes;
 	}
+
+	public function get_v3_score( $args = array(), $form_data = array() ) {
+		$score = UM()->options()->get( 'g_reCAPTCHA_score' );
+
+		if ( ! empty( $form_data['g_recaptcha_score'] ) ) {
+			// use form setting for score
+			$score = $form_data['g_recaptcha_score'];
+		}
+
+		if ( empty( $score ) ) {
+			// It's a fallback. Set default 0.6 because Google recommend by default set 0.5 score
+			// https://developers.google.com/recaptcha/docs/v3#interpreting_the_score
+			$score = 0.6;
+		}
+
+		/**
+		 * Filters the Google reCAPTCHA score.
+		 *
+		 * @param {float} $score     Google reCAPTCHA score. Number from 0 to 1.
+		 * @param {array} $args      Submission arguments.
+		 * @param {array} $form_data UM Form data.
+		 *
+		 * @return {float} Google reCAPTCHA score.
+		 *
+		 * @since 2.3.8
+		 * @hook um_recaptcha_score_validation
+		 *
+		 * @example <caption>Change the Google reCAPTCHA score.</caption>
+		 * function my_um_recaptcha_score_validation( $score, $args, $form_data ) {
+		 *     $score = 0.8;
+		 *     return $score;
+		 * }
+		 * add_filter( 'um_recaptcha_score_validation', 'my_um_recaptcha_score_validation', 10, 3 );
+		 */
+		return apply_filters( 'um_recaptcha_score_validation', $score, $args, $form_data );
+	}
+
+	/**
+	 * @param string $secret
+	 * @param string $client_response
+	 * @param string $context
+	 * @param array  $args
+	 *
+	 * @return mixed|string
+	 */
+	public function remote_request( $secret, $client_response, $context = '', $args = array() ) {
+		$user_ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+
+		$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$client_response&remoteip=$user_ip" );
+
+		$hook_args = compact( 'response', 'context', 'args', 'client_response' );
+		/**
+		 * Fires just after remote request to Google reCAPTCHA API.
+		 *
+		 * @param {array|WP_Error} $response        The response or WP_Error on failure.
+		 *                                          See WP_Http::request() for information on return value.
+		 * @param {string}         $context         Request context. Can be equals `wp_register_form`, `wp_lostpassword_form`, `wp_login_form`, `um_form_shortcode`, `um_reset_password_shortcode`.
+		 * @param {array}          $args            Additional arguments passed to `remote_request()` function depends on `$context`.
+		 * @param {string}         $client_response reCAPTCHA client side response.
+		 *
+		 * @since 2.3.8
+		 * @hook um_recaptcha_api_response
+		 *
+		 * @example <caption>Make something custom after API response.</caption>
+		 * function my_custom_recaptcha_api_response( $response, $context, $args, $client_response ) {
+		 *     // do something custom
+		 * }
+		 * add_action( 'um_recaptcha_api_response', 'my_custom_recaptcha_api_response', 10, 2 );
+		 */
+		do_action_ref_array( 'um_recaptcha_api_response', $hook_args );
+
+		$result = wp_remote_retrieve_body( $response );
+		if ( empty( $result ) ) {
+			return '';
+		}
+
+		return json_decode( $result );
+	}
 }
 
 //create class var
-add_action( 'plugins_loaded', 'um_init_recaptcha', -10, 1 );
+add_action( 'plugins_loaded', 'um_init_recaptcha', -10 );
 function um_init_recaptcha() {
 	if ( function_exists( 'UM' ) ) {
 		UM()->set_class( 'ReCAPTCHA', true );
