@@ -30,7 +30,6 @@ define( 'UM_RECAPTCHA_PLUGIN', plugin_basename( __FILE__ ) );
 define( 'UM_RECAPTCHA_EXTENSION', $plugin_data['Name'] );
 define( 'UM_RECAPTCHA_VERSION', $plugin_data['Version'] );
 define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
-
 define( 'UM_RECAPTCHA_REQUIRES', '2.7.0' );
 
 function um_recaptcha_plugins_loaded() {
@@ -44,7 +43,7 @@ add_action( 'plugins_loaded', 'um_recaptcha_check_dependencies', -20 );
 
 if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 	function um_recaptcha_check_dependencies() {
-		if ( ! defined( 'um_path' ) || ! file_exists( um_path . 'includes/class-dependencies.php' ) ) {
+		if ( ! defined( 'um_path' ) || ! file_exists( UM_PATH . 'includes/class-dependencies.php' ) ) {
 			//UM is not installed
 			function um_recaptcha_dependencies() {
 				$allowed_html = array(
@@ -97,7 +96,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
 			} else {
-				require_once UM_RECAPTCHA_PATH . 'includes/core/class-um-recaptcha.php';
+				require_once UM_RECAPTCHA_PATH . 'includes/class-um-recaptcha.php';
 			}
 		}
 	}
@@ -117,10 +116,10 @@ function um_recaptcha_activation_hook() {
 	}
 
 	//run setup
-	if ( ! class_exists( 'um_ext\um_recaptcha\core\Setup' ) ) {
-		require_once UM_RECAPTCHA_PATH . 'includes/core/class-setup.php';
+	if ( ! class_exists( 'um_ext\um_recaptcha\common\Setup' ) ) {
+		require_once UM_RECAPTCHA_PATH . 'includes/common/class-setup.php';
 	}
 
-	$recaptcha_setup = new um_ext\um_recaptcha\core\Setup();
+	$recaptcha_setup = new um_ext\um_recaptcha\common\Setup();
 	$recaptcha_setup->run_setup();
 }

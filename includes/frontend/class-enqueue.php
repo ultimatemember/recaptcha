@@ -1,5 +1,5 @@
 <?php
-namespace um_ext\um_recaptcha\core;
+namespace um_ext\um_recaptcha\frontend;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Enqueue
- * @package um_ext\um_recaptcha\core
+ * @package um_ext\um_recaptcha\frontend
  */
 class Enqueue {
 
@@ -15,6 +15,7 @@ class Enqueue {
 	 * Enqueue constructor.
 	 */
 	public function __construct() {
+		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ), 9999 );
 	}
 
 	/**
@@ -24,7 +25,6 @@ class Enqueue {
 		$suffix = UM()->frontend()->enqueue()::get_suffix();
 
 		wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/um-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
-		wp_enqueue_style( 'um-recaptcha' );
 
 		$version = UM()->options()->get( 'g_recaptcha_version' );
 		switch ( $version ) {
@@ -56,7 +56,5 @@ class Enqueue {
 				'site_key' => $site_key,
 			)
 		);
-
-		wp_enqueue_script( 'um-recaptcha' );
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-namespace um_ext\um_recaptcha\core;
+namespace um_ext\um_recaptcha\common;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Setup
- * @package um_ext\um_recaptcha\core
+ * @package um_ext\um_recaptcha\common
  */
 class Setup {
 
