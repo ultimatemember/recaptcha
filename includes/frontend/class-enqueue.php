@@ -24,7 +24,11 @@ class Enqueue {
 	public function wp_enqueue_scripts() {
 		$suffix = UM()->frontend()->enqueue()::get_suffix();
 
-		wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/um-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
+		if ( UM()->is_new_ui() ) {
+			wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/v3/recaptcha' . $suffix . '.css', array( 'um_new_design' ), UM_RECAPTCHA_VERSION );
+		} else {
+			wp_register_style( 'um-recaptcha', UM_RECAPTCHA_URL . 'assets/css/um-recaptcha' . $suffix . '.css', array(), UM_RECAPTCHA_VERSION );
+		}
 
 		$version = UM()->options()->get( 'g_recaptcha_version' );
 		switch ( $version ) {

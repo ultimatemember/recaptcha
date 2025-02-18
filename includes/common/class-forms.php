@@ -36,7 +36,10 @@ class Forms {
 		// reset password forms
 		add_action( 'um_reset_password_errors_hook', array( $this, 'um_recaptcha_validate_rp' ), 20 );
 
-		// fields
+		/**
+		 * fields
+		 * @todo deprecate since old UI is deprecated
+		**/
 		add_action( 'um_after_register_fields', array( $this, 'um_recaptcha_add_captcha' ), 500 );
 		add_action( 'um_after_login_fields', array( $this, 'um_recaptcha_add_captcha' ), 500 );
 		add_action( 'um_after_password_reset_fields', array( $this, 'um_recaptcha_add_captcha' ), 500 );
@@ -49,6 +52,10 @@ class Forms {
 		add_action( 'wp_authenticate', array( $this, 'um_authenticate_recaptcha_action' ), 2, 2 );
 		add_action( 'um_before_signon_after_account_changes', array( $this, 'um_remove_authenticate_recaptcha_action' ) );
 		add_action( 'um_submit_form_errors_hook', array( $this, 'um_recaptcha_validate' ), 20, 2 );
+
+		add_filter( 'um_predefined_fields_hook', array( $this, 'add_field' ), 10, 1 );
+		add_filter( 'um_get_form_fields', array( &$this, 'extends_fields' ), 100, 2 );
+		add_action( 'um_after_password_reset_fields', array( $this, 'password_reset_add_captcha' ), 500 );
 	}
 
 	/**
@@ -695,42 +702,44 @@ class Forms {
 
 	/**
 	 * add recaptcha
-	 *
 	 * @param $args
+	 * @todo deprecate since old UI is deprecated
 	 */
 	public function um_recaptcha_add_captcha( $args ) {
-		$allowed_args = array(
-			'mode' => $args['mode'],
-		);
-		if ( isset( $args['g_recaptcha_status'] ) ) {
-			$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
-		}
-		if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
-			return;
-		}
+		if ( ! UM()->is_new_ui() ) {
+			$allowed_args = array(
+				'mode' => $args['mode'],
+			);
+			if ( isset( $args['g_recaptcha_status'] ) ) {
+				$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
+			}
+			if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+				return;
+			}
 
-		$version = UM()->options()->get( 'g_recaptcha_version' );
-		switch ( $version ) {
-			case 'v3':
-				UM()->get_template( 'captcha-v3.php', UM_RECAPTCHA_PLUGIN, array( 'args' => $args ), true );
-				break;
-			case 'v2':
-			default:
-				UM()->get_template(
-					'captcha.php',
-					UM_RECAPTCHA_PLUGIN,
-					array(
-						'args'    => $args,
-						'type'    => UM()->options()->get( 'g_recaptcha_type' ),
-						'size'    => UM()->options()->get( 'g_recaptcha_size' ),
-						'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
-						'sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' ),
-					),
-					true
-				);
-				break;
+			$version = UM()->options()->get( 'g_recaptcha_version' );
+			switch ( $version ) {
+				case 'v3':
+					UM()->get_template( 'captcha-v3.php', UM_RECAPTCHA_PLUGIN, array( 'args' => $args ), true );
+					break;
+				case 'v2':
+				default:
+					UM()->get_template(
+						'captcha.php',
+						UM_RECAPTCHA_PLUGIN,
+						array(
+							'args'    => $args,
+							'type'    => UM()->options()->get( 'g_recaptcha_type' ),
+							'size'    => UM()->options()->get( 'g_recaptcha_size' ),
+							'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
+							'sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' ),
+						),
+						true
+					);
+					break;
+			}
+			wp_enqueue_script( 'um-recaptcha' );
 		}
-		wp_enqueue_script( 'um-recaptcha' );
 	}
 
 	/**
@@ -1025,5 +1034,145 @@ class Forms {
 		}
 
 		return json_decode( $result );
+	}
+
+	public function add_field( $fields ) {
+		if ( UM()->is_new_ui() ) {
+			$fields['um_recaptcha'] = array(
+				'content'     => '',
+				'type'        => 'block',
+				'private_use' => true,
+			);
+		}
+		return $fields;
+	}
+
+	/**
+	 * Extends fields on the registration form
+	 *
+	 * @param array $fields
+	 * @param int   $form_id
+	 *
+	 * @return array
+	 */
+	public function extends_fields( $fields, $form_id ) {
+		if ( ! UM()->is_new_ui() ) {
+			return $fields;
+		}
+
+		$args = UM()->query()->post_data( $form_id );
+		if ( ! empty( $args['g_recaptcha_status'] ) ) {
+			$recaptcha_row_key = 'um-recaptcha-row';
+
+			$fields[ $recaptcha_row_key ] = array(
+				'type'     => 'row',
+				'id'       => $recaptcha_row_key,
+				'sub_rows' => 1,
+				'cols'     => 1,
+				'origin'   => $recaptcha_row_key,
+			);
+
+			$allowed_args = array(
+				'mode' => $args['mode'],
+			);
+			if ( isset( $args['g_recaptcha_status'] ) ) {
+				$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
+			}
+			if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+				return $fields;
+			}
+
+			$recaptcha_field = UM()->builtin()->get_specific_fields( 'um_recaptcha' );
+			foreach ( $recaptcha_field as $key => $data ) {
+				if ( 'um_recaptcha' === $key ) {
+					if ( ! empty( $args['g_recaptcha_status'] ) ) {
+						$version = UM()->options()->get( 'g_recaptcha_version' );
+						if ( 'v3' === $version ) {
+							$t_args = array(
+								'form_id' => $form_id,
+								'mode'    => $args['mode'],
+							);
+
+							$data['content'] = UM()->get_template( 'v3/captcha-v3.php', UM_RECAPTCHA_PLUGIN, $t_args, false );
+						} else {
+							$t_args = array(
+								'form_id' => $form_id,
+								'type'    => UM()->options()->get( 'g_recaptcha_type' ),
+								'size'    => UM()->options()->get( 'g_recaptcha_size' ),
+								'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
+								'sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' ),
+							);
+
+							$data['content'] = UM()->get_template( 'v3/captcha.php', UM_RECAPTCHA_PLUGIN, $t_args, false );
+						}
+						$data['in_row']     = $recaptcha_row_key;
+						$data['in_sub_row'] = '0';
+						$data['in_column']  = '1';
+						$data['in_group']   = '';
+						$data['position']   = 1;
+
+						$fields[ $key ] = $data;
+					}
+				}
+			}
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * add password reset form recaptcha
+	 * @param $args
+	 */
+	public function password_reset_add_captcha( $args ) {
+		if ( ! UM()->is_new_ui() ) {
+			return;
+		}
+		$allowed_args = array(
+			'mode' => $args['mode'],
+		);
+		if ( isset( $args['g_recaptcha_status'] ) ) {
+			$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
+		}
+		if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+			return;
+		}
+
+		if ( 'password' !== $args['mode'] ) {
+			return;
+		}
+
+		echo '<div class="um-form-row">';
+		echo '<div class="um-form-cols um-form-cols-1">';
+		echo '<div class="um-form-col um-form-col-1">';
+		$version = UM()->options()->get( 'g_recaptcha_version' );
+		switch ( $version ) {
+			case 'v3':
+				$t_args = array(
+					'form_id' => $args['form_id'],
+					'mode'    => $args['mode'],
+				);
+				UM()->get_template( 'v3/captcha-v3.php', UM_RECAPTCHA_PLUGIN, $t_args, true );
+				break;
+			case 'v2':
+			default:
+				UM()->get_template(
+					'v3/captcha.php',
+					UM_RECAPTCHA_PLUGIN,
+					array(
+						'form_id' => $args['form_id'],
+						'type'    => UM()->options()->get( 'g_recaptcha_type' ),
+						'size'    => UM()->options()->get( 'g_recaptcha_size' ),
+						'theme'   => UM()->options()->get( 'g_recaptcha_theme' ),
+						'sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' ),
+					),
+					true
+				);
+				break;
+		}
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+		wp_enqueue_script( 'um-recaptcha' );
 	}
 }
