@@ -26,39 +26,18 @@ class UM_ReCAPTCHA {
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
+			self::$instance->um_recaptcha_construct();
 		}
+
 		return self::$instance;
 	}
 
 	/**
 	 * UM_ReCAPTCHA constructor.
 	 */
-	public function __construct() {
+	public function um_recaptcha_construct() {
 		// Global for backwards compatibility.
 		$GLOBALS['um_recaptcha'] = $this;
-		add_filter( 'um_call_object_ReCAPTCHA', array( &$this, 'get_this' ) );
-		add_filter( 'um_settings_default_values', array( &$this, 'default_settings' ), 10, 1 );
-		$this->includes();
-	}
-
-	/**
-	 * @return $this
-	 */
-	public function get_this() {
-		return $this;
-	}
-
-	/**
-	 * @param $defaults
-	 *
-	 * @return array
-	 */
-	public function default_settings( $defaults ) {
-		$defaults = array_merge( $defaults, $this->setup()->settings_defaults );
-		return $defaults;
-	}
-
-	public function includes() {
 		$this->common()->includes();
 		if ( UM()->is_request( 'admin' ) ) {
 			$this->admin()->includes();
@@ -105,13 +84,5 @@ class UM_ReCAPTCHA {
 			UM()->classes['um_ext\um_recaptcha\frontend\init'] = new um_ext\um_recaptcha\frontend\Init();
 		}
 		return UM()->classes['um_ext\um_recaptcha\frontend\init'];
-	}
-}
-
-//create class var
-add_action( 'plugins_loaded', 'um_init_recaptcha', -10 );
-function um_init_recaptcha() {
-	if ( function_exists( 'UM' ) ) {
-		UM()->set_class( 'ReCAPTCHA', true );
 	}
 }

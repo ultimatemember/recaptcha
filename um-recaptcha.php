@@ -97,6 +97,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 
 			} else {
 				require_once UM_RECAPTCHA_PATH . 'includes/class-um-recaptcha.php';
+				UM()->set_class( 'ReCAPTCHA', true );
 			}
 		}
 	}
