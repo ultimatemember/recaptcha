@@ -61,11 +61,11 @@ class Metabox {
 	}
 
 	/**
-	 * Merges additional role meta keys and their sanitize methods into the existing form meta map.
+	 * Merges additional form meta keys and their sanitize methods into the existing form meta map.
 	 *
-	 * @param array $map The current role meta map.
+	 * @param array $map The current form meta map.
 	 *
-	 * @return array The updated role meta map with additional keys and sanitize methods.
+	 * @return array The updated form meta map with additional keys and sanitize methods.
 	 */
 	public function form_meta_map( $map ) {
 		$new_map = array(
