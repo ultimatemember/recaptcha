@@ -31,6 +31,7 @@ define( 'UM_RECAPTCHA_EXTENSION', $plugin_data['Name'] );
 define( 'UM_RECAPTCHA_VERSION', $plugin_data['Version'] );
 define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
 define( 'UM_RECAPTCHA_REQUIRES', '2.7.0' );
+define( 'UM_RECAPTCHA_REQUIRES_NEW_UI', '3.0.0-alpha-20250319' );
 
 function um_recaptcha_plugins_loaded() {
 	$locale = ( '' !== get_locale() ) ? get_locale() : 'en_US';
@@ -83,18 +84,36 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
-			} elseif ( true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ) ) {
-				//UM old version is active
+			} elseif ( ! UM()->is_new_ui() && true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ) ) {
+				// UM old version is active
 				function um_recaptcha_dependencies() {
 					$allowed_html = array(
+						'a'      => array(
+							'href'   => array(),
+							'target' => true,
+						),
 						'strong' => array(),
+						'br'     => array(),
 					);
-					// translators: %s: Google reCAPTCHA extension name
 					echo '<div class="error"><p>' . wp_kses( UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ), $allowed_html ) . '</p></div>';
 				}
 
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
+			} elseif ( UM()->is_new_ui() && true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES_NEW_UI, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ) ) {
+				// UM old version is active
+				function um_recaptcha_dependencies() {
+					$allowed_html = array(
+						'a'      => array(
+							'href'   => array(),
+							'target' => true,
+						),
+						'strong' => array(),
+						'br'     => array(),
+					);
+					echo '<div class="error"><p>' . wp_kses( UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES_NEW_UI, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ), $allowed_html ) . '</p></div>';
+				}
 
+				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 			} else {
 				require_once UM_RECAPTCHA_PATH . 'includes/class-um-recaptcha.php';
 				UM()->set_class( 'ReCAPTCHA', true );

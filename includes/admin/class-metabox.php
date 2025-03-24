@@ -20,6 +20,8 @@ class Metabox {
 	public function __construct() {
 		add_action( 'um_admin_custom_register_metaboxes', array( &$this, 'add_metabox_register' ), 10 );
 		add_action( 'um_admin_custom_login_metaboxes', array( &$this, 'add_metabox_login' ), 10 );
+
+		add_filter( 'um_form_meta_map', array( &$this, 'form_meta_map' ) );
 	}
 
 	/**
@@ -56,5 +58,31 @@ class Metabox {
 			'side',
 			'default'
 		);
+	}
+
+	/**
+	 * Merges additional role meta keys and their sanitize methods into the existing form meta map.
+	 *
+	 * @param array $map The current role meta map.
+	 *
+	 * @return array The updated role meta map with additional keys and sanitize methods.
+	 */
+	public function form_meta_map( $map ) {
+		$new_map = array(
+			'_um_login_g_recaptcha_status'    => array(
+				'sanitize' => 'absint',
+			),
+			'_um_login_g_recaptcha_score'     => array(
+				'sanitize' => 'text',
+			),
+			'_um_register_g_recaptcha_status' => array(
+				'sanitize' => 'absint',
+			),
+			'_um_register_g_recaptcha_score'  => array(
+				'sanitize' => 'text',
+			),
+		);
+
+		return array_merge( $map, $new_map );
 	}
 }
