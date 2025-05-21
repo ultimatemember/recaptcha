@@ -6,6 +6,8 @@
  * Version: 2.3.9-alpha
  * Author: Ultimate Member
  * Author URI: http://ultimatemember.com/
+ * License: GPLv3
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: um-recaptcha
  * Domain Path: /languages
  * Requires at least: 5.5
