@@ -26,8 +26,8 @@ $allowed_html = array(
 			'label'   => __( 'reCAPTCHA status on this form', 'um-recaptcha' ),
 			'value'   => UM()->query()->get_meta_value( '_um_login_g_recaptcha_status', null, $recaptcha_enabled ),
 			'options' => array(
-				'0' => __( 'No', 'um-recaptcha' ),
-				'1' => __( 'Yes', 'um-recaptcha' ),
+				0 => __( 'No', 'um-recaptcha' ),
+				1 => __( 'Yes', 'um-recaptcha' ),
 			),
 		),
 	);
@@ -51,6 +51,5 @@ $allowed_html = array(
 		)
 	)->render_form();
 	?>
-
 	<div class="clear"></div>
 </div>

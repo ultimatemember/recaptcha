@@ -6,19 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Capthca
+ * Class Captcha
  *
  * @package um_ext\um_recaptcha\common
  */
-class Capthca {
-
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since 2.1.0
-	 */
-	public function __construct() {
-	}
+class Captcha {
 
 	/**
 	 * Captcha allowed
@@ -50,6 +42,6 @@ class Capthca {
 			$enable = false;
 		}
 
-		return ( false === $enable ) ? false : true;
+		return false !== $enable;
 	}
 }

@@ -18,8 +18,8 @@ class Metabox {
 	 * @since 2.1.0
 	 */
 	public function __construct() {
-		add_action( 'um_admin_custom_register_metaboxes', array( &$this, 'add_metabox_register' ), 10 );
-		add_action( 'um_admin_custom_login_metaboxes', array( &$this, 'add_metabox_login' ), 10 );
+		add_action( 'um_admin_custom_register_metaboxes', array( &$this, 'add_metabox_register' ) );
+		add_action( 'um_admin_custom_login_metaboxes', array( &$this, 'add_metabox_login' ) );
 
 		add_filter( 'um_form_meta_map', array( &$this, 'form_meta_map' ) );
 	}

@@ -48,7 +48,7 @@ class Directory {
 			$allowed_args['g_recaptcha_status'] = $form_data['g_recaptcha_status'];
 		}
 
-		if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+		if ( ! UM()->ReCAPTCHA()->common()->captcha()->captcha_allowed( $allowed_args ) ) {
 			return;
 		}
 

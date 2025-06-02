@@ -659,7 +659,7 @@ class Forms {
 		$allowed_args = array(
 			'mode' => $args['mode'],
 		);
-		if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+		if ( ! UM()->ReCAPTCHA()->common()->captcha()->captcha_allowed( $allowed_args ) ) {
 			return;
 		}
 
@@ -713,7 +713,7 @@ class Forms {
 			if ( isset( $args['g_recaptcha_status'] ) ) {
 				$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
 			}
-			if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+			if ( ! UM()->ReCAPTCHA()->common()->captcha()->captcha_allowed( $allowed_args ) ) {
 				return;
 			}
 
@@ -754,7 +754,7 @@ class Forms {
 		if ( isset( $args['g_recaptcha_status'] ) ) {
 			$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
 		}
-		if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+		if ( ! UM()->ReCAPTCHA()->common()->captcha()->captcha_allowed( $allowed_args ) ) {
 			return;
 		}
 
@@ -900,7 +900,7 @@ class Forms {
 		if ( isset( $form_data['g_recaptcha_status'] ) ) {
 			$allowed_args['g_recaptcha_status'] = $form_data['g_recaptcha_status'];
 		}
-		if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+		if ( ! UM()->ReCAPTCHA()->common()->captcha()->captcha_allowed( $allowed_args ) ) {
 			return;
 		}
 
@@ -1078,7 +1078,7 @@ class Forms {
 			if ( isset( $args['g_recaptcha_status'] ) ) {
 				$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
 			}
-			if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+			if ( ! UM()->ReCAPTCHA()->common()->captcha()->captcha_allowed( $allowed_args ) ) {
 				return $fields;
 			}
 
@@ -1134,7 +1134,7 @@ class Forms {
 		if ( isset( $args['g_recaptcha_status'] ) ) {
 			$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
 		}
-		if ( ! UM()->ReCAPTCHA()->common()->capthca()->captcha_allowed( $allowed_args ) ) {
+		if ( ! UM()->ReCAPTCHA()->common()->captcha()->captcha_allowed( $allowed_args ) ) {
 			return;
 		}
 

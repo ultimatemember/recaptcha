@@ -16,9 +16,18 @@ class Init {
 	 * Create classes' instances where __construct isn't empty for hooks init
 	 */
 	public function includes() {
-		$this->forms();
 		$this->directory();
-		$this->capthca();
+		$this->forms();
+	}
+
+	/**
+	 * @return Captcha
+	 */
+	public function captcha() {
+		if ( empty( UM()->classes['um_ext\um_recaptcha\common\captcha'] ) ) {
+			UM()->classes['um_ext\um_recaptcha\common\captcha'] = new Captcha();
+		}
+		return UM()->classes['um_ext\um_recaptcha\common\captcha'];
 	}
 
 	/**
@@ -39,15 +48,5 @@ class Init {
 			UM()->classes['um_ext\um_recaptcha\common\directory'] = new Directory();
 		}
 		return UM()->classes['um_ext\um_recaptcha\common\directory'];
-	}
-
-	/**
-	 * @return Capthca
-	 */
-	public function capthca() {
-		if ( empty( UM()->classes['um_ext\um_recaptcha\common\capthca'] ) ) {
-			UM()->classes['um_ext\um_recaptcha\common\capthca'] = new Capthca();
-		}
-		return UM()->classes['um_ext\um_recaptcha\common\capthca'];
 	}
 }

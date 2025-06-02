@@ -15,11 +15,11 @@ class Settings {
 	 * Settings constructor.
 	 */
 	public function __construct() {
-		add_filter( 'um_settings_structure', array( &$this, 'add_settings' ), 10, 1 );
-		add_filter( 'um_settings_map', array( &$this, 'settings_map' ), 10, 1 );
+		add_filter( 'um_settings_structure', array( &$this, 'add_settings' ) );
+		add_filter( 'um_settings_map', array( &$this, 'settings_map' ) );
 		add_action( 'um_admin_create_notices', array( &$this, 'add_admin_notice' ) );
 		add_filter( 'um_override_templates_get_template_path__um-recaptcha', array( &$this, 'um_recaptcha_get_path_template' ), 10, 2 );
-		add_filter( 'um_override_templates_scan_files', array( &$this, 'um_recaptcha_extend_scan_files' ), 10, 1 );
+		add_filter( 'um_override_templates_scan_files', array( &$this, 'um_recaptcha_extend_scan_files' ) );
 	}
 
 	/**
@@ -33,30 +33,22 @@ class Settings {
 			'title'  => __( 'Google reCAPTCHA', 'um-recaptcha' ),
 			'fields' => array(
 				array(
-					'id'      => 'g_recaptcha_status',
-					'type'    => 'checkbox',
-					'label'   => __( 'Enable Google reCAPTCHA', 'um-recaptcha' ),
-					'tooltip' => __( 'Turn on or off your Google reCAPTCHA on your site registration and login forms by default.', 'um-recaptcha' ),
-				),
-				array(
 					'id'          => 'g_recaptcha_version',
 					'type'        => 'select',
 					'label'       => __( 'reCAPTCHA type', 'um-recaptcha' ),
-					'tooltip'     => __( 'Choose the type of reCAPTCHA for this site key. A site key only works with a single reCAPTCHA site type.', 'um-recaptcha' ),
+					'description' => __( 'Choose the type of reCAPTCHA for this site key. A site key only works with a single reCAPTCHA site type. See <a href="https://developers.google.com/recaptcha/docs/versions" target="_blank">Site Types</a> for more details.', 'um-recaptcha' ),
 					'options'     => array(
 						'v2' => __( 'reCAPTCHA v2', 'um-recaptcha' ),
 						'v3' => __( 'reCAPTCHA v3', 'um-recaptcha' ),
 					),
 					'size'        => 'medium',
-					'description' => __( 'See <a href="https://developers.google.com/recaptcha/docs/versions" target="_blank">Site Types</a> for more details.', 'um-recaptcha' ),
-					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
 				),
 				/* reCAPTCHA v3 */
 				array(
 					'id'          => 'g_reCAPTCHA_site_key',
 					'type'        => 'text',
 					'label'       => __( 'Site Key', 'um-recaptcha' ),
-					'tooltip'     => __( 'You can register your site and generate a site key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
+					'description' => __( 'You can register your site and generate a site key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
 					'size'        => 'medium',
 					'conditional' => array( 'g_recaptcha_version', '=', 'v3' ),
 				),
@@ -64,7 +56,7 @@ class Settings {
 					'id'          => 'g_reCAPTCHA_secret_key',
 					'type'        => 'text',
 					'label'       => __( 'Secret Key', 'um-recaptcha' ),
-					'tooltip'     => __( 'Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
+					'description' => __( 'Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
 					'size'        => 'medium',
 					'conditional' => array( 'g_recaptcha_version', '=', 'v3' ),
 				),
@@ -72,7 +64,7 @@ class Settings {
 					'id'          => 'g_reCAPTCHA_score',
 					'type'        => 'text',
 					'label'       => __( 'reCAPTCHA Score', 'um-recaptcha' ),
-					'tooltip'     => __( 'Consider answers with a score >= to the specified as safe. Set the score in the 0 to 1 range. E.g. 0.5', 'um-recaptcha' ),
+					'description' => __( 'Consider answers with a score >= to the specified as safe. Set the score in the 0 to 1 range. E.g. 0.5', 'um-recaptcha' ),
 					'size'        => 'small',
 					'conditional' => array( 'g_recaptcha_version', '=', 'v3' ),
 				),
@@ -81,7 +73,7 @@ class Settings {
 					'id'          => 'g_recaptcha_sitekey',
 					'type'        => 'text',
 					'label'       => __( 'Site Key', 'um-recaptcha' ),
-					'tooltip'     => __( 'You can register your site and generate a site key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
+					'description' => __( 'You can register your site and generate a site key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
 					'size'        => 'medium',
 					'conditional' => array( 'g_recaptcha_version', '=', 'v2' ),
 				),
@@ -89,7 +81,7 @@ class Settings {
 					'id'          => 'g_recaptcha_secretkey',
 					'type'        => 'text',
 					'label'       => __( 'Secret Key', 'um-recaptcha' ),
-					'tooltip'     => __( 'Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
+					'description' => __( 'Keep this a secret. You can get your secret key via <a href="https://www.google.com/recaptcha/">Google reCAPTCHA</a>', 'um-recaptcha' ),
 					'size'        => 'medium',
 					'conditional' => array( 'g_recaptcha_version', '=', 'v2' ),
 				),
@@ -97,7 +89,7 @@ class Settings {
 					'id'          => 'g_recaptcha_type',
 					'type'        => 'select',
 					'label'       => __( 'Type', 'um-recaptcha' ),
-					'tooltip'     => __( 'The type of reCAPTCHA to serve.', 'um-recaptcha' ),
+					'description' => __( 'The type of reCAPTCHA to serve.', 'um-recaptcha' ),
 					'options'     => array(
 						'audio' => __( 'Audio', 'um-recaptcha' ),
 						'image' => __( 'Image', 'um-recaptcha' ),
@@ -109,7 +101,7 @@ class Settings {
 					'id'          => 'g_recaptcha_language_code',
 					'type'        => 'select',
 					'label'       => __( 'Language', 'um-recaptcha' ),
-					'tooltip'     => __( 'Select the language to be used in your reCAPTCHA.', 'um-recaptcha' ),
+					'description' => __( 'Select the language to be used in your reCAPTCHA.', 'um-recaptcha' ),
 					'options'     => array(
 						'ar'     => __( 'Arabic', 'um-recaptcha' ),
 						'af'     => __( 'Afrikaans', 'um-recaptcha' ),
@@ -189,7 +181,7 @@ class Settings {
 					'id'          => 'g_recaptcha_size',
 					'type'        => 'select',
 					'label'       => __( 'Size', 'um-recaptcha' ),
-					'tooltip'     => __( 'The type of reCAPTCHA to serve.', 'um-recaptcha' ),
+					'description' => __( 'The type of reCAPTCHA to serve.', 'um-recaptcha' ),
 					'options'     => array(
 						'compact'   => __( 'Compact', 'um-recaptcha' ),
 						'normal'    => __( 'Normal', 'um-recaptcha' ),
@@ -202,7 +194,7 @@ class Settings {
 					'id'          => 'g_recaptcha_theme',
 					'type'        => 'select',
 					'label'       => __( 'Theme', 'um-recaptcha' ),
-					'tooltip'     => __( 'Select a color theme of the widget.', 'um-recaptcha' ),
+					'description' => __( 'Select a color theme of the widget.', 'um-recaptcha' ),
 					'options'     => array(
 						'dark'  => __( 'Dark', 'um-recaptcha' ),
 						'light' => __( 'Light', 'um-recaptcha' ),
@@ -212,39 +204,46 @@ class Settings {
 				),
 				/* Forms */
 				array(
-					'id'          => 'g_recaptcha_password_reset',
-					'type'        => 'checkbox',
-					'label'       => __( 'Enable Google reCAPTCHA on the UM password reset form', 'um-recaptcha' ),
-					'tooltip'     => __( 'Display the google Google reCAPTCHA on the Ultimate Member password reset form.', 'um-recaptcha' ),
-					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+					'id'             => 'g_recaptcha_status',
+					'type'           => 'checkbox',
+					'label'          => __( 'UM Forms Google reCAPTCHA', 'um-recaptcha' ),
+					'checkbox_label' => __( 'Enable Google reCAPTCHA on the UM Forms by default', 'um-recaptcha' ),
+					'description'    => __( 'Turn on or off your Google reCAPTCHA on your site registration and login forms by default.', 'um-recaptcha' ),
 				),
 				array(
-					'id'          => 'g_recaptcha_wp_lostpasswordform',
-					'type'        => 'checkbox',
-					'label'       => __( 'Enable Google reCAPTCHA on wp-login.php lost password form', 'um-recaptcha' ),
-					'tooltip'     => __( 'Display the google Google reCAPTCHA on wp-login.php lost password form.', 'um-recaptcha' ),
-					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+					'id'             => 'g_recaptcha_password_reset',
+					'type'           => 'checkbox',
+					'label'          => __( 'UM Password Reset form Google reCAPTCHA', 'um-recaptcha' ),
+					'checkbox_label' => __( 'Enable Google reCAPTCHA on the UM password reset form', 'um-recaptcha' ),
+					'description'    => __( 'Display the google Google reCAPTCHA on the Ultimate Member password reset form.', 'um-recaptcha' ),
 				),
 				array(
-					'id'          => 'g_recaptcha_wp_login_form',
-					'type'        => 'checkbox',
-					'label'       => __( 'Enable Google reCAPTCHA on wp-login.php form', 'um-recaptcha' ),
-					'tooltip'     => __( 'Display the google Google reCAPTCHA on wp-login.php form.', 'um-recaptcha' ),
-					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+					'id'             => 'g_recaptcha_wp_lostpasswordform',
+					'type'           => 'checkbox',
+					'label'          => __( 'wp-login.php lost password form Google reCAPTCHA', 'um-recaptcha' ),
+					'checkbox_label' => __( 'Enable Google reCAPTCHA on wp-login.php lost password form', 'um-recaptcha' ),
+					'description'    => __( 'Display the google Google reCAPTCHA on wp-login.php lost password form.', 'um-recaptcha' ),
 				),
 				array(
-					'id'          => 'g_recaptcha_wp_login_form_widget',
-					'type'        => 'checkbox',
-					'label'       => __( 'Enable Google reCAPTCHA on login form through `wp_login_form()`', 'um-recaptcha' ),
-					'tooltip'     => __( 'Display the google Google reCAPTCHA on login form through `wp_login_form()`.', 'um-recaptcha' ),
-					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+					'id'             => 'g_recaptcha_wp_login_form',
+					'type'           => 'checkbox',
+					'label'          => __( 'wp-login.php form Google reCAPTCHA', 'um-recaptcha' ),
+					'checkbox_label' => __( 'Enable Google reCAPTCHA on wp-login.php form', 'um-recaptcha' ),
+					'description'    => __( 'Display the google Google reCAPTCHA on wp-login.php form.', 'um-recaptcha' ),
 				),
 				array(
-					'id'          => 'g_recaptcha_wp_register_form',
-					'type'        => 'checkbox',
-					'label'       => __( 'Enable Google reCAPTCHA on wp-login.php registration form', 'um-recaptcha' ),
-					'tooltip'     => __( 'Display the google Google reCAPTCHA on wp-login.php registration form`.', 'um-recaptcha' ),
-					'conditional' => array( 'g_recaptcha_status', '=', 1 ),
+					'id'             => 'g_recaptcha_wp_login_form_widget',
+					'type'           => 'checkbox',
+					'label'          => __( '`wp_login_form()` widget Google reCAPTCHA ', 'um-recaptcha' ),
+					'checkbox_label' => __( 'Enable Google reCAPTCHA on login form through `wp_login_form()`', 'um-recaptcha' ),
+					'description'    => __( 'Display the google Google reCAPTCHA on login form through `wp_login_form()`.', 'um-recaptcha' ),
+				),
+				array(
+					'id'             => 'g_recaptcha_wp_register_form',
+					'type'           => 'checkbox',
+					'label'          => __( 'wp-login.php registration form Google reCAPTCHA', 'um-recaptcha' ),
+					'checkbox_label' => __( 'Enable Google reCAPTCHA on wp-login.php registration form', 'um-recaptcha' ),
+					'description'    => __( 'Display the google Google reCAPTCHA on wp-login.php registration form.', 'um-recaptcha' ),
 				),
 			),
 		);
@@ -261,9 +260,6 @@ class Settings {
 		$settings_map = array_merge(
 			$settings_map,
 			array(
-				'g_recaptcha_status'               => array(
-					'sanitize' => 'bool',
-				),
 				'g_recaptcha_version'              => array(
 					'sanitize' => 'text',
 				),
@@ -293,6 +289,9 @@ class Settings {
 				),
 				'g_recaptcha_theme'                => array(
 					'sanitize' => 'key',
+				),
+				'g_recaptcha_status'               => array(
+					'sanitize' => 'bool',
 				),
 				'g_recaptcha_password_reset'       => array(
 					'sanitize' => 'bool',
