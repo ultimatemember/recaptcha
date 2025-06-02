@@ -31,16 +31,6 @@ class Init {
 	}
 
 	/**
-	 * @return Forms
-	 */
-	public function forms() {
-		if ( empty( UM()->classes['um_ext\um_recaptcha\common\forms'] ) ) {
-			UM()->classes['um_ext\um_recaptcha\common\forms'] = new Forms();
-		}
-		return UM()->classes['um_ext\um_recaptcha\common\forms'];
-	}
-
-	/**
 	 * @return Directory
 	 */
 	public function directory() {
@@ -48,5 +38,15 @@ class Init {
 			UM()->classes['um_ext\um_recaptcha\common\directory'] = new Directory();
 		}
 		return UM()->classes['um_ext\um_recaptcha\common\directory'];
+	}
+
+	/**
+	 * @return Forms
+	 */
+	public function forms() {
+		if ( empty( UM()->classes['um_ext\um_recaptcha\common\forms'] ) ) {
+			UM()->classes['um_ext\um_recaptcha\common\forms'] = new Forms();
+		}
+		return UM()->classes['um_ext\um_recaptcha\common\forms'];
 	}
 }

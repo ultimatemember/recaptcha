@@ -18,7 +18,7 @@ class Directory {
 	 * @since 2.1.0
 	 */
 	public function __construct() {
-		add_action( 'um_pre_directory_shortcode', array( $this, 'um_recaptcha_directory_enqueue_scripts' ), 10, 1 );
+		add_action( 'um_pre_directory_shortcode', array( $this, 'um_recaptcha_directory_enqueue_scripts' ) );
 	}
 
 	/**

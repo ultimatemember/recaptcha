@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) {
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -7,11 +8,10 @@ $allowed_html = array(
 		'style' => true,
 	),
 );
+
+$recaptcha_enabled = UM()->options()->get( 'g_recaptcha_status' );
 ?>
-
 <div class="um-admin-metabox">
-	<?php $recaptcha_enabled = UM()->options()->get( 'g_recaptcha_status' ); ?>
-
 	<?php if ( $recaptcha_enabled ) { ?>
 		<p><?php echo wp_kses( __( 'Google reCAPTCHA seems to be <strong style="color:#7ACF58;">enabled</strong> by default.', 'um-recaptcha' ), $allowed_html ); ?></p>
 	<?php } else { ?>

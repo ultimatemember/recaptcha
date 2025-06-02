@@ -31,7 +31,7 @@ class Forms {
 
 		// lost password forms
 		add_action( 'lostpassword_form', array( $this, 'um_add_recaptcha_wp_lostpassword_form' ) );
-		add_filter( 'lostpassword_errors', array( $this, 'um_recaptcha_validate_lostpassword_form' ), 10, 1 );
+		add_filter( 'lostpassword_errors', array( $this, 'um_recaptcha_validate_lostpassword_form' ) );
 
 		// reset password forms
 		add_action( 'um_reset_password_errors_hook', array( $this, 'um_recaptcha_validate_rp' ), 20 );
@@ -53,7 +53,7 @@ class Forms {
 		add_action( 'um_before_signon_after_account_changes', array( $this, 'um_remove_authenticate_recaptcha_action' ) );
 		add_action( 'um_submit_form_errors_hook', array( $this, 'um_recaptcha_validate' ), 20, 2 );
 
-		add_filter( 'um_predefined_fields_hook', array( $this, 'add_field' ), 10, 1 );
+		add_filter( 'um_predefined_fields_hook', array( $this, 'add_field' ) );
 		add_filter( 'um_get_form_fields', array( &$this, 'extends_fields' ), 100, 2 );
 		add_action( 'um_after_password_reset_fields', array( $this, 'password_reset_add_captcha' ), 500 );
 	}

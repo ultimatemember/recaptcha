@@ -3,15 +3,15 @@
  * Plugin Name: Ultimate Member - reCAPTCHA
  * Plugin URI: https://ultimatemember.com/extensions/google-recaptcha/
  * Description: Protect your website from spam and integrate Google reCAPTCHA into your Ultimate Member forms
- * Version: 2.3.9-alpha
+ * Version: 2.4.0-alpha
  * Author: Ultimate Member
  * Author URI: http://ultimatemember.com/
  * License: GPLv3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: um-recaptcha
  * Domain Path: /languages
- * Requires at least: 5.5
- * Requires PHP: 5.6
+ * Requires at least: 6.2
+ * Requires PHP: 7.0
  * Requires Plugins: ultimate-member
  * UM version: 2.7.0
  *
@@ -33,7 +33,7 @@ define( 'UM_RECAPTCHA_EXTENSION', $plugin_data['Name'] );
 define( 'UM_RECAPTCHA_VERSION', $plugin_data['Version'] );
 define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
 define( 'UM_RECAPTCHA_REQUIRES', '2.7.0' );
-define( 'UM_RECAPTCHA_REQUIRES_NEW_UI', '3.0.0-alpha-20250319' );
+define( 'UM_RECAPTCHA_REQUIRES_NEW_UI', '3.0.0-alpha-20250602' );
 
 function um_recaptcha_plugins_loaded() {
 	$locale = ( '' !== get_locale() ) ? get_locale() : 'en_US';
@@ -46,7 +46,7 @@ add_action( 'plugins_loaded', 'um_recaptcha_check_dependencies', -20 );
 
 if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 	function um_recaptcha_check_dependencies() {
-		if ( ! defined( 'um_path' ) || ! file_exists( UM_PATH . 'includes/class-dependencies.php' ) ) {
+		if ( ! defined( 'UM_PATH' ) || ! file_exists( UM_PATH . 'includes/class-dependencies.php' ) ) {
 			//UM is not installed
 			function um_recaptcha_dependencies() {
 				$allowed_html = array(
@@ -64,7 +64,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 		} else {
 
 			if ( ! function_exists( 'UM' ) ) {
-				require_once um_path . 'includes/class-dependencies.php';
+				require_once UM_PATH . 'includes/class-dependencies.php';
 				$is_um_active = um\is_um_active();
 			} else {
 				$is_um_active = UM()->dependencies()->ultimatemember_active_check();
@@ -123,7 +123,6 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 		}
 	}
 }
-
 
 register_activation_hook( UM_RECAPTCHA_PLUGIN, 'um_recaptcha_activation_hook' );
 function um_recaptcha_activation_hook() {
