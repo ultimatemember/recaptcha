@@ -96,7 +96,6 @@ class Captcha {
 			}
 		}
 
-		// $file = 'v3' === $version ? 'captcha-v3.php' : 'captcha.php';
 		$file = 'captcha.php';
 		if ( UM()->is_new_ui() ) {
 			$file = 'v3/' . $file;

@@ -61,7 +61,7 @@ class UM_Reset_Password extends Captcha {
 		if ( ! self::is_allowed() ) {
 			return;
 		}
-
+		// phpcs:ignore WordPress.Security.NonceVerification -- just getting value for condition logic
 		if ( ! empty( $_GET['updated'] ) ) {
 			return;
 		}

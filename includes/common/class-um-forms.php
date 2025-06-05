@@ -92,7 +92,7 @@ class UM_Forms extends Captcha {
 		if ( ! self::is_allowed( $allowed_args ) ) {
 			return;
 		}
-
+		// phpcs:ignore WordPress.Security.NonceVerification -- just getting value for condition logic
 		if ( isset( $_GET['message'] ) && in_array( sanitize_key( wp_unslash( $_GET['message'] ) ), array( 'approved', 'checkmail', 'pending' ), true ) ) {
 			return;
 		}

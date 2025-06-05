@@ -41,7 +41,7 @@ class WP_Login extends Captcha {
 			return $is_allowed;
 		}
 
-		return empty( $_REQUEST['um_login_form'] ) && self::is_allowed();
+		return empty( $_REQUEST['um_login_form'] ) && self::is_allowed(); // phpcs:ignore WordPress.Security.NonceVerification -- just getting value for condition logic
 	}
 
 	/**

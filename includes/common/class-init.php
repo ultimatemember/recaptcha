@@ -50,7 +50,7 @@ class Init {
 	/**
 	 * @return WP_Login
 	 */
-	public function wp_login() {
+	public function wp_login() { // phpcs:ignore WordPress.WP.DeprecatedFunctions.wp_loginFound -- own class and method
 		if ( empty( UM()->classes['um_ext\um_recaptcha\common\wp_login'] ) ) {
 			UM()->classes['um_ext\um_recaptcha\common\wp_login'] = new WP_Login();
 		}
