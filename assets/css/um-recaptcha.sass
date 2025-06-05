@@ -1,0 +1,19 @@
+@import "../../../ultimate-member/assets/css/selectors"
+@import "../../../ultimate-member/assets/css/mixins"
+@import "../../../ultimate-member/assets/css/box"
+@import "../../../ultimate-member/assets/css/colors"
+@import "../../../ultimate-member/assets/css/typography"
+
+div.um
+  .#{$prefix}form-new
+    .#{$prefix}recaptcha-row
+      .#{$prefix}recaptcha:not([data-size="invisible"])
+        max-width: 300px
+        margin: auto
+        margin-bottom: 0
+  .#{$prefix}form
+    .#{$prefix}recaptcha:not([data-size="invisible"])
+      max-width: 300px
+      margin: auto
+      &:not([data-mode="lost_password"])
+        margin-bottom: 30px

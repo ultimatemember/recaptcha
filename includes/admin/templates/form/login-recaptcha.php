@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) {
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -7,11 +8,10 @@ $allowed_html = array(
 		'style' => true,
 	),
 );
+
+$recaptcha_enabled = UM()->options()->get( 'g_recaptcha_status' );
 ?>
-
 <div class="um-admin-metabox">
-	<?php $recaptcha_enabled = UM()->options()->get( 'g_recaptcha_status' ); ?>
-
 	<?php if ( $recaptcha_enabled ) { ?>
 		<p><?php echo wp_kses( __( 'Google reCAPTCHA seems to be <strong style="color:#7ACF58;">enabled</strong> by default.', 'um-recaptcha' ), $allowed_html ); ?></p>
 	<?php } else { ?>
@@ -26,8 +26,8 @@ $allowed_html = array(
 			'label'   => __( 'reCAPTCHA status on this form', 'um-recaptcha' ),
 			'value'   => UM()->query()->get_meta_value( '_um_login_g_recaptcha_status', null, $recaptcha_enabled ),
 			'options' => array(
-				'0' => __( 'No', 'um-recaptcha' ),
-				'1' => __( 'Yes', 'um-recaptcha' ),
+				0 => __( 'No', 'um-recaptcha' ),
+				1 => __( 'Yes', 'um-recaptcha' ),
 			),
 		),
 	);
@@ -51,6 +51,5 @@ $allowed_html = array(
 		)
 	)->render_form();
 	?>
-
 	<div class="clear"></div>
 </div>

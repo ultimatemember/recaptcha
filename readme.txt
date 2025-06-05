@@ -3,12 +3,13 @@ Author URI: https://ultimatemember.com/
 Plugin URI: https://ultimatemember.com/extensions/google-recaptcha/
 Contributors: ultimatemember, champsupertramp, nsinelnikov
 Tags: community, member, membership, user-profile
-Requires at least: 5.5
-Tested up to: 6.7
-Stable tag: 2.3.8
+Requires at least: 6.3
+Requires PHP: 7.0
+Tested up to: 6.8
+Stable tag: 2.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
-Requires UM core at least: 2.7.0
+Requires UM core at least: 2.10.5
 
 Stop bots on your registration & login forms with Google reCAPTCHA
 
@@ -69,6 +70,10 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 == Changelog ==
 
 = Important: Please update to Ultimate Member 2.1 before updating the extension =
+
+= 2.4.0: June xx, 2025 =
+
+
 
 = 2.3.8: November 19, 2024 =
 

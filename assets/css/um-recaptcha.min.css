@@ -1,1 +1,1 @@
-div.um .g-recaptcha{max-width:300px;margin:auto;margin-bottom:30px}.um-password .um-field .g-recaptcha{margin-bottom:0}
+div.um .um-form-new .um-recaptcha-row .um-recaptcha:not([data-size=invisible]){max-width:300px;margin:auto;margin-bottom:0}div.um .um-form .um-recaptcha:not([data-size=invisible]){max-width:300px;margin:auto}div.um .um-form .um-recaptcha:not([data-size=invisible]):not([data-mode=lost_password]){margin-bottom:30px}
