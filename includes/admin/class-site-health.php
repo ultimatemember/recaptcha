@@ -77,10 +77,6 @@ class Site_Health {
 						'label' => __( 'Secret Key', 'um-recaptcha' ),
 						'value' => UM()->options()->get( 'g_recaptcha_secretkey' ) ? $labels['yes'] : $labels['no'],
 					),
-					'g_recaptcha_type'          => array(
-						'label' => __( 'Type', 'um-recaptcha' ),
-						'value' => 'audio' === UM()->options()->get( 'g_recaptcha_type' ) ? __( 'Audio', 'um-recaptcha' ) : __( 'Image', 'um-recaptcha' ),
-					),
 					'g_recaptcha_language_code' => array(
 						'label' => __( 'Language', 'um-recaptcha' ),
 						'value' => UM()->options()->get( 'g_recaptcha_language_code' ) ? UM()->options()->get( 'g_recaptcha_language_code' ) : 'en',

@@ -86,18 +86,6 @@ class Settings {
 					'conditional' => array( 'g_recaptcha_version', '=', 'v2' ),
 				),
 				array(
-					'id'          => 'g_recaptcha_type',
-					'type'        => 'select',
-					'label'       => __( 'Type', 'um-recaptcha' ),
-					'description' => __( 'The type of reCAPTCHA to serve.', 'um-recaptcha' ),
-					'options'     => array(
-						'audio' => __( 'Audio', 'um-recaptcha' ),
-						'image' => __( 'Image', 'um-recaptcha' ),
-					),
-					'size'        => 'small',
-					'conditional' => array( 'g_recaptcha_version', '=', 'v2' ),
-				),
-				array(
 					'id'          => 'g_recaptcha_language_code',
 					'type'        => 'select',
 					'label'       => __( 'Language', 'um-recaptcha' ),
@@ -278,9 +266,6 @@ class Settings {
 				'g_recaptcha_secretkey'            => array(
 					'sanitize' => 'text',
 				),
-				'g_recaptcha_type'                 => array(
-					'sanitize' => 'key',
-				),
 				'g_recaptcha_language_code'        => array(
 					'sanitize' => 'text',
 				),
@@ -317,11 +302,16 @@ class Settings {
 	 * Adding admin notices about inactive reCAPTCHA when keys are empty
 	 */
 	public function add_admin_notice() {
-		$status    = UM()->options()->get( 'g_recaptcha_status' );
-		$sitekey   = UM()->options()->get( 'g_recaptcha_sitekey' ) || UM()->options()->get( 'g_reCAPTCHA_site_key' );
-		$secretkey = UM()->options()->get( 'g_recaptcha_secretkey' ) || UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+		$version = UM()->options()->get( 'g_recaptcha_version' );
+		if ( 'v3' === $version ) {
+			$sitekey   = UM()->options()->get( 'g_reCAPTCHA_site_key' );
+			$secretkey = UM()->options()->get( 'g_reCAPTCHA_secret_key' );
+		} else {
+			$sitekey   = UM()->options()->get( 'g_recaptcha_sitekey' );
+			$secretkey = UM()->options()->get( 'g_recaptcha_secretkey' );
+		}
 
-		if ( ! $status || ( $sitekey && $secretkey ) ) {
+		if ( $sitekey && $secretkey ) {
 			return;
 		}
 
@@ -361,9 +351,7 @@ class Settings {
 	 */
 	public function um_recaptcha_extend_scan_files( $scan_files ) {
 		$extension_files['um-recaptcha'] = UM()->admin_settings()->scan_template_files( UM_RECAPTCHA_PATH . '/templates/' );
-		$scan_files                      = array_merge( $scan_files, $extension_files );
-
-		return $scan_files;
+		return array_merge( $scan_files, $extension_files );
 	}
 
 	/**

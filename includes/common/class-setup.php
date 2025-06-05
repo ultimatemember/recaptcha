@@ -31,7 +31,6 @@ class Setup {
 			'g_recaptcha_secretkey'            => '',
 			'g_recaptcha_language_code'        => 'en',
 			'g_recaptcha_theme'                => 'light',
-			'g_recaptcha_type'                 => 'image',
 			'g_recaptcha_size'                 => 'normal',
 			/* Forms */
 			'g_recaptcha_status'               => 1,

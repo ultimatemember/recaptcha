@@ -41,8 +41,6 @@ class UM_ReCAPTCHA {
 		$this->common()->includes();
 		if ( UM()->is_request( 'admin' ) ) {
 			$this->admin()->includes();
-		} elseif ( UM()->is_request( 'frontend' ) ) {
-			$this->frontend()->includes();
 		}
 	}
 
@@ -74,15 +72,5 @@ class UM_ReCAPTCHA {
 			UM()->classes['um_ext\um_recaptcha\common\init'] = new um_ext\um_recaptcha\common\Init();
 		}
 		return UM()->classes['um_ext\um_recaptcha\common\init'];
-	}
-
-	/**
-	 * @return um_ext\um_recaptcha\frontend\Init
-	 */
-	public function frontend() {
-		if ( empty( UM()->classes['um_ext\um_recaptcha\frontend\init'] ) ) {
-			UM()->classes['um_ext\um_recaptcha\frontend\init'] = new um_ext\um_recaptcha\frontend\Init();
-		}
-		return UM()->classes['um_ext\um_recaptcha\frontend\init'];
 	}
 }

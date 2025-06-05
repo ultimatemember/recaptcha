@@ -10,10 +10,10 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: um-recaptcha
  * Domain Path: /languages
- * Requires at least: 6.2
+ * Requires at least: 6.3
  * Requires PHP: 7.0
  * Requires Plugins: ultimate-member
- * UM version: 2.7.0
+ * UM version: 2.10.5
  *
  * @package UM_reCAPTCHA
  */
@@ -32,7 +32,7 @@ define( 'UM_RECAPTCHA_PLUGIN', plugin_basename( __FILE__ ) );
 define( 'UM_RECAPTCHA_EXTENSION', $plugin_data['Name'] );
 define( 'UM_RECAPTCHA_VERSION', $plugin_data['Version'] );
 define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
-define( 'UM_RECAPTCHA_REQUIRES', '2.7.0' );
+define( 'UM_RECAPTCHA_REQUIRES', '2.10.4' );
 define( 'UM_RECAPTCHA_REQUIRES_NEW_UI', '3.0.0-alpha-20250602' );
 
 function um_recaptcha_plugins_loaded() {
@@ -86,7 +86,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
 
-			} elseif ( ! UM()->is_new_ui() && true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ) ) {
+			} elseif ( ! UM()->is_new_ui() && true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION, true ) ) {
 				// UM old version is active
 				function um_recaptcha_dependencies() {
 					$allowed_html = array(
@@ -101,7 +101,7 @@ if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
 				}
 
 				add_action( 'admin_notices', 'um_recaptcha_dependencies' );
-			} elseif ( UM()->is_new_ui() && true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES_NEW_UI, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION ) ) {
+			} elseif ( UM()->is_new_ui() && true !== UM()->dependencies()->compare_versions( UM_RECAPTCHA_REQUIRES_NEW_UI, UM_RECAPTCHA_VERSION, 'recaptcha', UM_RECAPTCHA_EXTENSION, true ) ) {
 				// UM old version is active
 				function um_recaptcha_dependencies() {
 					$allowed_html = array(

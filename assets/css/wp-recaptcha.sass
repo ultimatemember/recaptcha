@@ -1,0 +1,17 @@
+@import "../../../ultimate-member/assets/css/selectors"
+@import "../../../ultimate-member/assets/css/mixins"
+@import "../../../ultimate-member/assets/css/box"
+@import "../../../ultimate-member/assets/css/colors"
+@import "../../../ultimate-member/assets/css/typography"
+
+// It's styles for reCAPTCHA v2. It doesn't matter old or new UI. Works for both.
+.login
+  &.has-normal-um-recaptcha
+    #login
+      width: 354px // Hardcode width to built-in the v2 normal size reCAPTCHA
+    ##{$prefix}wp-login-recaptcha
+      margin-bottom: $spacing-xl
+  &.has-compact-um-recaptcha
+    ##{$prefix}wp-login-recaptcha
+      +flex(row,center,center,nowrap)
+      margin-bottom: $spacing-xl
