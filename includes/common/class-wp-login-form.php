@@ -6,11 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WP_Login
+ * Class WP_Login_Form
  *
  * @package um_ext\um_recaptcha\common
  */
-class WP_Login extends Captcha {
+class WP_Login_Form extends Captcha {
 
 	/**
 	 * Initialize the class and set its properties.

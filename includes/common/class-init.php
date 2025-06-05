@@ -48,13 +48,13 @@ class Init {
 	}
 
 	/**
-	 * @return WP_Login
+	 * @return WP_Login_Form
 	 */
 	public function wp_login_form() {
-		if ( empty( UM()->classes['um_ext\um_recaptcha\common\wp_login'] ) ) {
-			UM()->classes['um_ext\um_recaptcha\common\wp_login'] = new WP_Login();
+		if ( empty( UM()->classes['um_ext\um_recaptcha\common\wp_login_form'] ) ) {
+			UM()->classes['um_ext\um_recaptcha\common\wp_login_form'] = new WP_Login_Form();
 		}
-		return UM()->classes['um_ext\um_recaptcha\common\wp_login'];
+		return UM()->classes['um_ext\um_recaptcha\common\wp_login_form'];
 	}
 
 	/**
