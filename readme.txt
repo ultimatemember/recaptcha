@@ -73,7 +73,18 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 
 = 2.4.0: June xx, 2025 =
 
+* Tweak: Refactored classes and methods to make the clear dependencies between API and UI versions.
+* Tweak: Ultimate Member new UI compatibility.
+* Updated: PHP requirement - the minimum PHP version is now upgraded to 7.0.
+* Deprecated: reCAPTCHA Type setting Image/Audio due to API updates.
 
+* Templates required update:
+  - captcha.php
+  - captcha-v3.php (deprecated and merged with captcha.php)
+  - wp-captcha.php
+  - wp-captcha-v3.php (deprecated and merged with captcha.php)
+
+* Cached and optimized/minified assets(JS/CSS) must be flushed/re-generated after upgrade
 
 = 2.3.8: November 19, 2024 =
 
@@ -208,3 +219,6 @@ Yes, by adding the Google reCAPTCHA to your Ultimate Member registration form, i
 = 1.0.2: 25 February, 2016 =
 
 * Fixed: Recaptcha ID and Social Login conflict
+
+= 2.4.0 =
+Increased the minimum PHP and WordPress requirements. The plugin now requires at least PHP 7.0 and WordPress 6.3.
