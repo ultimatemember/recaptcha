@@ -35,13 +35,6 @@ define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
 define( 'UM_RECAPTCHA_REQUIRES', '2.10.5' );
 define( 'UM_RECAPTCHA_REQUIRES_NEW_UI', '3.0.0-alpha-20250602' );
 
-function um_recaptcha_plugins_loaded() {
-	$locale = ( '' !== get_locale() ) ? get_locale() : 'en_US';
-	load_textdomain( UM_RECAPTCHA_TEXTDOMAIN, WP_LANG_DIR . '/plugins/' . UM_RECAPTCHA_TEXTDOMAIN . '-' . $locale . '.mo' );
-	load_plugin_textdomain( UM_RECAPTCHA_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-add_action( 'plugins_loaded', 'um_recaptcha_plugins_loaded', 0 );
-
 add_action( 'plugins_loaded', 'um_recaptcha_check_dependencies', -20 );
 
 if ( ! function_exists( 'um_recaptcha_check_dependencies' ) ) {
