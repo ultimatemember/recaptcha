@@ -14,9 +14,12 @@
  * Requires PHP: 7.0
  * Requires Plugins: ultimate-member
  * UM version: 2.10.5
+ * UM Cross Extensions: um-messaging, um-social-login
  *
  * @package UM_reCAPTCHA
  */
+
+// TODO Don't release until full review of the Messaging and Social Login with new UI.
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
