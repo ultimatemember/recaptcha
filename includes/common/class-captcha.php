@@ -443,6 +443,10 @@ class Captcha {
 	}
 
 	public function enqueue_um_recaptcha_scripts() {
+		if ( is_user_logged_in() ) {
+			return;
+		}
+
 		$suffix = UM()->frontend()->enqueue()::get_suffix();
 
 		$version = UM()->options()->get( 'g_recaptcha_version' );
