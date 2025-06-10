@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-09T22:02:02+00:00\n"
+"POT-Creation-Date: 2025-06-10T13:32:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: um-recaptcha\n"
@@ -628,23 +628,23 @@ msgstr ""
 msgid "<strong>Error</strong>: reCAPTCHA Code: %s"
 msgstr ""
 
-#: includes/common/class-um-forms.php:190
+#: includes/common/class-um-forms.php:197
 #: includes/common/class-um-reset-password.php:119
 msgid "Please confirm you are not a robot"
 msgstr ""
 
-#: includes/common/class-um-forms.php:201
+#: includes/common/class-um-forms.php:208
 #: includes/common/class-um-reset-password.php:131
 msgid "reCAPTCHA: it is very likely a bot."
 msgstr ""
 
-#: includes/common/class-um-forms.php:203
+#: includes/common/class-um-forms.php:210
 #: includes/common/class-um-reset-password.php:133
 msgid "reCAPTCHA: Invalid response the `action` parameter."
 msgstr ""
 
 #. translators: %s: Google reCAPTCHA error code
-#: includes/common/class-um-forms.php:209
+#: includes/common/class-um-forms.php:216
 #: includes/common/class-um-reset-password.php:139
 #, php-format
 msgid "Undefined error. Key: %s"
