@@ -36,7 +36,7 @@ define( 'UM_RECAPTCHA_EXTENSION', $plugin_data['Name'] );
 define( 'UM_RECAPTCHA_VERSION', $plugin_data['Version'] );
 define( 'UM_RECAPTCHA_TEXTDOMAIN', 'um-recaptcha' );
 define( 'UM_RECAPTCHA_REQUIRES', '2.10.5' );
-define( 'UM_RECAPTCHA_REQUIRES_NEW_UI', '3.0.0-alpha-20250602' );
+define( 'UM_RECAPTCHA_REQUIRES_NEW_UI', '3.0.0-alpha-20250610' );
 
 add_action( 'plugins_loaded', 'um_recaptcha_check_dependencies', -20 );
 

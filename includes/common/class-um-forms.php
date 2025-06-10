@@ -53,6 +53,10 @@ class UM_Forms extends Captcha {
 			$enable = (bool) $args['g_recaptcha_status'];
 		}
 
+		if ( $enable && isset( $args['mode'] ) ) {
+			$enable = in_array( $args['mode'], array( 'login', 'register' ), true );
+		}
+
 		if ( ! self::are_keys_valid() ) {
 			$enable = false;
 		}
@@ -119,6 +123,9 @@ class UM_Forms extends Captcha {
 		$args         = UM()->query()->post_data( $form_id );
 		if ( isset( $args['g_recaptcha_status'] ) ) {
 			$allowed_args['g_recaptcha_status'] = $args['g_recaptcha_status'];
+		}
+		if ( isset( $args['mode'] ) ) {
+			$allowed_args['mode'] = $args['mode'];
 		}
 		if ( ! self::is_allowed( $allowed_args ) ) {
 			return $fields;
