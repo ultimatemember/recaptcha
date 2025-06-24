@@ -122,29 +122,23 @@ class Site_Health {
 		return $info;
 	}
 
-	public function debug_information_register_form( $info, $key ) {
-		$info[ 'ultimate-member-' . $key ]['fields'] = array_merge(
-			$info[ 'ultimate-member-' . $key ]['fields'],
-			array(
-				'um_register_g_recaptcha_status' => array(
-					'label' => __( 'reCAPTCHA status on this form', 'um-recaptcha' ),
-					'value' => ! empty( get_post_meta( $key, '_um_register_g_recaptcha_status', true ) ) ? __( 'Yes', 'um-recaptcha' ) : __( 'No', 'um-recaptcha' ),
-				),
-			)
+	public function debug_information_register_form( $info, $form_id ) {
+		$info[] = array(
+			'g_recaptcha_status' => array(
+				'label' => __( 'reCAPTCHA status on this form', 'um-recaptcha' ),
+				'value' => ! empty( get_post_meta( $form_id, '_um_register_g_recaptcha_status', true ) ) ? __( 'Yes', 'um-recaptcha' ) : __( 'No', 'um-recaptcha' ),
+			),
 		);
 
 		return $info;
 	}
 
-	public function debug_information_login_form( $info, $key ) {
-		$info[ 'ultimate-member-' . $key ]['fields'] = array_merge(
-			$info[ 'ultimate-member-' . $key ]['fields'],
-			array(
-				'um_login_g_recaptcha_status' => array(
-					'label' => __( 'reCAPTCHA status on this form', 'um-recaptcha' ),
-					'value' => ! empty( get_post_meta( $key, '_um_login_g_recaptcha_status', true ) ) ? __( 'Yes', 'um-recaptcha' ) : __( 'No', 'um-recaptcha' ),
-				),
-			)
+	public function debug_information_login_form( $info, $form_id ) {
+		$info[] = array(
+			'g_recaptcha_status' => array(
+				'label' => __( 'reCAPTCHA status on this form', 'um-recaptcha' ),
+				'value' => ! empty( get_post_meta( $form_id, '_um_login_g_recaptcha_status', true ) ) ? __( 'Yes', 'um-recaptcha' ) : __( 'No', 'um-recaptcha' ),
+			),
 		);
 
 		return $info;
