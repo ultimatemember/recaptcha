@@ -27,8 +27,9 @@ class Site_Health {
 		);
 
 		$info['um-recaptcha'] = array(
-			'label'       => __( 'UM Google reCAPTCHA', 'um-recaptcha' ),
-			'description' => __( 'This debug information for your UM Google reCAPTCHA extension installation can assist you in getting support.', 'um-recaptcha' ),
+			'label'       => UM_RECAPTCHA_EXTENSION,
+			// translators: %s is the plugin name.
+			'description' => sprintf( __( 'This debug information for your "%s" extension installation can assist you in getting support.', 'um-recaptcha' ), UM_RECAPTCHA_EXTENSION ),
 			'fields'      => array(
 				'g_recaptcha_status'  => array(
 					'label' => __( 'Enable Google reCAPTCHA', 'um-recaptcha' ),
