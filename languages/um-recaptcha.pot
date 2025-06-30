@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-24T13:43:12+00:00\n"
+"POT-Creation-Date: 2025-06-30T16:04:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: um-recaptcha\n"
@@ -46,7 +46,7 @@ msgid "Google reCAPTCHA"
 msgstr ""
 
 #: includes/admin/class-settings.php:38
-#: includes/admin/class-site-health.php:38
+#: includes/admin/class-site-health.php:39
 msgid "reCAPTCHA type"
 msgstr ""
 
@@ -55,19 +55,19 @@ msgid "Choose the type of reCAPTCHA for this site key. A site key only works wit
 msgstr ""
 
 #: includes/admin/class-settings.php:41
-#: includes/admin/class-site-health.php:39
+#: includes/admin/class-site-health.php:40
 msgid "reCAPTCHA v2"
 msgstr ""
 
 #: includes/admin/class-settings.php:42
-#: includes/admin/class-site-health.php:39
+#: includes/admin/class-site-health.php:40
 msgid "reCAPTCHA v3"
 msgstr ""
 
 #: includes/admin/class-settings.php:50
 #: includes/admin/class-settings.php:75
-#: includes/admin/class-site-health.php:49
-#: includes/admin/class-site-health.php:73
+#: includes/admin/class-site-health.php:50
+#: includes/admin/class-site-health.php:74
 msgid "Site Key"
 msgstr ""
 
@@ -78,8 +78,8 @@ msgstr ""
 
 #: includes/admin/class-settings.php:58
 #: includes/admin/class-settings.php:83
-#: includes/admin/class-site-health.php:53
-#: includes/admin/class-site-health.php:77
+#: includes/admin/class-site-health.php:54
+#: includes/admin/class-site-health.php:78
 msgid "Secret Key"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgid "Keep this a secret. You can get your secret key via <a href=\"https://www
 msgstr ""
 
 #: includes/admin/class-settings.php:66
-#: includes/admin/class-site-health.php:57
+#: includes/admin/class-site-health.php:58
 msgid "reCAPTCHA Score"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Consider answers with a score >= to the specified as safe. Set the score 
 msgstr ""
 
 #: includes/admin/class-settings.php:91
-#: includes/admin/class-site-health.php:81
+#: includes/admin/class-site-health.php:82
 msgid "Language"
 msgstr ""
 
@@ -387,7 +387,7 @@ msgid "Zulu"
 msgstr ""
 
 #: includes/admin/class-settings.php:171
-#: includes/admin/class-site-health.php:85
+#: includes/admin/class-site-health.php:86
 msgid "Size"
 msgstr ""
 
@@ -396,22 +396,22 @@ msgid "The type of reCAPTCHA to serve."
 msgstr ""
 
 #: includes/admin/class-settings.php:174
-#: includes/admin/class-site-health.php:64
+#: includes/admin/class-site-health.php:65
 msgid "Compact"
 msgstr ""
 
 #: includes/admin/class-settings.php:175
-#: includes/admin/class-site-health.php:65
+#: includes/admin/class-site-health.php:66
 msgid "Normal"
 msgstr ""
 
 #: includes/admin/class-settings.php:176
-#: includes/admin/class-site-health.php:66
+#: includes/admin/class-site-health.php:67
 msgid "Invisible"
 msgstr ""
 
 #: includes/admin/class-settings.php:184
-#: includes/admin/class-site-health.php:89
+#: includes/admin/class-site-health.php:90
 msgid "Theme"
 msgstr ""
 
@@ -424,7 +424,7 @@ msgid "Dark"
 msgstr ""
 
 #: includes/admin/class-settings.php:188
-#: includes/admin/class-site-health.php:90
+#: includes/admin/class-site-health.php:91
 msgid "Light"
 msgstr ""
 
@@ -445,7 +445,7 @@ msgid "UM Password Reset form Google reCAPTCHA"
 msgstr ""
 
 #: includes/admin/class-settings.php:205
-#: includes/admin/class-site-health.php:100
+#: includes/admin/class-site-health.php:101
 msgid "Enable Google reCAPTCHA on the UM password reset form"
 msgstr ""
 
@@ -458,7 +458,7 @@ msgid "wp-login.php lost password form Google reCAPTCHA"
 msgstr ""
 
 #: includes/admin/class-settings.php:212
-#: includes/admin/class-site-health.php:104
+#: includes/admin/class-site-health.php:105
 msgid "Enable Google reCAPTCHA on wp-login.php lost password form"
 msgstr ""
 
@@ -471,7 +471,7 @@ msgid "wp-login.php form Google reCAPTCHA"
 msgstr ""
 
 #: includes/admin/class-settings.php:219
-#: includes/admin/class-site-health.php:108
+#: includes/admin/class-site-health.php:109
 msgid "Enable Google reCAPTCHA on wp-login.php form"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgid "`wp_login_form()` widget Google reCAPTCHA "
 msgstr ""
 
 #: includes/admin/class-settings.php:226
-#: includes/admin/class-site-health.php:112
+#: includes/admin/class-site-health.php:113
 msgid "Enable Google reCAPTCHA on login form through `wp_login_form()`"
 msgstr ""
 
@@ -497,7 +497,7 @@ msgid "wp-login.php registration form Google reCAPTCHA"
 msgstr ""
 
 #: includes/admin/class-settings.php:233
-#: includes/admin/class-site-health.php:116
+#: includes/admin/class-site-health.php:117
 msgid "Enable Google reCAPTCHA on wp-login.php registration form"
 msgstr ""
 
@@ -518,35 +518,33 @@ msgid "Generate your site and secret key"
 msgstr ""
 
 #: includes/admin/class-site-health.php:25
-#: includes/admin/class-site-health.php:129
-#: includes/admin/class-site-health.php:140
+#: includes/admin/class-site-health.php:130
+#: includes/admin/class-site-health.php:141
 #: includes/admin/templates/form/login-recaptcha.php:30
 #: includes/admin/templates/form/register-recaptcha.php:30
 msgid "Yes"
 msgstr ""
 
 #: includes/admin/class-site-health.php:26
-#: includes/admin/class-site-health.php:129
-#: includes/admin/class-site-health.php:140
+#: includes/admin/class-site-health.php:130
+#: includes/admin/class-site-health.php:141
 #: includes/admin/templates/form/login-recaptcha.php:29
 #: includes/admin/templates/form/register-recaptcha.php:29
 msgid "No"
 msgstr ""
 
-#: includes/admin/class-site-health.php:30
-msgid "UM Google reCAPTCHA"
+#. translators: %s is the plugin name.
+#: includes/admin/class-site-health.php:32
+#, php-format
+msgid "This debug information for your \"%s\" extension installation can assist you in getting support."
 msgstr ""
 
-#: includes/admin/class-site-health.php:31
-msgid "This debug information for your UM Google reCAPTCHA extension installation can assist you in getting support."
-msgstr ""
-
-#: includes/admin/class-site-health.php:34
+#: includes/admin/class-site-health.php:35
 msgid "Enable Google reCAPTCHA"
 msgstr ""
 
-#: includes/admin/class-site-health.php:128
-#: includes/admin/class-site-health.php:139
+#: includes/admin/class-site-health.php:129
+#: includes/admin/class-site-health.php:140
 #: includes/admin/templates/form/login-recaptcha.php:26
 #: includes/admin/templates/form/register-recaptcha.php:26
 msgid "reCAPTCHA status on this form"
