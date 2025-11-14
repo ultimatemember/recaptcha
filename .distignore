@@ -1,0 +1,16 @@
+# Directories
+/.wordpress-org
+/.git
+/.github
+/node_modules
+
+# Files
+/.distignore
+/.editorconfig
+/.gitattributes
+/.gitignore
+/composer.json
+/gulpfile.js
+/package.json
+/package-lock.json
+/phpcs.xml
