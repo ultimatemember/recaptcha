@@ -24,14 +24,13 @@ if ( ! defined( 'UM_RECAPTCHA_PLUGIN' ) ) {
 
 $options = get_option( 'um_options', array() );
 if ( ! empty( $options['uninstall_on_delete'] ) ) {
-	if ( ! class_exists( 'um_ext\um_recaptcha\core\Setup' ) ) {
-		/** @noinspection PhpIncludeInspection */
-		require_once UM_RECAPTCHA_PATH . 'includes/core/class-setup.php';
+	if ( ! class_exists( 'um_ext\um_recaptcha\common\Setup' ) ) {
+		require_once UM_RECAPTCHA_PATH . 'includes/common/class-setup.php';
 	}
 
-	$recaptcha_setup = new um_ext\um_recaptcha\core\Setup();
+	$recaptcha_setup = new um_ext\um_recaptcha\common\Setup();
 
-	//remove settings
+	// Remove settings
 	foreach ( $recaptcha_setup->settings_defaults as $k => $v ) {
 		unset( $options[ $k ] );
 	}
