@@ -110,7 +110,7 @@ class Captcha {
 	 *
 	 * @return bool
 	 */
-	public static function is_allowed( $args = null ) {
+	public static function is_allowed( $args = null ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found -- is used in overrides
 		return false;
 	}
 
@@ -180,7 +180,12 @@ class Captcha {
 
 		$response = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$client_response&remoteip=$user_ip" );
 
-		$hook_args = compact( 'response', 'context', 'args', 'client_response' );
+		$hook_args = array(
+			'response'        => $response,
+			'context'         => $context,
+			'args'            => $args,
+			'client_response' => $client_response,
+		);
 		/**
 		 * Fires just after remote request to Google reCAPTCHA API.
 		 *
