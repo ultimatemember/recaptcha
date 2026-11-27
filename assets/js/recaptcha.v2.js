@@ -31,7 +31,7 @@ UM.recaptcha.prototype = {
 				{
 					'sitekey': this.sitekey,
 					'callback': function( token ) {
-						$form.attr('disabled', 'disabled').submit();
+						$form.attr('disabled', 'disabled').trigger( 'submit' );
 					}
 				}
 			);
